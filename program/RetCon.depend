@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1650379701 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/main.c
+	<avr/io.h>
+	<stdio.h>
+	<avr/interrupt.h>
+	<util/delay.h>
+	"KS0108_lib/KS0108.h"
+	"KS0108_lib/graphic.h"
+	"KS0108_lib/font5x8.h"
+	"KS0108_lib/multi_buff.h"
+	"Petit_FS_lib/diskio.h"
+	"Petit_FS_lib/integer.h"
+	"Petit_FS_lib/pff.h"
+
+1643289734 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/KS0108.h
+
+1191533626 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/graphic.h
+
+1643289734 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/font5x8.h
+	<avr/pgmspace.h>
+
+1650379925 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.h
+
+1643297112 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/diskio.h
+	"integer.h"
+
+1643297112 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/integer.h
+	<windows.h>
+
+1643297112 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/pff.h
+	"integer.h"
+
+1191533694 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/graphic.c
+
+1643288992 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/KS0108-AVR.c
+	<avr/io.h>
+	<avr/pgmspace.h>
+	"KS0108.h"
+
+1643289734 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/KS0108.c
+	"KS0108.h"
+	"font5x8.h"
+	<util/delay.h>
+
+1650379938 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.c
+	<avr/io.h>
+	<avr/pgmspace.h>
+	"font5x8.h"
+	"multi_buff.h"
+
+1643297112 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/mmc.c
+	<avr/io.h>
+	"diskio.h"
+
+1643297112 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/pff.c
+	"pff.h"
+	"diskio.h"
+

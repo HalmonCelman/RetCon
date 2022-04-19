@@ -1,2 +1,5 @@
-# KoKOS_mini_games
-KoKOS for mini console
+# RetCon
+
+Mini konsola Retro
+
+dedykuję Emilce

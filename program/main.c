@@ -23,19 +23,19 @@
 #include "Petit_FS_lib/integer.h"
 #include "Petit_FS_lib/pff.h"
 
-
-
-
 ///__makra
 #define CSCARDOFF PORTB|=(1<<CSCARDPIN)
 #define CSCARDON PORTB&=~(1<<CSCARDPIN)
 #define CSCARDPIN 2
 #define CSCARDDDR DDRB
+#define R 13*point_menu
+
 
 ///__funkcje_deklaracje
     void GLCD_B_Bitmap_SD(char* name);
     void load_games_menu(void);
-
+    void play(void);
+    void minilook(void);
 ///__tablice
     const char file_name[]="l.wbmp";
 
@@ -46,10 +46,11 @@
     WORD s1;
     BYTE res;
 
+    uint8_t point_menu;
 
 int main(void)
 {
-
+    point_menu=0;
     xxx_zmiana=0;
     ///->start ekranu
     GLCD_Initalize();
@@ -83,19 +84,18 @@ GLCD_B_ClearScreen();
 GLCD_B_Bitmap_SD("l.txt");
 GLCD_r;
 _delay_ms(1000);
+
+
+//miejsce na gry
+
 GLCD_B_ClearScreen();
 GLCD_B_Bitmap_SD("menu.txt");
 load_games_menu();
 GLCD_r;
 
+play();
 
 
-///interpreter
-GLCD_B_ClearScreen();
-
-LLKL("program.txt");
-
-GLCD_r;
 
 
 pf_mount(0); //wymontuj nosnik jesli wszystko skonczone
@@ -193,11 +193,59 @@ GLCD_r;
 }
 
 
+void play(void){
+}
 
+
+void minilook(void){
+}
 
 void load_games_menu(void){
-GLCD_B_WriteString("slimon",10,24);
-GLCD_B_WriteString("saper",10,40);
-GLCD_B_WriteString("snake",10,56);
+GLCD_B_CinRect(0,22,63,42);
+GLCD_B_WriteStringAcc("snake",10,27-((point_menu==1 || point_menu==2)?3:0));
+GLCD_B_WriteStringAcc("slimon",10,43-((point_menu==1)?3:0)-((point_menu==2)?7:0));
+GLCD_B_WriteStringAcc("saper",10,55-((point_menu==2)?3:0));
+
+for (int j = 0; j < 52; j++)	{
+		GLCD_B_SetPixel(6 + j, 23+R);
+		GLCD_B_SetPixel(6 + j, 37+R);
+	}
+
+	GLCD_B_SetPixel(6, 24+R); //kropki
+	GLCD_B_SetPixel(57, 24+R);
+	GLCD_B_SetPixel(6, 36+R);
+	GLCD_B_SetPixel(57, 36+R);
+
+	GLCD_B_Rect(2,25+R,60,11); //obwod
+
+	//strzalki
+	GLCD_B_SetPixel(0, 30+R); //lewa
+	GLCD_B_SetPixel(1, 30+R);
+	GLCD_B_SetPixel(3, 30+R);
+	GLCD_B_SetPixel(4, 30+R);
+	GLCD_B_SetPixel(5, 30+R);
+	GLCD_B_SetPixel(6, 30+R);
+	GLCD_B_SetPixel(5, 29+R);
+	GLCD_B_SetPixel(5, 31+R);
+	GLCD_B_SetPixel(4, 29+R);
+	GLCD_B_SetPixel(4, 28+R);
+	GLCD_B_SetPixel(4, 31+R);
+	GLCD_B_SetPixel(4, 32+R);
+
+    GLCD_B_SetPixel(63, 30+R); //prawa
+	GLCD_B_SetPixel(62, 30+R);
+	GLCD_B_SetPixel(60, 30+R);
+	GLCD_B_SetPixel(59, 30+R);
+	GLCD_B_SetPixel(58, 30+R);
+	GLCD_B_SetPixel(57, 30+R);
+	GLCD_B_SetPixel(58, 29+R);
+	GLCD_B_SetPixel(58, 31+R);
+	GLCD_B_SetPixel(59, 29+R);
+	GLCD_B_SetPixel(59, 28+R);
+	GLCD_B_SetPixel(59, 31+R);
+	GLCD_B_SetPixel(59, 32+R);
+
+minilook();
+
 }
 

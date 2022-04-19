@@ -21,8 +21,8 @@
 			</Environment>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
 			<Add option="-mmcu=atmega32" />
+			<Add option="-Wall" />
 			<Add option="-DF_CPU=8000000UL" />
 		</Compiler>
 		<Linker>
@@ -33,6 +33,31 @@
 			<Add after="avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).hex" />
 			<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).eep" />
 		</ExtraCommands>
+		<Unit filename="KS0108_lib/KS0108-AVR.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="KS0108_lib/KS0108.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="KS0108_lib/KS0108.h" />
+		<Unit filename="KS0108_lib/font5x8.h" />
+		<Unit filename="KS0108_lib/graphic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="KS0108_lib/graphic.h" />
+		<Unit filename="KS0108_lib/multi_buff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="KS0108_lib/multi_buff.h" />
+		<Unit filename="Petit_FS_lib/diskio.h" />
+		<Unit filename="Petit_FS_lib/integer.h" />
+		<Unit filename="Petit_FS_lib/mmc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Petit_FS_lib/pff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Petit_FS_lib/pff.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
