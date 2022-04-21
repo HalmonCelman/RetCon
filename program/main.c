@@ -24,14 +24,46 @@
 #include "Petit_FS_lib/pff.h"
 
 ///__makra
+#define PREP_TRICK_DDR(x,y) x##y
+#define DDR(x) PREP_TRICK_DDR(DDR,x)
+
+#define PREP_TRICK_PORT(x,y) x##y
+#define PORT(x) PREP_TRICK_PORT(PORT,x)
+
+#define PREP_TRICK_PIN(x,y) x##y
+#define PIN(x) PREP_TRICK_PIN(PIN,x)
+///very useful macros^
+
+
 #define CSCARDOFF PORTB|=(1<<CSCARDPIN)
 #define CSCARDON PORTB&=~(1<<CSCARDPIN)
 #define CSCARDPIN 2
 #define CSCARDDDR DDRB
 #define R 13*point_menu
 
+///__przyciski
+#define K_U_PIN 0  //up
+#define K_U_PORT D
+
+#define K_D_PIN 1  //down
+#define K_D_PORT D
+
+#define K_R_PIN 2  //right
+#define K_R_PORT D
+
+#define K_L_PIN 3  //left
+#define K_L_PORT D
+
+#define K_J_PIN 4  //jump
+#define K_J_PORT D
+
+#define K_P_PIN 5  //punch
+#define K_P_PORT D
+
 
 ///__funkcje_deklaracje
+    void key_init(void);
+
     void GLCD_B_Bitmap_SD(char* name);
     void load_games_menu(void);
     void play(void);
@@ -54,6 +86,7 @@ int main(void)
     xxx_zmiana=0;
     ///->start ekranu
     GLCD_Initalize();
+    key_init();
 GLCD_ClearScreen();
 GLCD_B_ClearScreen(); //clear buffer
 ///->multiplexing                                                                                   ///<-przy zmianie mikrokontrolera lub czêstotliwoœci zwróciæ uwagê
@@ -195,6 +228,11 @@ GLCD_r;
 
 void play(void){
 }
+
+void key_init(void){
+
+}
+
 
 
 void minilook(void){

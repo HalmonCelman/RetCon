@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MCU_Microchip_ATmega:ATmega32A-PU U1
-U 1 1 61D4C9CD
-P 2250 3250
-F 0 "U1" H 2250 1161 50  0000 C CNN
-F 1 "ATmega32A-PU" H 2250 1070 50  0000 C CNN
-F 2 "Package_DIP:DIP-40_W15.24mm" H 2250 3250 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/atmel-8155-8-bit-microcontroller-avr-atmega32a_datasheet.pdf" H 2250 3250 50  0001 C CNN
-	1    2250 3250
-	1    0    0    -1  
-$EndComp
-$Comp
 L schemat_dip40-rescue:Wincom_WG12864D-SFYLY-Display_Graphic U2
 U 1 1 61D53C3A
 P 6600 2300
@@ -76,49 +65,33 @@ Wire Wire Line
 Wire Wire Line
 	5550 2150 5550 1550
 Wire Wire Line
-	5550 1550 2850 1550
-Wire Wire Line
 	6100 2250 5450 2250
 Wire Wire Line
 	5450 2250 5450 1650
-Wire Wire Line
-	5450 1650 2850 1650
 Wire Wire Line
 	6100 2350 5350 2350
 Wire Wire Line
 	5350 2350 5350 1750
 Wire Wire Line
-	5350 1750 2850 1750
-Wire Wire Line
 	6100 2450 5250 2450
 Wire Wire Line
 	5250 2450 5250 1850
-Wire Wire Line
-	5250 1850 2850 1850
 Wire Wire Line
 	6100 2550 5150 2550
 Wire Wire Line
 	5150 2550 5150 1950
 Wire Wire Line
-	5150 1950 2850 1950
-Wire Wire Line
 	6100 2650 5050 2650
 Wire Wire Line
 	5050 2650 5050 2050
-Wire Wire Line
-	5050 2050 2850 2050
 Wire Wire Line
 	6100 2750 4950 2750
 Wire Wire Line
 	4950 2750 4950 2150
 Wire Wire Line
-	4950 2150 2850 2150
-Wire Wire Line
 	6100 2850 4850 2850
 Wire Wire Line
 	4850 2850 4850 2250
-Wire Wire Line
-	4850 2250 2850 2250
 Wire Wire Line
 	6100 1650 5950 1650
 Wire Wire Line
@@ -128,8 +101,6 @@ Wire Wire Line
 Wire Wire Line
 	3500 1200 3500 3350
 Wire Wire Line
-	3500 3350 2850 3350
-Wire Wire Line
 	6100 1750 5850 1750
 Wire Wire Line
 	5850 1750 5850 1300
@@ -137,8 +108,6 @@ Wire Wire Line
 	5850 1300 3600 1300
 Wire Wire Line
 	3600 1300 3600 3550
-Wire Wire Line
-	3600 3550 2850 3550
 $Comp
 L power:VCC #PWR04
 U 1 1 61D95FE0
@@ -181,8 +150,6 @@ Wire Wire Line
 Wire Wire Line
 	3700 1450 3700 3450
 Wire Wire Line
-	3700 3450 2850 3450
-Wire Wire Line
 	6600 3050 6600 3200
 Wire Wire Line
 	6600 3200 8100 3200
@@ -202,8 +169,6 @@ Wire Wire Line
 Wire Wire Line
 	3850 3300 3850 3950
 Wire Wire Line
-	3850 3950 2850 3950
-Wire Wire Line
 	7100 2850 7400 2850
 Wire Wire Line
 	7400 2850 7400 3400
@@ -211,8 +176,6 @@ Wire Wire Line
 	7400 3400 4000 3400
 Wire Wire Line
 	4000 3400 4000 3850
-Wire Wire Line
-	4000 3850 2850 3850
 Wire Wire Line
 	7100 2350 7600 2350
 Wire Wire Line
@@ -267,14 +230,8 @@ F 3 "" H 2250 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2250 1250 2250 900 
-Wire Wire Line
-	2350 1250 2350 900 
-Wire Wire Line
 	2350 900  2250 900 
 Connection ~ 2250 900 
-Wire Wire Line
-	2250 5250 2250 5600
 Wire Wire Line
 	2250 5600 5850 5600
 $Comp
@@ -321,31 +278,21 @@ Wire Wire Line
 Wire Wire Line
 	1350 5800 1350 1550
 Wire Wire Line
-	1350 1550 1650 1550
-Wire Wire Line
 	6450 5200 3300 5200
 Wire Wire Line
 	3300 5200 3300 4150
-Wire Wire Line
-	3300 3150 2850 3150
 Wire Wire Line
 	6450 5300 3200 5300
 Wire Wire Line
 	3200 5300 3200 4250
 Wire Wire Line
-	3200 3050 2850 3050
-Wire Wire Line
 	6450 5400 3100 5400
 Wire Wire Line
 	3100 5400 3100 4050
 Wire Wire Line
-	3100 2950 2850 2950
-Wire Wire Line
 	6300 3950 4300 3950
 Wire Wire Line
 	4300 3950 4300 2650
-Wire Wire Line
-	4300 2650 2850 2650
 Wire Wire Line
 	6300 4050 3100 4050
 Connection ~ 3100 4050
@@ -366,4 +313,205 @@ Wire Wire Line
 Wire Wire Line
 	10150 5500 10150 2550
 Connection ~ 10150 2550
+$Comp
+L Switch:SW_Push SW2
+U 1 1 6261EEBB
+P 8900 4600
+F 0 "SW2" H 8900 4885 50  0000 C CNN
+F 1 "Up" H 8900 4794 50  0000 C CNN
+F 2 "" H 8900 4800 50  0001 C CNN
+F 3 "~" H 8900 4800 50  0001 C CNN
+	1    8900 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW3
+U 1 1 6261FEC3
+P 8900 5150
+F 0 "SW3" H 8900 5435 50  0000 C CNN
+F 1 "Down" H 8900 5344 50  0000 C CNN
+F 2 "" H 8900 5350 50  0001 C CNN
+F 3 "~" H 8900 5350 50  0001 C CNN
+	1    8900 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW4
+U 1 1 6262059D
+P 9500 4850
+F 0 "SW4" H 9500 5135 50  0000 C CNN
+F 1 "Right" H 9500 5044 50  0000 C CNN
+F 2 "" H 9500 5050 50  0001 C CNN
+F 3 "~" H 9500 5050 50  0001 C CNN
+	1    9500 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW1
+U 1 1 62620D64
+P 8300 4850
+F 0 "SW1" H 8300 5135 50  0000 C CNN
+F 1 "Left" H 8300 5044 50  0000 C CNN
+F 2 "" H 8300 5050 50  0001 C CNN
+F 3 "~" H 8300 5050 50  0001 C CNN
+	1    8300 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW5
+U 1 1 626213AA
+P 10500 5150
+F 0 "SW5" H 10500 5435 50  0000 C CNN
+F 1 "Jump" H 10500 5344 50  0000 C CNN
+F 2 "" H 10500 5350 50  0001 C CNN
+F 3 "~" H 10500 5350 50  0001 C CNN
+	1    10500 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW6
+U 1 1 6262299A
+P 10900 4800
+F 0 "SW6" H 10900 5085 50  0000 C CNN
+F 1 "Punch" H 10900 4994 50  0000 C CNN
+F 2 "" H 10900 5000 50  0001 C CNN
+F 3 "~" H 10900 5000 50  0001 C CNN
+	1    10900 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 1550 1650 1550
+Wire Wire Line
+	3300 3150 2850 3150
+Wire Wire Line
+	3200 3050 2850 3050
+Wire Wire Line
+	3100 2950 2850 2950
+Wire Wire Line
+	5550 1550 2850 1550
+Wire Wire Line
+	5450 1650 2850 1650
+Wire Wire Line
+	5350 1750 2850 1750
+Wire Wire Line
+	5250 1850 2850 1850
+Wire Wire Line
+	5150 1950 2850 1950
+Wire Wire Line
+	5050 2050 2850 2050
+Wire Wire Line
+	4950 2150 2850 2150
+Wire Wire Line
+	4850 2250 2850 2250
+Wire Wire Line
+	2350 1250 2350 900 
+Wire Wire Line
+	4300 2650 2850 2650
+Wire Wire Line
+	3850 3950 2850 3950
+Wire Wire Line
+	4000 3850 2850 3850
+Wire Wire Line
+	3600 3550 2850 3550
+Wire Wire Line
+	3700 3450 2850 3450
+Wire Wire Line
+	3500 3350 2850 3350
+Wire Wire Line
+	2250 5250 2250 5600
+Wire Wire Line
+	2250 1250 2250 900 
+$Comp
+L MCU_Microchip_ATmega:ATmega32A-PU U1
+U 1 1 61D4C9CD
+P 2250 3250
+F 0 "U1" H 2250 1161 50  0000 C CNN
+F 1 "ATmega32A-PU" H 2250 1070 50  0000 C CNN
+F 2 "Package_DIP:DIP-40_W15.24mm" H 2250 3250 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/atmel-8155-8-bit-microcontroller-avr-atmega32a_datasheet.pdf" H 2250 3250 50  0001 C CNN
+	1    2250 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 4600 3000 4600
+Wire Wire Line
+	3000 4600 3000 4250
+Wire Wire Line
+	3000 4250 2850 4250
+Wire Wire Line
+	8700 5150 7050 5150
+Wire Wire Line
+	7050 5150 7050 4700
+Wire Wire Line
+	7050 4700 3900 4700
+Wire Wire Line
+	3900 4700 3900 4350
+Wire Wire Line
+	3900 4350 2850 4350
+Wire Wire Line
+	9300 4850 8650 4850
+Wire Wire Line
+	8650 4850 8650 4750
+Wire Wire Line
+	8650 4750 3850 4750
+Wire Wire Line
+	3850 4750 3850 4450
+Wire Wire Line
+	3850 4450 2850 4450
+Wire Wire Line
+	8100 4850 3750 4850
+Wire Wire Line
+	3750 4850 3750 4550
+Wire Wire Line
+	3750 4550 2850 4550
+Wire Wire Line
+	10300 5150 9400 5150
+Wire Wire Line
+	9400 5150 9400 4950
+Wire Wire Line
+	9400 4950 3650 4950
+Wire Wire Line
+	3650 4950 3650 4650
+Wire Wire Line
+	3650 4650 2850 4650
+Wire Wire Line
+	10700 4800 9900 4800
+Wire Wire Line
+	9900 4800 9900 5050
+Wire Wire Line
+	9900 5050 3550 5050
+Wire Wire Line
+	3550 5050 3550 4750
+Wire Wire Line
+	3550 4750 2850 4750
+Wire Wire Line
+	6450 5600 9100 5600
+Wire Wire Line
+	9100 5600 9100 5350
+Connection ~ 6450 5600
+Wire Wire Line
+	9100 5600 9700 5600
+Wire Wire Line
+	9700 5600 9700 4850
+Connection ~ 9100 5600
+Wire Wire Line
+	9700 5600 10700 5600
+Wire Wire Line
+	10700 5600 10700 5150
+Connection ~ 9700 5600
+Wire Wire Line
+	10700 5600 11100 5600
+Wire Wire Line
+	11100 5600 11100 4800
+Connection ~ 10700 5600
+Wire Wire Line
+	9100 5150 9100 4600
+Connection ~ 9100 5150
+Wire Wire Line
+	9100 5350 8500 5350
+Wire Wire Line
+	8500 5350 8500 4850
+Connection ~ 9100 5350
+Wire Wire Line
+	9100 5350 9100 5150
 $EndSCHEMATC
