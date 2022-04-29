@@ -2,8 +2,7 @@
 #define MULTI_BUFF_H_INCLUDED
 
 
-
-volatile unsigned char GLCD_Buffer[8][128];
+ unsigned char GLCD_Buffer[1024];
 volatile unsigned char xxx_zmiana;
 
 void GLCD_B_SetPixel(unsigned char, unsigned char);

@@ -5,9 +5,9 @@
 void GLCD_B_SetPixel(unsigned char x, unsigned char y)
 {
 unsigned char tmp;
-tmp = GLCD_Buffer[y/8][x];
+tmp = GLCD_Buffer[(y/8)*128+x];
 tmp |= (1 << (y % 8));
-GLCD_Buffer[y/8][x]=tmp;
+GLCD_Buffer[(y/8)*128+x]=tmp;
 
 }
 
@@ -15,19 +15,23 @@ GLCD_Buffer[y/8][x]=tmp;
 void GLCD_B_ClrPixel(unsigned char x, unsigned char y)
 {
 unsigned char tmp;
-tmp = GLCD_Buffer[y/8][x];
+tmp = GLCD_Buffer[(y/8)*128+x];
 tmp &=~ (1 << (y % 8));
-GLCD_Buffer[y/8][x]=tmp;
+GLCD_Buffer[(y/8)*128+x]=tmp;
 
 }
 
 void GLCD_B_WriteChar(char charToWrite,unsigned char x, unsigned char y)
 {
-int i;
+uint8_t i;
+int wsp;
 charToWrite -= 32;
-for(i = 0; i < 5; i++)
-  GLCD_Buffer[y/8][x+i]=pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i));
-GLCD_Buffer[y/8][x+5]=0;
+for(i = 0; i < 5; i++){
+    wsp=y*128+x+i;
+  GLCD_Buffer[wsp]=pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i));
+}
+ wsp=y*128+x+5;
+GLCD_Buffer[wsp]=0;
 }
 
 
@@ -37,20 +41,19 @@ void GLCD_B_WriteCharAcc(char charToWrite,unsigned char x, unsigned char y)
         int i;
 charToWrite -= 32;
 for(i = 0; i < 5; i++){
-        GLCD_Buffer[y/8][x+i]|=(pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i))<<(y%8));
-        GLCD_Buffer[y/8+1][x+i]|=(pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i))>>(8-(y%8)));
+        GLCD_Buffer[(y/8)*128+x+i]|=(pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i))<<(y%8));
+        GLCD_Buffer[((y/8)+1)*128+x+i]|=(pgm_read_byte((char *)((int)font5x8 + (5 * charToWrite) + i))>>(8-(y%8)));
 }
 }
 
 
 void GLCD_B_ClearScreen(void)
 {
-unsigned char i, j;
-for(j = 0; j < 8; j++)
+int j;
+for(j = 0; j < 1024; j++)
   {
-  for(i = 0; i < 128; i++)
-    GLCD_Buffer[j][i]=0;
-  }
+    GLCD_Buffer[j]=0;
+}
 }
 
 void GLCD_B_WriteString(char * stringToWrite,unsigned char x,unsigned char y)

@@ -32,6 +32,8 @@
 
 #define PREP_TRICK_PIN(x,y) x##y
 #define PIN(x) PREP_TRICK_PIN(PIN,x)
+#define J(x,y) x##y
+#define QUOTE(x) "x"
 ///very useful macros^
 
 
@@ -63,8 +65,9 @@
 
 ///__funkcje_deklaracje
     void key_init(void);
-
-    void GLCD_B_Bitmap_SD(char* name);
+    void GLCD_B_Bitmap_SD_exp(char*);
+    void GLCD_Animate_exp(char*);
+    void GLCD_B_Bitmap_SD(char*);
     void load_games_menu(void);
     void play(void);
     void minilook(void);
@@ -74,6 +77,7 @@
 ///__zmienne globalne
 
     volatile unsigned char licznik=0;
+    volatile unsigned char animate=0;
     FATFS fs;
     WORD s1;
     BYTE res;
@@ -99,9 +103,10 @@ GLCD_B_ClearScreen(); //clear buffer
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system...",0,0);
 GLCD_r;
+
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
-
+_delay_ms(500);
 ///init disk
 uint8_t i=255;
 while(i-- && (res=disk_initialize()));
@@ -111,11 +116,11 @@ res=pf_mount(&fs);
 if(res== FR_OK){
 
 
-
-
 GLCD_B_ClearScreen();
-GLCD_B_Bitmap_SD("l.txt");
-GLCD_r;
+
+//GLCD_B_Bitmap_SD_exp("ae.txt");
+GLCD_Animate_exp("ae.txt");
+
 _delay_ms(1000);
 
 
@@ -171,12 +176,13 @@ if(licznik>=13){
   {
   GLCD_GoTo(0,j);
   for(i = 0; i < 128; i++)
-    GLCD_WriteData(GLCD_Buffer[j][i]);
+    GLCD_WriteData(GLCD_Buffer[j*128+i]);
   }
 xxx_zmiana=0;
 }
 
  }
+
 licznik++;
 }
 
@@ -225,6 +231,35 @@ GLCD_r;
 
 }
 
+void GLCD_Animate_exp(char* name){
+res=pf_open(name);
+if(res== FR_OK){
+int x=0;
+while(!x){
+    pf_read(GLCD_Buffer,1024,&s1);
+    if(s1!=1024){
+        x=1;
+    }
+
+if(x){
+    GLCD_B_ClearScreen();
+}else{
+GLCD_r;
+}
+_delay_ms(33);
+}
+write_close();
+}
+}
+
+void GLCD_B_Bitmap_SD_exp(char* name){
+    res=pf_open(name);
+if(res== FR_OK){
+    pf_read(GLCD_Buffer,1024,&s1);
+write_close();
+}
+
+}
 
 void play(void){
 }

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1650379701 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/main.c
+1651269486 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/main.c
 	<avr/io.h>
 	<stdio.h>
 	<avr/interrupt.h>
@@ -19,7 +19,7 @@
 1643289734 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/font5x8.h
 	<avr/pgmspace.h>
 
-1650379925 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.h
+1651267560 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.h
 
 1643297112 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/Petit_FS_lib/diskio.h
 	"integer.h"
@@ -42,7 +42,7 @@
 	"font5x8.h"
 	<util/delay.h>
 
-1650379938 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.c
+1651269161 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/KS0108_lib/multi_buff.c
 	<avr/io.h>
 	<avr/pgmspace.h>
 	"font5x8.h"
