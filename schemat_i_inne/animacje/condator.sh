@@ -4,18 +4,26 @@
 # 
 # ABOUT PROGRAM
 # it's an "consolidator" of .txt files it's getting them together to one file
-echo -n "Write dir and press enter: ";
-read dir;
-echo -n "Write prefix and press enter: ";
-read prefix;
+if [ -n "$1" ]; then
+  dir=$1;
+else
+  	echo -n "Write dir name and press enter: ";
+	read dir;
+fi
+if [ -n "$2" ]; then
+  prefix=$2;
+else
+  	echo -n "Paste prefix and press enter: ";
+	read prefix;
+fi
 i=0;
-echo -n "">$prefix.txt;
+echo -n "">not_exported/$prefix.txt;
 echo -n "in progress";
 
 
 for file in $dir/*
 do
-cat $dir/$prefix$i.txt >> $prefix.txt;
+cat frames/$dir/$prefix$i.txt >> not_exported/$prefix.txt;
 echo -n ".";
 ((i+=1))
 done
