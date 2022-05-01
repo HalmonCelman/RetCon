@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651269486 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/main.c
+1651440362 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/program/main.c
 	<avr/io.h>
 	<stdio.h>
 	<avr/interrupt.h>

@@ -6,6 +6,10 @@
 * program pisany na atmega32                    *
 *************************************************
  */
+
+ #define F_CPU 12000000UL
+
+
 ///__biblioteki standardowe
 #include <avr/io.h>
 #include <stdio.h>
@@ -71,8 +75,6 @@
     void load_games_menu(void);
     void play(void);
     void minilook(void);
-///__tablice
-    const char file_name[]="l.wbmp";
 
 ///__zmienne globalne
 
@@ -83,6 +85,24 @@
     BYTE res;
 
     uint8_t point_menu;
+
+
+///__struktury
+struct animacja{
+char* name; //nazwa
+int frame; //nr aktualnej klatki
+uint8_t x; //x
+uint8_t y; //y
+uint8_t w; //szerokosc
+uint8_t h; //wysokosc
+uint8_t active; //czy aktywna aktualnie
+};
+
+///__animacje
+struct animacja a;
+
+
+
 
 int main(void)
 {
@@ -118,25 +138,34 @@ if(res== FR_OK){
 
 GLCD_B_ClearScreen();
 
-//GLCD_B_Bitmap_SD_exp("ae.txt");
-GLCD_Animate_exp("ae.txt");
+//GLCD_Animate_exp("ae.txt");
 
-_delay_ms(1000);
+a.name="a.txt";
+a.frame=0;
+a.active=0;
+a.x=0;
+a.y=0;
+a.w=128;
+a.h=64;
 
+res=pf_open(a.name);
+a.active=1;
 
+_delay_ms(1);
+while(1);
 //miejsce na gry
 
-GLCD_B_ClearScreen();
-GLCD_B_Bitmap_SD("menu.txt");
-load_games_menu();
-GLCD_r;
+//GLCD_B_ClearScreen();
+//GLCD_B_Bitmap_SD("menu.txt");
+//load_games_menu();
+//GLCD_r;
 
-play();
-
-
+//play();
 
 
-pf_mount(0); //wymontuj nosnik jesli wszystko skonczone
+
+
+//pf_mount(0); //wymontuj nosnik jesli wszystko skonczone
 
 
 }else{
@@ -166,7 +195,7 @@ while(1){
 
 ISR(TIMER0_COMP_vect){
 
-if(licznik>=13){
+if(licznik>=20){ //for 12MHz
         licznik=0;
         if(xxx_zmiana){
 
@@ -180,7 +209,18 @@ if(licznik>=13){
   }
 xxx_zmiana=0;
 }
+if(a.active){
 
+pf_read(GLCD_Buffer,1024,&s1);
+a.frame++;
+if(a.frame>=82){
+    a.active=0;
+    write_close();
+}
+GLCD_r;
+
+
+}
  }
 
 licznik++;
