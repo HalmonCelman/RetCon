@@ -78,8 +78,7 @@
 
 ///__zmienne globalne
 
-    volatile unsigned char licznik=0;
-    volatile unsigned char animate=0;
+    unsigned char licznik=0;
     FATFS fs;
     WORD s1;
     BYTE res;
@@ -89,7 +88,7 @@
 
 ///__struktury
 struct animacja{
-char* name; //nazwa
+char *name; //nazwa
 int frame; //nr aktualnej klatki
 uint8_t x; //x
 uint8_t y; //y
@@ -123,10 +122,10 @@ GLCD_B_ClearScreen(); //clear buffer
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system...",0,0);
 GLCD_r;
-
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
-_delay_ms(500);
+
+
 ///init disk
 uint8_t i=255;
 while(i-- && (res=disk_initialize()));
@@ -137,7 +136,6 @@ if(res== FR_OK){
 
 
 GLCD_B_ClearScreen();
-
 //GLCD_Animate_exp("ae.txt");
 
 a.name="a.txt";
@@ -148,11 +146,49 @@ a.y=0;
 a.w=128;
 a.h=64;
 
-res=pf_open(a.name);
-a.active=1;
 
-_delay_ms(1);
-while(1);
+
+
+
+
+if(res==FR_OK){
+a.active=1;
+}else{
+    GLCD_B_ClearScreen();
+GLCD_B_WriteString("FE",0,0);
+GLCD_r;
+}
+res=pf_open(a.name);
+
+while(a.active){
+
+
+GLCD_r;
+pf_lseek((DWORD)1024*a.frame);
+
+pf_read(GLCD_Buffer,1024,&s1);
+if(res==FR_OK){
+
+}else{
+    GLCD_B_ClearScreen();
+GLCD_B_WriteString("RE",0,0);
+GLCD_r;
+_delay_ms(1000);
+}
+
+a.frame++;
+if(a.frame>=83){
+    a.active=0;
+}
+
+
+
+
+}
+
+write_close();
+
+
 //miejsce na gry
 
 //GLCD_B_ClearScreen();
@@ -194,11 +230,11 @@ while(1){
 ///__przerwania
 
 ISR(TIMER0_COMP_vect){
-
+licznik++;
 if(licznik>=20){ //for 12MHz
         licznik=0;
         if(xxx_zmiana){
-
+xxx_zmiana=0;
 
     int i,j;
     for(j = 0; j < 8; j++)
@@ -207,23 +243,10 @@ if(licznik>=20){ //for 12MHz
   for(i = 0; i < 128; i++)
     GLCD_WriteData(GLCD_Buffer[j*128+i]);
   }
-xxx_zmiana=0;
-}
-if(a.active){
-
-pf_read(GLCD_Buffer,1024,&s1);
-a.frame++;
-if(a.frame>=82){
-    a.active=0;
-    write_close();
-}
-GLCD_r;
-
 
 }
- }
+}
 
-licznik++;
 }
 
 

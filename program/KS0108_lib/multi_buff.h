@@ -2,7 +2,7 @@
 #define MULTI_BUFF_H_INCLUDED
 
 
- unsigned char GLCD_Buffer[1024];
+unsigned char GLCD_Buffer[1024];
 volatile unsigned char xxx_zmiana;
 
 void GLCD_B_SetPixel(unsigned char, unsigned char);
@@ -16,5 +16,5 @@ void GLCD_B_Circle(unsigned char, unsigned char,unsigned char);
 void GLCD_B_Rect(uint8_t, uint8_t, uint8_t, uint8_t);
 void GLCD_B_CinRect(uint8_t, uint8_t, uint8_t, uint8_t);
 
-#define GLCD_r xxx_zmiana=1;
+#define GLCD_r xxx_zmiana=1;while(xxx_zmiana)
 #endif // MULTI_BUFF_H_INCLUDED

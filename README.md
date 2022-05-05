@@ -2,4 +2,3 @@
 
 Mini konsola Retro
 
-dedykuję Emilce

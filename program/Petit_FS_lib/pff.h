@@ -28,11 +28,11 @@
 
 #define	_USE_READ	1	/* pf_read(): 0:Remove ,1:Enable */
 
-#define	_USE_DIR	1	/* pf_opendir() and pf_readdir(): 0:Remove ,1:Enable */
+#define	_USE_DIR	0	/* pf_opendir() and pf_readdir(): 0:Remove ,1:Enable */
 
 #define	_USE_LSEEK	1	/* pf_lseek(): 0:Remove ,1:Enable */
 
-#define	_USE_WRITE	1	/* pf_write(): 0:Remove ,1:Enable */
+#define	_USE_WRITE	0	/* pf_write(): 0:Remove ,1:Enable */
 
 #define _FS_FAT32	1	/* 0:Supports FAT12/16 only, 1:Enable FAT32 supprt */
 
