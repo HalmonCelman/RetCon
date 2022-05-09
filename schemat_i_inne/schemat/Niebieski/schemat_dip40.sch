@@ -364,7 +364,7 @@ Wire Wire Line
 Wire Wire Line
 	3500 3350 2850 3350
 Wire Wire Line
-	2250 5250 2250 5600
+	2250 5250 2250 5300
 Wire Wire Line
 	2250 1250 2250 900 
 Wire Wire Line
@@ -693,4 +693,24 @@ Wire Wire Line
 	6450 5500 10150 5500
 Wire Wire Line
 	6450 5600 9100 5600
+$Comp
+L Device:Buzzer BZ1
+U 1 1 627A142A
+P 2950 5400
+F 0 "BZ1" V 2908 5552 50  0000 L CNN
+F 1 "Buzzer" V 2999 5552 50  0000 L CNN
+F 2 "Buzzer_Beeper:Buzzer_12x9.5RM7.6" V 2925 5500 50  0001 C CNN
+F 3 "~" V 2925 5500 50  0001 C CNN
+	1    2950 5400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2850 4950 3050 4950
+Wire Wire Line
+	3050 4950 3050 5300
+Wire Wire Line
+	2850 5300 2250 5300
+Connection ~ 2250 5300
+Wire Wire Line
+	2250 5300 2250 5600
 $EndSCHEMATC
