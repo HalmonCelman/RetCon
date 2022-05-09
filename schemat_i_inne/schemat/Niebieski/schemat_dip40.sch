@@ -372,8 +372,6 @@ Wire Wire Line
 Wire Wire Line
 	2250 1250 2250 900 
 Wire Wire Line
-	8700 4600 3000 4600
-Wire Wire Line
 	8700 5150 7050 5150
 Wire Wire Line
 	7050 5150 7050 4700
@@ -398,8 +396,6 @@ Wire Wire Line
 Wire Wire Line
 	3650 4950 3650 4650
 Wire Wire Line
-	3650 4650 2850 4650
-Wire Wire Line
 	10700 4800 9900 4800
 Wire Wire Line
 	9900 4800 9900 5050
@@ -408,37 +404,7 @@ Wire Wire Line
 Wire Wire Line
 	3550 5050 3550 4750
 Wire Wire Line
-	3550 4750 2850 4750
-Wire Wire Line
-	6450 5600 9100 5600
-Wire Wire Line
-	9100 5600 9100 5350
-Connection ~ 6450 5600
-Wire Wire Line
-	9100 5600 9700 5600
-Wire Wire Line
-	9700 5600 9700 4850
-Connection ~ 9100 5600
-Wire Wire Line
-	9700 5600 10700 5600
-Wire Wire Line
-	10700 5600 10700 5150
-Connection ~ 9700 5600
-Wire Wire Line
-	10700 5600 11100 5600
-Wire Wire Line
-	11100 5600 11100 4800
-Connection ~ 10700 5600
-Wire Wire Line
-	9100 5150 9100 4600
-Connection ~ 9100 5150
-Wire Wire Line
-	9100 5350 8500 5350
-Wire Wire Line
 	8500 5350 8500 4850
-Connection ~ 9100 5350
-Wire Wire Line
-	9100 5350 9100 5150
 $Comp
 L schemat_dip40-rescue:WG12864B-STBL-schemat_dip40-rescue U2
 U 1 1 6264714C
@@ -607,10 +573,6 @@ Connection ~ 10150 1950
 Wire Wire Line
 	10150 1950 10150 5500
 Wire Wire Line
-	3000 4600 3000 4550
-Wire Wire Line
-	3000 4550 2850 4550
-Wire Wire Line
 	8650 4750 3800 4750
 Wire Wire Line
 	3800 4750 3800 4300
@@ -622,10 +584,6 @@ Wire Wire Line
 	2950 4250 2850 4250
 Wire Wire Line
 	3750 4550 3550 4550
-Wire Wire Line
-	3550 4550 3550 4450
-Wire Wire Line
-	3550 4450 2850 4450
 Wire Wire Line
 	2850 4350 3900 4350
 $Comp
@@ -678,4 +636,85 @@ Wire Wire Line
 	1550 1950 1650 1950
 Wire Wire Line
 	1550 1950 1550 2050
+Wire Wire Line
+	3550 4550 3550 4450
+Wire Wire Line
+	3550 4450 2850 4450
+Wire Wire Line
+	3650 4650 2850 4650
+Wire Wire Line
+	3550 4750 2850 4750
+Wire Wire Line
+	8700 4600 3000 4600
+Wire Wire Line
+	3000 4600 3000 4550
+Wire Wire Line
+	3000 4550 2850 4550
+$Comp
+L Device:R R2
+U 1 1 627CBEAE
+P 8150 5600
+F 0 "R2" V 7943 5600 50  0000 C CNN
+F 1 "0R" V 8034 5600 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P5.08mm_Vertical" V 8080 5600 50  0001 C CNN
+F 3 "~" H 8150 5600 50  0001 C CNN
+	1    8150 5600
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8300 5600 9100 5600
+Wire Wire Line
+	8000 5600 6450 5600
+Connection ~ 6450 5600
+Wire Wire Line
+	9100 5150 9100 5600
+$Comp
+L power:GND #PWR0101
+U 1 1 627E1A64
+P 8500 5350
+F 0 "#PWR0101" H 8500 5100 50  0001 C CNN
+F 1 "GND" V 8505 5222 50  0000 R CNN
+F 2 "" H 8500 5350 50  0001 C CNN
+F 3 "" H 8500 5350 50  0001 C CNN
+	1    8500 5350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 627E22B0
+P 9100 4600
+F 0 "#PWR0102" H 9100 4350 50  0001 C CNN
+F 1 "GND" H 9105 4427 50  0000 C CNN
+F 2 "" H 9100 4600 50  0001 C CNN
+F 3 "" H 9100 4600 50  0001 C CNN
+	1    9100 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 627E2F19
+P 11100 4800
+F 0 "#PWR0104" H 11100 4550 50  0001 C CNN
+F 1 "GND" H 11105 4627 50  0000 C CNN
+F 2 "" H 11100 4800 50  0001 C CNN
+F 3 "" H 11100 4800 50  0001 C CNN
+	1    11100 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 627E3595
+P 10700 5150
+F 0 "#PWR0105" H 10700 4900 50  0001 C CNN
+F 1 "GND" H 10705 4977 50  0000 C CNN
+F 2 "" H 10700 5150 50  0001 C CNN
+F 3 "" H 10700 5150 50  0001 C CNN
+	1    10700 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9700 4850 9700 5600
+Wire Wire Line
+	9700 5600 9100 5600
+Connection ~ 9100 5600
 $EndSCHEMATC
