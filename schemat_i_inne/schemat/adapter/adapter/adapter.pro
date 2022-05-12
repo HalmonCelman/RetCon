@@ -1,6 +1,6 @@
-update=wto, 10 maj 2022, 19:41:37
+update=czw, 12 maj 2022, 11:37:41
 version=1
-last_client=pcbnew
+last_client=kicad
 [general]
 version=1
 RootSch=
@@ -186,7 +186,7 @@ Type=0
 Enabled=0
 [pcbnew/Layer.B.Cu]
 Name=B.Cu
-Type=3
+Type=0
 Enabled=1
 [pcbnew/Layer.B.Adhes]
 Enabled=1
