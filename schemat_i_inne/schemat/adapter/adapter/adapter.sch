@@ -36,9 +36,9 @@ F 3 "~" H 5450 3300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6150 3100 5250 3100
+	6150 3100 6050 3100
 Wire Wire Line
-	6150 3200 5250 3200
+	6150 3200 5750 3200
 Wire Wire Line
 	5250 3300 6150 3300
 Wire Wire Line
@@ -59,4 +59,25 @@ Text Label 5050 3500 0    50   ~ 0
 SCK
 Text Label 5050 3600 0    50   ~ 0
 RST
+$Comp
+L Device:C C1
+U 1 1 627FB761
+P 5900 2850
+F 0 "C1" V 5648 2850 50  0000 C CNN
+F 1 "C" V 5739 2850 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5938 2700 50  0001 C CNN
+F 3 "~" H 5900 2850 50  0001 C CNN
+	1    5900 2850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5750 2850 5750 3200
+Connection ~ 5750 3200
+Wire Wire Line
+	5750 3200 5250 3200
+Wire Wire Line
+	6050 2850 6050 3100
+Connection ~ 6050 3100
+Wire Wire Line
+	6050 3100 5250 3100
 $EndSCHEMATC

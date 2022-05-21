@@ -7,8 +7,6 @@
 *************************************************
  */
 
- #define F_CPU 12000000UL
-
 
 ///__biblioteki standardowe
 #include <avr/io.h>
