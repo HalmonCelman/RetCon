@@ -566,13 +566,11 @@ F 3 "" H 4300 5150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6700 4650 6700 1750
+	6700 4650 6700 2200
 Wire Wire Line
-	6200 4350 6200 1950
+	6200 4350 6200 2300
 Wire Wire Line
 	7400 4350 7400 1850
-Wire Wire Line
-	7400 1850 2850 1850
 Wire Wire Line
 	6800 4100 6800 2050
 Wire Wire Line
@@ -661,12 +659,6 @@ Wire Wire Line
 	3200 3900 3800 3900
 Wire Wire Line
 	3800 3900 3800 3850
-Wire Wire Line
-	6800 2050 2850 2050
-Wire Wire Line
-	6200 1950 2850 1950
-Wire Wire Line
-	6700 1750 2850 1750
 $Comp
 L schemat_dip40-rescue:SD_card_reader-Connector U4
 U 1 1 61D7A0EB
@@ -689,17 +681,41 @@ Wire Wire Line
 Wire Wire Line
 	8700 4350 8700 2500
 Wire Wire Line
-	8700 2500 4600 2500
-Wire Wire Line
-	4600 2500 4600 2850
-Wire Wire Line
-	4600 2850 2850 2850
-Wire Wire Line
-	8300 2450 4550 2450
-Wire Wire Line
-	4550 2450 4550 2750
-Wire Wire Line
-	4550 2750 2850 2750
-Wire Wire Line
 	8300 2450 8300 4700
+Wire Wire Line
+	4250 2450 4250 1750
+Wire Wire Line
+	4250 1750 2850 1750
+Wire Wire Line
+	4250 2450 8300 2450
+Wire Wire Line
+	4150 2500 4150 1850
+Wire Wire Line
+	4150 1850 2850 1850
+Wire Wire Line
+	4150 2500 8700 2500
+Wire Wire Line
+	6200 2300 4500 2300
+Wire Wire Line
+	4500 2300 4500 2850
+Wire Wire Line
+	6700 2200 4450 2200
+Wire Wire Line
+	6800 2050 4350 2050
+Wire Wire Line
+	7400 1850 4300 1850
+Wire Wire Line
+	4300 1850 4300 2650
+Wire Wire Line
+	4450 2200 4450 2550
+Wire Wire Line
+	4450 2550 2850 2550
+Wire Wire Line
+	4500 2850 2850 2850
+Wire Wire Line
+	4300 2650 2850 2650
+Wire Wire Line
+	4350 2750 2850 2750
+Wire Wire Line
+	4350 2050 4350 2750
 $EndSCHEMATC
