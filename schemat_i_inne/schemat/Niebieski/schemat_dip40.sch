@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L schemat_dip40-rescue:SD_card_reader-Connector U4
-U 1 1 61D7A0EB
-P 6300 1100
-F 0 "U4" H 7078 1146 50  0000 L CNN
-F 1 "SD_card_reader" H 7078 1055 50  0000 L CNN
-F 2 "Connector_Card:SD_Kyocera_145638009511859+" H 6250 1100 50  0001 C CNN
-F 3 "" H 6250 1100 50  0001 C CNN
-	1    6300 1100
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:VCC #PWR02
 U 1 1 61DB3E6A
 P 2300 1150
@@ -38,34 +27,34 @@ $EndComp
 $Comp
 L Switch:SW_DIP_x01 SW1
 U 1 1 626527EA
-P 3900 5850
-F 0 "SW1" H 3900 6117 50  0000 C CNN
-F 1 "SW_DIP_x01" H 3900 6026 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 3900 5850 50  0001 C CNN
-F 3 "~" H 3900 5850 50  0001 C CNN
-	1    3900 5850
+P 3300 6400
+F 0 "SW1" H 3300 6667 50  0000 C CNN
+F 1 "SW_DIP_x01" H 3300 6576 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 3300 6400 50  0001 C CNN
+F 3 "~" H 3300 6400 50  0001 C CNN
+	1    3300 6400
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:Battery BT1
 U 1 1 6265C2FE
-P 3400 5850
-F 0 "BT1" H 3508 5896 50  0000 L CNN
-F 1 "9V battery" H 3508 5805 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" V 3400 5910 50  0001 C CNN
-F 3 "~" V 3400 5910 50  0001 C CNN
-	1    3400 5850
+P 2800 6400
+F 0 "BT1" H 2908 6446 50  0000 L CNN
+F 1 "9V battery" H 2908 6355 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" V 2800 6460 50  0001 C CNN
+F 3 "~" V 2800 6460 50  0001 C CNN
+	1    2800 6400
 	0    1    1    0   
 $EndComp
 $Comp
 L power:GND #PWR01
 U 1 1 6268019B
-P 3200 5850
-F 0 "#PWR01" H 3200 5600 50  0001 C CNN
-F 1 "GND" H 3205 5677 50  0000 C CNN
-F 2 "" H 3200 5850 50  0001 C CNN
-F 3 "" H 3200 5850 50  0001 C CNN
-	1    3200 5850
+P 2600 6400
+F 0 "#PWR01" H 2600 6150 50  0001 C CNN
+F 1 "GND" H 2605 6227 50  0000 C CNN
+F 2 "" H 2600 6400 50  0001 C CNN
+F 3 "" H 2600 6400 50  0001 C CNN
+	1    2600 6400
 	0    1    1    0   
 $EndComp
 $Comp
@@ -165,17 +154,6 @@ F 3 "~" V 5700 3075 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L schemat_dip40-rescue:WG12864B-STBL U3
-U 1 1 6288712E
-P 4300 4400
-F 0 "U3" H 4300 5431 50  0000 C CNN
-F 1 "WG12864B-STBL" H 4300 5340 50  0000 C CNN
-F 2 "Blue:WG12864BL" H 4300 4400 50  0001 C CNN
-F 3 "" H 4300 4400 50  0001 C CNN
-	1    4300 4400
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:VCC #PWR04
 U 1 1 629ACB69
 P 4300 3550
@@ -216,13 +194,9 @@ F 3 "" H 4800 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4800 4050 4950 4050
-Wire Wire Line
 	4950 4050 4950 3900
 Wire Wire Line
 	4950 3600 4950 3550
-Wire Wire Line
-	4950 3550 4300 3550
 $Comp
 L MCU_Microchip_ATmega:ATmega32A-AU U1
 U 1 1 6264DA55
@@ -262,8 +236,6 @@ F 3 "" H 5350 950 50  0001 C CNN
 	1    5350 950 
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	4800 2850 2850 2850
 $Comp
 L power:GND #PWR015
 U 1 1 62AA82B4
@@ -275,15 +247,6 @@ F 3 "" H 5350 1450 50  0001 C CNN
 	1    5350 1450
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	5300 2950 4900 2950
-Connection ~ 4900 2950
-Wire Wire Line
-	5300 3050 5100 3050
-Connection ~ 5100 3050
-Wire Wire Line
-	5300 3150 5000 3150
-Connection ~ 5000 3150
 $Comp
 L power:VCC #PWR011
 U 1 1 62AC0AFC
@@ -295,25 +258,12 @@ F 3 "" H 5300 2750 50  0001 C CNN
 	1    5300 2750
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR012
-U 1 1 62AC7AB6
-P 5300 2850
-F 0 "#PWR012" H 5300 2600 50  0001 C CNN
-F 1 "GND" V 5305 2722 50  0000 R CNN
-F 2 "" H 5300 2850 50  0001 C CNN
-F 3 "" H 5300 2850 50  0001 C CNN
-	1    5300 2850
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	1650 1550 1650 700 
 Wire Wire Line
 	1650 700  3450 700 
 Wire Wire Line
 	3450 700  3450 3250
-Wire Wire Line
-	3450 3250 5300 3250
 $Comp
 L power:GND #PWR03
 U 1 1 62AD9C6E
@@ -348,12 +298,6 @@ Wire Wire Line
 	4900 1150 4900 2950
 Wire Wire Line
 	4800 1050 5350 1050
-Wire Wire Line
-	4800 1050 4800 2850
-Wire Wire Line
-	3800 1300 3800 1550
-Wire Wire Line
-	3800 1550 2850 1550
 $Comp
 L power:GND #PWR07
 U 1 1 62B553AC
@@ -366,21 +310,7 @@ F 3 "" H 4000 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6800 1650 2850 1650
-Wire Wire Line
 	6800 4650 6700 4650
-Wire Wire Line
-	6700 4650 6700 1750
-Wire Wire Line
-	6700 1750 2850 1750
-Wire Wire Line
-	6200 1850 2850 1850
-Wire Wire Line
-	7400 1950 2850 1950
-Wire Wire Line
-	8300 2050 2850 2050
-Wire Wire Line
-	8700 2150 2850 2150
 Wire Wire Line
 	6600 4350 6600 4900
 Wire Wire Line
@@ -407,71 +337,71 @@ F 3 "" H 7800 4900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4650 6150 5050 6150
+	4050 6700 4450 6700
 $Comp
 L Device:C C2
 U 1 1 62674904
-P 5050 6000
-F 0 "C2" H 5165 6046 50  0000 L CNN
-F 1 "100N" H 5165 5955 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5088 5850 50  0001 C CNN
-F 3 "~" H 5050 6000 50  0001 C CNN
-	1    5050 6000
+P 4450 6550
+F 0 "C2" H 4565 6596 50  0000 L CNN
+F 1 "100N" H 4565 6505 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4488 6400 50  0001 C CNN
+F 3 "~" H 4450 6550 50  0001 C CNN
+	1    4450 6550
 	1    0    0    -1  
 $EndComp
-Connection ~ 4650 6150
+Connection ~ 4050 6700
 Wire Wire Line
-	4200 6150 4650 6150
+	3600 6700 4050 6700
 Wire Wire Line
-	4200 5850 4350 5850
+	3600 6400 3750 6400
 $Comp
 L Device:C C1
 U 1 1 6265D991
-P 4200 6000
-F 0 "C1" H 4315 6046 50  0000 L CNN
-F 1 "330N" H 4315 5955 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4238 5850 50  0001 C CNN
-F 3 "~" H 4200 6000 50  0001 C CNN
-	1    4200 6000
+P 3600 6550
+F 0 "C1" H 3715 6596 50  0000 L CNN
+F 1 "330N" H 3715 6505 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3638 6400 50  0001 C CNN
+F 3 "~" H 3600 6550 50  0001 C CNN
+	1    3600 6550
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR06
 U 1 1 62676E00
-P 4650 6150
-F 0 "#PWR06" H 4650 5900 50  0001 C CNN
-F 1 "GND" H 4655 5977 50  0000 C CNN
-F 2 "" H 4650 6150 50  0001 C CNN
-F 3 "" H 4650 6150 50  0001 C CNN
-	1    4650 6150
+P 4050 6700
+F 0 "#PWR06" H 4050 6450 50  0001 C CNN
+F 1 "GND" H 4055 6527 50  0000 C CNN
+F 2 "" H 4050 6700 50  0001 C CNN
+F 3 "" H 4050 6700 50  0001 C CNN
+	1    4050 6700
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4950 5850 5050 5850
+	4350 6400 4450 6400
 $Comp
 L Regulator_Linear:L7805 U2
 U 1 1 62650285
-P 4650 5850
-F 0 "U2" H 4650 6092 50  0000 C CNN
-F 1 "L7805" H 4650 6001 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 4675 5700 50  0001 L CIN
-F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 4650 5800 50  0001 C CNN
-	1    4650 5850
+P 4050 6400
+F 0 "U2" H 4050 6642 50  0000 C CNN
+F 1 "L7805" H 4050 6551 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 4075 6250 50  0001 L CIN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 4050 6350 50  0001 C CNN
+	1    4050 6400
 	1    0    0    -1  
 $EndComp
-Connection ~ 4200 5850
+Connection ~ 3600 6400
 $Comp
 L power:VCC #PWR010
 U 1 1 62BD496D
-P 5050 5850
-F 0 "#PWR010" H 5050 5700 50  0001 C CNN
-F 1 "VCC" H 5067 6023 50  0000 C CNN
-F 2 "" H 5050 5850 50  0001 C CNN
-F 3 "" H 5050 5850 50  0001 C CNN
-	1    5050 5850
+P 4450 6400
+F 0 "#PWR010" H 4450 6250 50  0001 C CNN
+F 1 "VCC" H 4467 6573 50  0000 C CNN
+F 2 "" H 4450 6400 50  0001 C CNN
+F 3 "" H 4450 6400 50  0001 C CNN
+	1    4450 6400
 	1    0    0    -1  
 $EndComp
-Connection ~ 5050 5850
+Connection ~ 4450 6400
 Wire Wire Line
 	3800 4250 3600 4250
 Wire Wire Line
@@ -501,8 +431,6 @@ Wire Wire Line
 Wire Wire Line
 	3400 4650 3400 3750
 Wire Wire Line
-	3400 3750 2850 3750
-Wire Wire Line
 	3800 4750 3350 4750
 Wire Wire Line
 	3350 4750 3350 3850
@@ -521,31 +449,17 @@ Wire Wire Line
 Wire Wire Line
 	3250 4050 2850 4050
 Wire Wire Line
-	3800 4050 3750 4050
-Wire Wire Line
-	3750 4050 3750 4900
-Wire Wire Line
 	3750 4900 3200 4900
 Wire Wire Line
 	3200 4900 3200 4950
 Wire Wire Line
 	3200 4950 2850 4950
 Wire Wire Line
-	3800 3850 3650 3850
-Wire Wire Line
-	3650 3850 3650 4800
-Wire Wire Line
 	3650 4800 3200 4800
 Wire Wire Line
 	3200 4800 3200 4850
 Wire Wire Line
 	3200 4850 2850 4850
-Wire Wire Line
-	3800 3750 3800 3700
-Wire Wire Line
-	3800 3700 3200 3700
-Wire Wire Line
-	3200 3700 3200 4750
 Wire Wire Line
 	3200 4750 2850 4750
 Wire Wire Line
@@ -559,15 +473,11 @@ Wire Wire Line
 Wire Wire Line
 	4800 4850 4850 4850
 Wire Wire Line
-	4850 4850 4850 5400
-Wire Wire Line
 	4850 5400 3100 5400
 Wire Wire Line
 	3100 5400 3100 4550
 Wire Wire Line
 	3100 4550 2850 4550
-Wire Wire Line
-	8700 4350 8700 2150
 $Comp
 L Switch:SW_Push SW7
 U 1 1 6262299A
@@ -580,18 +490,10 @@ F 3 "~" H 8900 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8300 4700 8300 2050
-Wire Wire Line
-	7400 4350 7400 1950
-Wire Wire Line
 	7200 4900 7800 4900
 Wire Wire Line
 	6600 4900 7200 4900
 Connection ~ 7200 4900
-Wire Wire Line
-	6800 4100 6800 1650
-Wire Wire Line
-	6200 4350 6200 1850
 $Comp
 L Switch:SW_Push SW6
 U 1 1 626213AA
@@ -653,25 +555,151 @@ F 3 "~" H 6400 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R1
-U 1 1 629577BC
-P 4150 5150
-F 0 "R1" V 3943 5150 50  0000 C CNN
-F 1 "0R" V 4034 5150 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 4080 5150 50  0001 C CNN
-F 3 "~" H 4150 5150 50  0001 C CNN
-	1    4150 5150
-	0    1    1    0   
-$EndComp
-$Comp
 L power:GND #PWR05
 U 1 1 62958323
-P 4000 5150
-F 0 "#PWR05" H 4000 4900 50  0001 C CNN
-F 1 "GND" H 4005 4977 50  0000 C CNN
-F 2 "" H 4000 5150 50  0001 C CNN
-F 3 "" H 4000 5150 50  0001 C CNN
-	1    4000 5150
+P 4300 5150
+F 0 "#PWR05" H 4300 4900 50  0001 C CNN
+F 1 "GND" H 4305 4977 50  0000 C CNN
+F 2 "" H 4300 5150 50  0001 C CNN
+F 3 "" H 4300 5150 50  0001 C CNN
+	1    4300 5150
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6700 4650 6700 1750
+Wire Wire Line
+	6200 4350 6200 1950
+Wire Wire Line
+	7400 4350 7400 1850
+Wire Wire Line
+	7400 1850 2850 1850
+Wire Wire Line
+	6800 4100 6800 2050
+Wire Wire Line
+	4800 4050 4950 4050
+Wire Wire Line
+	4950 3550 4300 3550
+Wire Wire Line
+	4850 4850 4850 5400
+$Comp
+L schemat_dip40-rescue:WG12864B-STBL U3
+U 1 1 6288712E
+P 4300 4400
+F 0 "U3" H 4300 5431 50  0000 C CNN
+F 1 "WG12864B-STBL" H 4300 5340 50  0000 C CNN
+F 2 "Blue:WG12864BL" H 4300 4400 50  0001 C CNN
+F 3 "" H 4300 4400 50  0001 C CNN
+	1    4300 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 6297DED7
+P 4800 1200
+F 0 "R1" H 4870 1246 50  0000 L CNN
+F 1 "0R" H 4870 1155 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 4730 1200 50  0001 C CNN
+F 3 "~" H 4800 1200 50  0001 C CNN
+	1    4800 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR012
+U 1 1 62AC7AB6
+P 5300 2850
+F 0 "#PWR012" H 5300 2600 50  0001 C CNN
+F 1 "GND" V 5305 2722 50  0000 R CNN
+F 2 "" H 5300 2850 50  0001 C CNN
+F 3 "" H 5300 2850 50  0001 C CNN
+	1    5300 2850
+	0    1    1    0   
+$EndComp
+Connection ~ 4900 2950
+Connection ~ 5100 3050
+Connection ~ 5000 3150
+Wire Wire Line
+	2850 4450 2950 4450
+Wire Wire Line
+	2950 4450 2950 3000
+Wire Wire Line
+	2950 3000 5300 3000
+Wire Wire Line
+	5300 3000 5300 3050
+Wire Wire Line
+	4900 2950 4900 3450
+Wire Wire Line
+	5000 3150 5000 3250
+Wire Wire Line
+	5100 3050 5100 3350
+Wire Wire Line
+	5000 3250 5300 3250
+Wire Wire Line
+	5100 3350 5300 3350
+Wire Wire Line
+	4900 3450 5300 3450
+Wire Wire Line
+	4750 3250 4750 3200
+Wire Wire Line
+	3450 3250 4750 3250
+Wire Wire Line
+	4750 3200 5300 3200
+Wire Wire Line
+	5300 3200 5300 3150
+Wire Wire Line
+	3750 3750 3800 3750
+Wire Wire Line
+	3750 3750 3750 4900
+Wire Wire Line
+	3650 4050 3800 4050
+Wire Wire Line
+	3650 4050 3650 4800
+Wire Wire Line
+	3400 3750 2850 3750
+Wire Wire Line
+	3200 4750 3200 3900
+Wire Wire Line
+	3200 3900 3800 3900
+Wire Wire Line
+	3800 3900 3800 3850
+Wire Wire Line
+	6800 2050 2850 2050
+Wire Wire Line
+	6200 1950 2850 1950
+Wire Wire Line
+	6700 1750 2850 1750
+$Comp
+L schemat_dip40-rescue:SD_card_reader-Connector U4
+U 1 1 61D7A0EB
+P 6300 1100
+F 0 "U4" H 7078 1146 50  0000 L CNN
+F 1 "SD_card_reader" H 7078 1055 50  0000 L CNN
+F 2 "Connector_Card:SD_Kyocera_145638009511859+" H 6250 1100 50  0001 C CNN
+F 3 "" H 6250 1100 50  0001 C CNN
+	1    6300 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 1650 2850 1650
+Wire Wire Line
+	3800 1300 3800 1650
+Wire Wire Line
+	2850 1550 4800 1550
+Wire Wire Line
+	4800 1550 4800 1350
+Wire Wire Line
+	8700 4350 8700 2500
+Wire Wire Line
+	8700 2500 4600 2500
+Wire Wire Line
+	4600 2500 4600 2850
+Wire Wire Line
+	4600 2850 2850 2850
+Wire Wire Line
+	8300 2450 4550 2450
+Wire Wire Line
+	4550 2450 4550 2750
+Wire Wire Line
+	4550 2750 2850 2750
+Wire Wire Line
+	8300 2450 8300 4700
 $EndSCHEMATC
