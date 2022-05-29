@@ -24,40 +24,21 @@ F 3 "~" V 6550 3425 50  0001 C CNN
 	1    6550 3400
 	-1   0    0    1   
 $EndComp
-$Comp
-L Connector:Conn_01x06_Female J1
-U 1 1 62A94AE0
-P 5450 3300
-F 0 "J1" H 5478 3276 50  0000 L CNN
-F 1 "Conn_01x06_Female" H 5478 3185 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 5450 3300 50  0001 C CNN
-F 3 "~" H 5450 3300 50  0001 C CNN
-	1    5450 3300
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6150 3100 6050 3100
 Wire Wire Line
 	6150 3200 5750 3200
-Wire Wire Line
-	5250 3300 6150 3300
-Wire Wire Line
-	6150 3400 5250 3400
-Wire Wire Line
-	6150 3500 5250 3500
-Wire Wire Line
-	6150 3600 5250 3600
 Text Label 5050 3100 0    50   ~ 0
 VCC
 Text Label 5050 3200 0    50   ~ 0
 GND
-Text Label 5050 3300 0    50   ~ 0
+Text Label 5050 3650 0    50   ~ 0
 MOSI
-Text Label 5050 3400 0    50   ~ 0
+Text Label 5050 3550 0    50   ~ 0
 MISO
-Text Label 5050 3500 0    50   ~ 0
+Text Label 5050 3450 0    50   ~ 0
 SCK
-Text Label 5050 3600 0    50   ~ 0
+Text Label 5050 3350 0    50   ~ 0
 RST
 $Comp
 L Device:C C1
@@ -80,4 +61,39 @@ Wire Wire Line
 Connection ~ 6050 3100
 Wire Wire Line
 	6050 3100 5250 3100
+$Comp
+L Connector:Conn_01x06_Female J1
+U 1 1 62A94AE0
+P 5450 3300
+F 0 "J1" H 5478 3276 50  0000 L CNN
+F 1 "Conn_01x06_Female" H 5478 3185 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 5450 3300 50  0001 C CNN
+F 3 "~" H 5450 3300 50  0001 C CNN
+	1    5450 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5250 3300 5900 3300
+Wire Wire Line
+	5900 3300 5900 3500
+Wire Wire Line
+	5900 3500 6150 3500
+Wire Wire Line
+	5850 3400 5850 3600
+Wire Wire Line
+	5850 3600 6150 3600
+Wire Wire Line
+	5250 3500 5750 3500
+Wire Wire Line
+	5750 3500 5750 3700
+Wire Wire Line
+	5750 3700 6150 3700
+Wire Wire Line
+	5250 3600 5650 3600
+Wire Wire Line
+	5650 3600 5650 3800
+Wire Wire Line
+	5650 3800 6150 3800
+Wire Wire Line
+	5250 3400 5850 3400
 $EndSCHEMATC
