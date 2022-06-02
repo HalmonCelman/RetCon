@@ -718,4 +718,15 @@ Wire Wire Line
 	4350 2750 2850 2750
 Wire Wire Line
 	4350 2050 4350 2750
+$Comp
+L Connector:SD_Card J?
+U 1 1 629A5D92
+P 8200 1150
+F 0 "J?" H 8200 1815 50  0000 C CNN
+F 1 "SD_Card" H 8200 1724 50  0000 C CNN
+F 2 "" H 8200 1150 50  0001 C CNN
+F 3 "http://portal.fciconnect.com/Comergent//fci/drawing/10067847.pdf" H 8200 1150 50  0001 C CNN
+	1    8200 1150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
