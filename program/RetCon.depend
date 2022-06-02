@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1653128011 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/main.c
+1654183820 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/main.c
 	<avr/io.h>
 	<stdio.h>
 	<avr/interrupt.h>
@@ -12,7 +12,7 @@
 	"Petit_FS_lib/integer.h"
 	"Petit_FS_lib/pff.h"
 
-1653155177 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108.h
+1654183844 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108.h
 
 1191533626 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/graphic.h
 
@@ -48,7 +48,7 @@
 	"font5x8.h"
 	"multi_buff.h"
 
-1653153663 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/mmc.c
+1654168418 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/mmc.c
 	<avr/io.h>
 	"diskio.h"
 

@@ -4,20 +4,20 @@
 #define KS0108_SCREEN_HEIGHT	64
 
 
-#define KS0108_DATA_PORT	PORTD
-#define KS0108_DATA_DIR		DDRD
-#define KS0108_DATA_PIN		PIND
+#define KS0108_DATA_PORT	PORTC
+#define KS0108_DATA_DIR		DDRC
+#define KS0108_DATA_PIN		PINC
 
-#define KS0108_CTRL_PORT	PORTC
-#define KS0108_CTRL_DIR		DDRC
+#define KS0108_CTRL_PORT	PORTD
+#define KS0108_CTRL_DIR		DDRD
 
-#define KS0108_RS			(1 << 6)
-#define KS0108_RW			(1 << 7)
-#define KS0108_EN			(1 << 5)
+#define KS0108_RS			(1 << 5)
+#define KS0108_RW			(1 << 6)
+#define KS0108_EN			(1 << 7)
 
-#define KS0108_CS1			(1 << 3)
-#define KS0108_CS2			(1 << 4)
-#define KS0108_CS3			(1 << 5)
+#define KS0108_CS1			(1 << 4)
+#define KS0108_CS2			(1 << 3)
+#define KS0108_CS3			(1 << 4)
 
 
 

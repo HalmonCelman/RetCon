@@ -34,17 +34,18 @@ return SPDR;
 
 #define SCK 7
 #define MOSI 5
-#define CS 4
+#define CS 0
 
 
 /* Port Controls (Platform dependent) */
-#define SELECT()	PORTB &= ~(1<<PB4)		/* MMC CS = L */
-#define	DESELECT()	PORTB |=  (1<<PB4)		/* MMC CS = H */
-#define	MMC_SEL		!(PORTB &  (1<<PB4))	/* MMC CS status (true:selected) */
+#define SELECT()	PORTA &= ~(1<<PA0)		/* MMC CS = L */
+#define	DESELECT()	PORTA |=  (1<<PA0)		/* MMC CS = H */
+#define	MMC_SEL		!(PORTA &  (1<<PA0))	/* MMC CS status (true:selected) */
 
 void INIT_SPI(void){
-DDRB |= (1<<CS)|(1<<MOSI)|(1<<SCK)|(1<<PB4); //SS pin as an output - to working SPI
-PORTB |= (1<<CS);
+DDRB |= (1<<MOSI)|(1<<SCK)|(1<<PB4); //SS pin as an output - to working SPI
+DDRA |= (1<<CS);
+PORTA |= (1<<CS);
 SPCR |= (1<<SPE)|(1<<MSTR);
 }
 
