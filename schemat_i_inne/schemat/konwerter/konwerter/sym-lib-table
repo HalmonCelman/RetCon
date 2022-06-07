@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Device)(type Legacy)(uri ${KIPRJMOD}/Device.lib)(options "")(descr ""))
+)
