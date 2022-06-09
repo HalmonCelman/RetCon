@@ -19,20 +19,9 @@ U 1 1 629FC923
 P 5050 3000
 F 0 "R1" H 5120 3046 50  0000 L CNN
 F 1 "10K" H 5120 2955 50  0000 L CNN
-F 2 "" V 4980 3000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4980 3000 50  0001 C CNN
 F 3 "~" H 5050 3000 50  0001 C CNN
 	1    5050 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x04_Male J1
-U 1 1 629FD370
-P 3400 4050
-F 0 "J1" H 3508 4331 50  0000 C CNN
-F 1 "Conn_01x04_Male" H 3508 4240 50  0000 C CNN
-F 2 "" H 3400 4050 50  0001 C CNN
-F 3 "~" H 3400 4050 50  0001 C CNN
-	1    3400 4050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -47,19 +36,6 @@ F 3 "" H 5050 2850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x04_Male J2
-U 1 1 629FF313
-P 5300 4050
-F 0 "J2" H 5408 4331 50  0000 C CNN
-F 1 "Conn_01x04_Male" H 5408 4240 50  0000 C CNN
-F 2 "" H 5300 4050 50  0001 C CNN
-F 3 "~" H 5300 4050 50  0001 C CNN
-	1    5300 4050
-	1    0    0    -1  
-$EndComp
-Text Notes 3200 3400 0    50   ~ 0
-MOSI
-$Comp
 L power:GND #PWR03
 U 1 1 62A028F5
 P 4450 3800
@@ -70,8 +46,6 @@ F 3 "" H 4450 3800 50  0001 C CNN
 	1    4450 3800
 	1    0    0    -1  
 $EndComp
-Text Notes 3200 3500 0    50   ~ 0
-MISO
 Text Notes 4900 3600 0    50   ~ 0
 <-inny\n
 $Comp
@@ -104,7 +78,7 @@ U 1 1 62A12BBF
 P 4850 4350
 F 0 "R3" H 4920 4396 50  0000 L CNN
 F 1 "10K" H 4920 4305 50  0000 L CNN
-F 2 "" V 4780 4350 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4780 4350 50  0001 C CNN
 F 3 "~" H 4850 4350 50  0001 C CNN
 	1    4850 4350
 	1    0    0    -1  
@@ -131,17 +105,13 @@ F 3 "" H 4150 4600 50  0001 C CNN
 	1    4150 4600
 	0    1    1    0   
 $EndComp
-Text Notes 3250 3600 0    50   ~ 0
-SCK
-Text Notes 3250 3700 0    50   ~ 0
-CS
 $Comp
 L Device:D_Zener D1
 U 1 1 62A2A835
 P 4600 3500
 F 0 "D1" H 4600 3284 50  0000 C CNN
 F 1 "4,7V" H 4600 3375 50  0000 C CNN
-F 2 "" H 4600 3500 50  0001 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P7.62mm_Horizontal" H 4600 3500 50  0001 C CNN
 F 3 "~" H 4600 3500 50  0001 C CNN
 	1    4600 3500
 	-1   0    0    1   
@@ -152,7 +122,7 @@ U 1 1 62A2D81A
 P 4450 3650
 F 0 "R2" H 4520 3696 50  0000 L CNN
 F 1 "10K" H 4520 3605 50  0000 L CNN
-F 2 "" V 4380 3650 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4380 3650 50  0001 C CNN
 F 3 "~" H 4450 3650 50  0001 C CNN
 	1    4450 3650
 	1    0    0    -1  
@@ -224,7 +194,7 @@ U 1 1 62A18FCC
 P 4850 5000
 F 0 "R4" H 4920 5046 50  0000 L CNN
 F 1 "10K" H 4920 4955 50  0000 L CNN
-F 2 "" V 4780 5000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4780 5000 50  0001 C CNN
 F 3 "~" H 4850 5000 50  0001 C CNN
 	1    4850 5000
 	1    0    0    -1  
@@ -257,49 +227,259 @@ Wire Wire Line
 	4850 5150 4750 5150
 Wire Wire Line
 	4750 3500 5200 3500
-Wire Wire Line
-	5200 3500 5200 4050
-Wire Wire Line
-	5200 4050 5500 4050
-Wire Wire Line
-	5050 3150 5500 3150
-Wire Wire Line
-	5500 3150 5500 3950
 Connection ~ 5050 3150
 Wire Wire Line
 	4850 4500 5100 4500
 Wire Wire Line
 	5100 4500 5100 4150
-Wire Wire Line
-	5100 4150 5500 4150
 Connection ~ 4850 4500
 Wire Wire Line
 	4850 5150 5500 5150
-Wire Wire Line
-	5500 5150 5500 4250
 Connection ~ 4850 5150
 Wire Wire Line
-	4450 3500 3750 3500
-Wire Wire Line
-	3750 3500 3750 4050
-Wire Wire Line
-	3750 4050 3600 4050
+	4450 3500 3900 3500
 Connection ~ 4450 3500
 Wire Wire Line
-	3750 4150 3600 4150
-Wire Wire Line
-	4150 5150 3600 5150
-Wire Wire Line
-	3600 5150 3600 4250
+	4150 5150 3700 5150
 Connection ~ 4150 5150
-Wire Wire Line
-	4350 3150 3600 3150
-Wire Wire Line
-	3600 3150 3600 3950
-Connection ~ 4350 3150
 Wire Wire Line
 	3750 4500 4150 4500
 Connection ~ 4150 4500
+$Comp
+L power:+1V8 #PWR010
+U 1 1 62A1121A
+P 5800 4450
+F 0 "#PWR010" H 5800 4300 50  0001 C CNN
+F 1 "+1V8" V 5815 4578 50  0000 L CNN
+F 2 "" H 5800 4450 50  0001 C CNN
+F 3 "" H 5800 4450 50  0001 C CNN
+	1    5800 4450
+	0    -1   -1   0   
+$EndComp
 Wire Wire Line
-	3750 4150 3750 4500
+	5800 4350 5600 4350
+Wire Wire Line
+	5600 4350 5600 4150
+Wire Wire Line
+	5100 4150 5600 4150
+$Comp
+L power:+1V8 #PWR08
+U 1 1 62A13642
+P 5800 4150
+F 0 "#PWR08" H 5800 4000 50  0001 C CNN
+F 1 "+1V8" V 5815 4278 50  0000 L CNN
+F 2 "" H 5800 4150 50  0001 C CNN
+F 3 "" H 5800 4150 50  0001 C CNN
+	1    5800 4150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR09
+U 1 1 62A13DE3
+P 5800 4250
+F 0 "#PWR09" H 5800 4100 50  0001 C CNN
+F 1 "+5V" V 5815 4378 50  0000 L CNN
+F 2 "" H 5800 4250 50  0001 C CNN
+F 3 "" H 5800 4250 50  0001 C CNN
+	1    5800 4250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5800 4550 5200 4550
+Wire Wire Line
+	5200 3500 5200 4550
+Wire Wire Line
+	5500 3950 5800 3950
+Wire Wire Line
+	5500 3950 5500 5150
+Wire Wire Line
+	5050 3150 5550 3150
+Wire Wire Line
+	5550 3150 5550 4050
+Wire Wire Line
+	5550 4050 5800 4050
+$Comp
+L Connector:Conn_01x06_Male J1
+U 1 1 62A1928F
+P 3400 3950
+F 0 "J1" H 3508 4331 50  0000 C CNN
+F 1 "Conn_01x06_Male" H 3508 4240 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 3400 3950 50  0001 C CNN
+F 3 "~" H 3400 3950 50  0001 C CNN
+	1    3400 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 3150 3650 3150
+Wire Wire Line
+	3650 3150 3650 3950
+Wire Wire Line
+	3650 3950 3600 3950
+Connection ~ 4350 3150
+$Comp
+L power:GND #PWR012
+U 1 1 62A20755
+P 3900 4250
+F 0 "#PWR012" H 3900 4000 50  0001 C CNN
+F 1 "GND" H 3905 4077 50  0000 C CNN
+F 2 "" H 3900 4250 50  0001 C CNN
+F 3 "" H 3900 4250 50  0001 C CNN
+	1    3900 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR011
+U 1 1 62A22E6F
+P 3600 3750
+F 0 "#PWR011" H 3600 3600 50  0001 C CNN
+F 1 "+5V" H 3615 3923 50  0000 C CNN
+F 2 "" H 3600 3750 50  0001 C CNN
+F 3 "" H 3600 3750 50  0001 C CNN
+	1    3600 3750
+	1    0    0    -1  
+$EndComp
+Text Notes 3150 3750 0    50   ~ 0
++5V\n
+Text Notes 3200 4300 0    50   ~ 0
+GND
+Text Notes 6000 1500 0    50   ~ 0
+Stabilizacja 1,8V\n
+$Comp
+L Regulator_Linear:LM1117-1.8 U2
+U 1 1 62A2C113
+P 6550 1900
+F 0 "U2" H 6550 2142 50  0000 C CNN
+F 1 "LM1117-1.8" H 6550 2051 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 6550 1900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lm1117.pdf" H 6550 1900 50  0001 C CNN
+	1    6550 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR013
+U 1 1 62A2CAFB
+P 5900 1900
+F 0 "#PWR013" H 5900 1750 50  0001 C CNN
+F 1 "+5V" H 5915 2073 50  0000 C CNN
+F 2 "" H 5900 1900 50  0001 C CNN
+F 3 "" H 5900 1900 50  0001 C CNN
+	1    5900 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 1900 6150 1900
+$Comp
+L power:+1V8 #PWR015
+U 1 1 62A2DEDE
+P 7300 1900
+F 0 "#PWR015" H 7300 1750 50  0001 C CNN
+F 1 "+1V8" H 7315 2073 50  0000 C CNN
+F 2 "" H 7300 1900 50  0001 C CNN
+F 3 "" H 7300 1900 50  0001 C CNN
+	1    7300 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6850 1900 6950 1900
+$Comp
+L power:GND #PWR014
+U 1 1 62A2F298
+P 6550 2550
+F 0 "#PWR014" H 6550 2300 50  0001 C CNN
+F 1 "GND" H 6555 2377 50  0000 C CNN
+F 2 "" H 6550 2550 50  0001 C CNN
+F 3 "" H 6550 2550 50  0001 C CNN
+	1    6550 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6550 2200 6550 2350
+$Comp
+L Device:C C1
+U 1 1 62A3056F
+P 6150 2200
+F 0 "C1" H 6265 2246 50  0000 L CNN
+F 1 "100N" H 6265 2155 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 6188 2050 50  0001 C CNN
+F 3 "~" H 6150 2200 50  0001 C CNN
+	1    6150 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 62A30D63
+P 6950 2200
+F 0 "C2" H 7065 2246 50  0000 L CNN
+F 1 "100N" H 7065 2155 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 6988 2050 50  0001 C CNN
+F 3 "~" H 6950 2200 50  0001 C CNN
+	1    6950 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 2350 6550 2350
+Connection ~ 6550 2350
+Wire Wire Line
+	6550 2350 6550 2550
+Wire Wire Line
+	6550 2350 6950 2350
+Wire Wire Line
+	6150 2050 6150 1900
+Connection ~ 6150 1900
+Wire Wire Line
+	6150 1900 6250 1900
+Wire Wire Line
+	6950 2050 6950 1900
+Connection ~ 6950 1900
+Wire Wire Line
+	6950 1900 7300 1900
+$Comp
+L Connector:Micro_SD_Card J3
+U 1 1 62A39F82
+P 6700 4150
+F 0 "J3" H 6650 4867 50  0000 C CNN
+F 1 "Micro_SD_Card" H 6650 4776 50  0000 C CNN
+F 2 "Connector_Card:SD_Kyocera_145638009511859+" H 7850 4450 50  0001 C CNN
+F 3 "http://katalog.we-online.de/em/datasheet/693072010801.pdf" H 6700 4150 50  0001 C CNN
+	1    6700 4150
+	1    0    0    -1  
+$EndComp
+Text Notes 5700 3350 0    100  Italic 20
+UWAGA! w tym miejscu ma być zwykła karta a nie micro, \nużyto schematu micro ze względu na niezgodność footprintu
+Text Notes 6600 3950 0    50   Italic 0
+CS
+Text Notes 6600 4050 0    50   Italic 0
+MOSI\n
+Text Notes 6600 4250 0    50   Italic 0
++3,3V\n
+Text Notes 6600 4150 0    50   Italic 0
+GND
+Text Notes 6600 4350 0    50   Italic 0
+SCK
+Text Notes 6600 4450 0    50   Italic 0
+GND
+Text Notes 6600 4550 0    50   Italic 0
+MISO
+Wire Wire Line
+	3700 5150 3700 3850
+Wire Wire Line
+	3700 3850 3600 3850
+Wire Wire Line
+	3600 4250 3900 4250
+Wire Wire Line
+	3750 4050 3600 4050
+Wire Wire Line
+	3750 4050 3750 4500
+Wire Wire Line
+	3900 3500 3900 4150
+Wire Wire Line
+	3900 4150 3600 4150
+Text Label 3700 3850 0    50   Italic 0
+CS
+Text Label 3650 3950 0    50   Italic 0
+MOSI
+Text Label 3650 4050 0    50   Italic 0
+SCK
+Text Label 3650 4150 0    50   Italic 0
+MISO
 $EndSCHEMATC
