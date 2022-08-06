@@ -15,7 +15,7 @@
 #define KS0108_RW			(1 << 6)
 #define KS0108_EN			(1 << 7)
 
-#define KS0108_CS1			(1 << 4)
+#define KS0108_CS1			(1 << 4) //there is some bug that means in program CS1 is used as CS2 and CS2 as CS1
 #define KS0108_CS2			(1 << 3)
 #define KS0108_CS3			(1 << 4)
 

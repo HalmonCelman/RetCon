@@ -39,10 +39,6 @@
 ///very useful macros^
 
 
-#define CSCARDOFF PORTB|=(1<<CSCARDPIN)
-#define CSCARDON PORTB&=~(1<<CSCARDPIN)
-#define CSCARDPIN 2
-#define CSCARDDDR DDRB
 #define R 13*point_menu
 
 ///__przyciski
@@ -103,8 +99,6 @@ struct animacja a;
 
 int main(void)
 {
-    DDRA |= 2;
-    PORTA = 0;
     point_menu=0;
     xxx_zmiana=0;
     ///->start ekranu
