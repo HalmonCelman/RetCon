@@ -75,6 +75,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Petit_FS_lib/pff.h" />
+		<Unit filename="fuse.c">
+			<Option compilerVar="CC" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

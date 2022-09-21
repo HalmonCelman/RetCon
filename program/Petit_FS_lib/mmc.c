@@ -44,6 +44,7 @@ return SPDR;
 
 void INIT_SPI(void){
 DDRB |= (1<<MOSI)|(1<<SCK)|(1<<PB4); //SS pin as an output - to working SPI
+DDRB &=~ (1<<6); //MISO as input
 DDRA |= (1<<CS);
 PORTA |= (1<<CS);
 SPCR |= (1<<SPE)|(1<<MSTR);

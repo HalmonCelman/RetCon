@@ -114,8 +114,17 @@ GLCD_B_ClearScreen(); //clear buffer
 
 ///->main program
 GLCD_B_ClearScreen();
+GLCD_B_WriteString("starting system.",0,0);
+GLCD_r;
+_delay_ms(1000);
+GLCD_B_ClearScreen();
+GLCD_B_WriteString("starting system..",0,0);
+GLCD_r;
+_delay_ms(1000);
+GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system...",0,0);
 GLCD_r;
+_delay_ms(1000);
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
 
