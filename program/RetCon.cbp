@@ -66,6 +66,16 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="KS0108_lib/multi_buff.h" />
+		<Unit filename="LLKL_tiny_lib/LLKL_tiny.c">
+			<Option compilerVar="CC" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="LLKL_tiny_lib/LLKL_tiny.h">
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="LLKL_tiny_lib/LLKL_tiny_conf.h">
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="Petit_FS_lib/diskio.h" />
 		<Unit filename="Petit_FS_lib/integer.h" />
 		<Unit filename="Petit_FS_lib/mmc.c">

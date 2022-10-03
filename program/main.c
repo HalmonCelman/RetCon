@@ -116,6 +116,7 @@ GLCD_B_ClearScreen(); //clear buffer
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system.",0,0);
 GLCD_r;
+/* <- deleted for faster designing, add if needed later
 _delay_ms(1000);
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system..",0,0);
@@ -125,6 +126,7 @@ GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting system...",0,0);
 GLCD_r;
 _delay_ms(1000);
+*/
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
 
@@ -190,7 +192,6 @@ if(a.frame>=83){
 }
 
 write_close();
-
 
 //miejsce na gry
 
