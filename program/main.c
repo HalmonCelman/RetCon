@@ -1,6 +1,6 @@
 /*
 *************************************************
-*         by KK        ©                        *
+*         by KK        Â©                        *
 *  ten program nie ma byc uniwersalny           *
 * jest pisany na prosbe i liczy sie tylko efekt *
 * program pisany na atmega32                    *
@@ -106,10 +106,11 @@ int main(void)
     key_init();
 GLCD_ClearScreen();
 GLCD_B_ClearScreen(); //clear buffer
-///->multiplexing                                                                                   ///<-przy zmianie mikrokontrolera lub czêstotliwoœci zwróciæ uwagê
-    TCCR0 |= (1<<WGM01) | (1<<CS02) | (1<<CS00); //CTC mode 1024 prescaler
-    OCR0 =19;// div by 20
-    TIMSK |=(1<<1);//enable compare match
+///->multiplexing                                                                                   ///<-przy zmianie mikrokontrolera lub czÃªstotliwoÅ“ci zwrÃ³ciÃ¦ uwagÃª
+    TCCR0A = (1<<WGM01); //CTC mode 1024 prescaler
+    TCCR0B  = (1<<CS02) | (1<<CS00);
+    OCR0A =19;// div by 20
+    TIMSK0 |=(1<<1);//enable compare match
     sei();//enable interrupts
 
 ///->main program
@@ -233,7 +234,7 @@ while(1){
 
 ///__przerwania
 
-ISR(TIMER0_COMP_vect){
+ISR(TIMER0_COMPA_vect){
 licznik++;
 if(licznik>=20){ //for 12MHz
         licznik=0;

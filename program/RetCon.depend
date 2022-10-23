@@ -1,61 +1,48 @@
 # depslib dependency file v1.0
-1663273351 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/main.c
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/fuse.c
 	<avr/io.h>
-	<stdio.h>
-	<avr/interrupt.h>
-	<util/delay.h>
-	"KS0108_lib/KS0108.h"
-	"KS0108_lib/graphic.h"
-	"KS0108_lib/font5x8.h"
-	"KS0108_lib/multi_buff.h"
-	"Petit_FS_lib/diskio.h"
-	"Petit_FS_lib/integer.h"
-	"Petit_FS_lib/pff.h"
 
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108.h
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/graphic.c
 
-1191533626 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/graphic.h
-
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/font5x8.h
-	<avr/pgmspace.h>
-
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/multi_buff.h
-
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/diskio.h
-	"integer.h"
-
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/integer.h
-	<windows.h>
-
-1663794929 /home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/pff.h
-	"integer.h"
-
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/graphic.c
-
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108-AVR.c
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/KS0108-AVR.c
 	<avr/io.h>
 	<avr/pgmspace.h>
 	"KS0108.h"
 
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108.c
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/KS0108.h
+
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/KS0108.c
 	"KS0108.h"
 	"font5x8.h"
 	<util/delay.h>
 
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/multi_buff.c
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/font5x8.h
+	<avr/pgmspace.h>
+
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/multi_buff.c
 	<avr/io.h>
 	<avr/pgmspace.h>
 	"font5x8.h"
 	"multi_buff.h"
 
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/mmc.c
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/KS0108_lib/multi_buff.h
+
+1664799558 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/LLKL_tiny_lib/LLKL_tiny.c
+
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/Petit_FS_lib/mmc.c
 	<avr/io.h>
 	"diskio.h"
 
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/Petit_FS_lib/pff.c
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/Petit_FS_lib/diskio.h
+	"integer.h"
+
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/Petit_FS_lib/integer.h
+	<windows.h>
+
+1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/Petit_FS_lib/pff.c
 	"pff.h"
 	"diskio.h"
 
-1663794929 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/fuse.c
-	<avr/io.h>
+1663762528 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/RetCon/Petit_FS_lib/pff.h
+	"integer.h"
 
