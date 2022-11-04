@@ -1,9 +1,9 @@
 /*
 *************************************************
-*         by KK        ©                        *
-*  ten program nie ma byc uniwersalny           *
-* jest pisany na prosbe i liczy sie tylko efekt *
-* program pisany na atmega32                    *
+*         by KK        ©                                              *
+*  ten program nie ma byc uniwersalny              *
+*  jest pisany na prosbe i liczy sie głównie efekt  *
+* program pisany na atmega32                           *
 *************************************************
  */
 
@@ -115,19 +115,10 @@ GLCD_B_ClearScreen(); //clear buffer
 
 ///->main program
 GLCD_B_ClearScreen();
-GLCD_B_WriteString("starting system.",0,0);
+GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
-/* <- deleted for faster designing, add if needed later
-_delay_ms(1000);
-GLCD_B_ClearScreen();
-GLCD_B_WriteString("starting system..",0,0);
-GLCD_r;
-_delay_ms(1000);
-GLCD_B_ClearScreen();
-GLCD_B_WriteString("starting system...",0,0);
-GLCD_r;
-_delay_ms(1000);
-*/
+
+
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
 
@@ -333,7 +324,7 @@ void play(void){
 }
 
 void key_init(void){
-
+DDRB|=(1<<4);
 }
 
 
