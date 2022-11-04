@@ -20,10 +20,12 @@
 #include "KS0108_lib/font5x8.h"
 #include "KS0108_lib/multi_buff.h"
 
-///Petit FAT FS
-#include "Petit_FS_lib/diskio.h"
-#include "Petit_FS_lib/integer.h"
-#include "Petit_FS_lib/pff.h"
+///FAT FS
+#include "FatFs_lib/diskio.h"
+#include "FatFs_lib/ff.h"
+#include "FatFs_lib/ffconf.h"
+#include "FatFs_lib/mmc_avr.h"
+#include "FatFs_lib/rtc.h"
 
 ///__makra
 #define PREP_TRICK_DDR(x,y) x##y
@@ -36,6 +38,9 @@
 #define PIN(x) PREP_TRICK_PIN(PIN,x)
 #define J(x,y) x##y
 #define QUOTE(x) "x"
+
+#define delay(x) Timer_delay=x;while(Timer_delay);
+
 ///very useful macros^
 
 
@@ -73,12 +78,13 @@
 ///__zmienne globalne
 
     unsigned char licznik=0;
-    FATFS fs;
+    FATFS fs1;
+    FIL file1;
     WORD s1;
     BYTE res;
 
     uint8_t point_menu;
-
+    volatile int Timer_delay;
 
 ///__struktury
 struct animacja{
@@ -99,6 +105,9 @@ struct animacja a;
 
 int main(void)
 {
+//debuging
+DDRA|=2;
+//***************
     point_menu=0;
     xxx_zmiana=0;
     ///->start ekranu
@@ -106,10 +115,10 @@ int main(void)
     key_init();
 GLCD_ClearScreen();
 GLCD_B_ClearScreen(); //clear buffer
-///->multiplexing                                                                                   ///<-przy zmianie mikrokontrolera lub czêstotliwoœci zwróciæ uwagê
-    TCCR0A = (1<<WGM01); //CTC mode 1024 prescaler
-    TCCR0B  = (1<<CS02) | (1<<CS00);
-    OCR0A =19;// div by 20
+///->multiplexing    ( includes also mmc_disktimerproc )                          ///<-przy zmianie mikrokontrolera lub czestotliwosci zwrócic uwage
+    TCCR0A = (1<<WGM01); //CTC mode 256 prescaler 100Hz
+    TCCR0B  = (1<<CS02) ;
+    OCR0A =24;// div by 25
     TIMSK0 |=(1<<1);//enable compare match
     sei();//enable interrupts
 
@@ -117,23 +126,32 @@ GLCD_B_ClearScreen(); //clear buffer
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
-
+delay(1000);
 
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
 
 
-///init disk
-uint8_t i=255;
-while(i-- && (res=disk_initialize()));
-if(res== FR_OK){
+/// 1.init disk
+res=1;
+while(res){
+res=disk_initialize(0);
+if(res!= FR_OK){
 
-res=pf_mount(&fs);
+    GLCD_B_ClearScreen();
+GLCD_B_WriteString("Error - disk 404",0,0);
+GLCD_B_WriteString("retrying...",0,1);
+GLCD_r;
+delay(1000);
+}
+}
+///end 1
+///2.mount
+res=f_mount(&fs1, "", 0);
 if(res== FR_OK){
 
 
 GLCD_B_ClearScreen();
-//GLCD_Animate_exp("ae.txt");
 
 a.name="a.txt";
 a.frame=0;
@@ -145,30 +163,34 @@ a.h=64;
 
 
 
-
-
+res=f_open(&file1, "a.txt", FA_READ);
 
 if(res==FR_OK){
 a.active=1;
-}else{
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("FE",0,0);
-GLCD_r;
-}
-res=pf_open(a.name);
+
+
 
 while(a.active){
 
 
 GLCD_r;
-pf_lseek((DWORD)1024*a.frame);
+f_lseek(&file1,(DWORD)1024*a.frame);
+if(res==FR_OK){
 
-pf_read(GLCD_Buffer,1024,&s1);
+}else{
+    GLCD_B_ClearScreen();
+GLCD_B_WriteString("LSE",0,0);
+GLCD_B_WriteChar((char)(res+48),0,1);
+GLCD_r;
+_delay_ms(1000);
+}
+res=f_read(&file1,&GLCD_Buffer[0],1024,&s1);
 if(res==FR_OK){
 
 }else{
     GLCD_B_ClearScreen();
 GLCD_B_WriteString("RE",0,0);
+GLCD_B_WriteChar((char)(res+48),0,1);
 GLCD_r;
 _delay_ms(1000);
 }
@@ -183,8 +205,12 @@ if(a.frame>=83){
 
 }
 
-write_close();
-
+f_close(&file1);
+}else{
+    GLCD_B_ClearScreen();
+GLCD_B_WriteString("FE",0,0);
+GLCD_r;
+}
 //miejsce na gry
 
 //GLCD_B_ClearScreen();
@@ -195,22 +221,13 @@ write_close();
 //play();
 
 
-
-
-//pf_mount(0); //wymontuj nosnik jesli wszystko skonczone
-
+f_unmount("");
+///end 2
 
 }else{
 _delay_ms(1000);
     GLCD_B_ClearScreen();
 GLCD_B_WriteString("Error - mount",0,0);
-GLCD_r;
-}
-
-}else{
-_delay_ms(1000);
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("Error - disk 404",0,0);
 GLCD_r;
 }
 
@@ -226,8 +243,11 @@ while(1){
 ///__przerwania
 
 ISR(TIMER0_COMPA_vect){
+if(Timer_delay) Timer_delay--;
+mmc_disk_timerproc(); //for FatFS
+
 licznik++;
-if(licznik>=20){ //for 12MHz
+if(licznik>=25){ //for 16MHz
         licznik=0;
         if(xxx_zmiana){
 xxx_zmiana=0;
@@ -246,13 +266,15 @@ xxx_zmiana=0;
 }
 
 
+
+
 ///__funkcje
 
 void GLCD_B_Bitmap_SD(char* name){
     char g[16];
-    res=pf_open(name);
+    res=f_open(&file1,name,FA_READ);
 if(res== FR_OK){
-pf_read(g, 5 , &s1);
+f_read(&file1,g, 5 , &s1);
 
 
 
@@ -263,7 +285,7 @@ i=0;
 int f=0;
 while(i<64){
     f=0;
-    res= pf_read(g, 16 , &s1);
+    res= f_read(&file1,g, 16 , &s1);
     while(f<16){
     j=0;
         while(j<8){
@@ -279,7 +301,7 @@ while(i<64){
 }
 
 
-write_close();
+f_close(&file1);
 
 }else{
 _delay_ms(1000);
@@ -291,11 +313,11 @@ GLCD_r;
 }
 
 void GLCD_Animate_exp(char* name){
-res=pf_open(name);
+res=f_open(&file1,name,FA_READ);
 if(res== FR_OK){
 int x=0;
 while(!x){
-    pf_read(GLCD_Buffer,1024,&s1);
+    f_read(&file1,GLCD_Buffer,1024,&s1);
     if(s1!=1024){
         x=1;
     }
@@ -307,15 +329,15 @@ GLCD_r;
 }
 _delay_ms(33);
 }
-write_close();
+f_close(&file1);
 }
 }
 
 void GLCD_B_Bitmap_SD_exp(char* name){
-    res=pf_open(name);
+    res=f_open(&file1,name,FA_READ);
 if(res== FR_OK){
-    pf_read(GLCD_Buffer,1024,&s1);
-write_close();
+    f_read(&file1,GLCD_Buffer,1024,&s1);
+f_close(&file1);
 }
 
 }
