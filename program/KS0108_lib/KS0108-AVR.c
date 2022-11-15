@@ -7,7 +7,9 @@
 #include <avr/pgmspace.h>
 #include "KS0108.h"
 
-
+#ifndef asm
+#define asm __asm__
+#endif
 extern unsigned char screen_x;
 extern unsigned char screen_y;
 

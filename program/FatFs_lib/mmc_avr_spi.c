@@ -238,7 +238,7 @@ int rcvr_datablock (
 /* Send a data packet to MMC                                             */
 /*-----------------------------------------------------------------------*/
 
-#if	_USE_WRITE
+#if !FF_FS_READONLY
 static
 int xmit_datablock (
 	const BYTE *buff,	/* 512 byte data block to be transmitted */
@@ -423,7 +423,7 @@ DRESULT mmc_disk_read (
 /* Write Sector(s)                                                       */
 /*-----------------------------------------------------------------------*/
 
-#if _USE_WRITE
+#if  !FF_FS_READONLY
 DRESULT mmc_disk_write (
 	const BYTE *buff,	/* Pointer to the data to be written */
 	LBA_t sector,		/* Start sector number (LBA) */

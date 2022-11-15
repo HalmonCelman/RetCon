@@ -51,7 +51,7 @@
 
 1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/graphic.c
 
-1663762528 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108-AVR.c
+1667674187 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/KS0108_lib/KS0108-AVR.c
 	<avr/io.h>
 	<avr/pgmspace.h>
 	"KS0108.h"
@@ -76,7 +76,7 @@
 
 1664799558 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_tiny_lib/LLKL_tiny.c
 
-1667601759 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/main.c
+1668010640 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/main.c
 	<avr/io.h>
 	<stdio.h>
 	<avr/interrupt.h>
@@ -122,7 +122,7 @@
 	<float.h>
 	<stdint.h>
 
-1667593414 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/FatFs_lib/ffconf.h
+1667675115 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/FatFs_lib/ffconf.h
 
 1667597336 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/FatFs_lib/diskio.h
 	"ff.h"
@@ -138,7 +138,7 @@
 	<stdarg.h>
 	<math.h>
 
-1667598571 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/FatFs_lib/mmc_avr_spi.c
+1668011736 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/FatFs_lib/mmc_avr_spi.c
 	<avr/io.h>
 	<avr/interrupt.h>
 	"diskio.h"

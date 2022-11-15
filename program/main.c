@@ -44,6 +44,10 @@
 ///very useful macros^
 
 
+///////////////////////////////////////////////////////////////////konfiguracja
+#define DEBUG_MODE 1
+
+
 #define R 13*point_menu
 
 ///__przyciski
@@ -67,10 +71,12 @@
 
 
 ///__funkcje_deklaracje
-    void key_init(void);
-    void GLCD_B_Bitmap_SD_exp(char*);
-    void GLCD_Animate_exp(char*);
-    void GLCD_B_Bitmap_SD(char*);
+    uint8_t err(uint8_t,char *); // normal error if error occure than it displays it on screen for 1000 ms and returns error code
+    uint8_t errc(uint8_t,char *); //critic error, if error occure then program will no longer work( function causes infinite loop ),if no error returns 0
+    void key_init(void); //initialize keys
+    void GLCD_B_Bitmap_SD_exp(char*); //shows exported bitmap from path
+    void GLCD_Animate_exp(char*); //shows exported animation from file
+    void GLCD_B_Bitmap_SD(char*); //shows unexported bitmap(from .wbmp file)
     void load_games_menu(void);
     void play(void);
     void minilook(void);
@@ -79,7 +85,7 @@
 
     unsigned char licznik=0;
     FATFS fs1;
-    FIL file1;
+    FIL file1,file2;
     WORD s1;
     BYTE res;
 
@@ -100,6 +106,27 @@ uint8_t active; //czy aktywna aktualnie
 ///__animacje
 struct animacja a;
 
+//pobieranie czasu
+
+DWORD get_fattime (void)
+{
+	RTC rtc;
+
+	rtc.year=2022;
+	rtc.month=1;
+	rtc.mday=1;
+	rtc.hour=1;
+	rtc.min=1;
+	rtc.sec=1;
+
+	/* Pack date and time into a DWORD variable */
+	return	  ((DWORD)(rtc.year - 1980) << 25)
+			| ((DWORD)rtc.month << 21)
+			| ((DWORD)rtc.mday << 16)
+			| ((DWORD)rtc.hour << 11)
+			| ((DWORD)rtc.min << 5)
+			| ((DWORD)rtc.sec >> 1);
+}
 
 
 
@@ -107,6 +134,7 @@ int main(void)
 {
 //debuging
 DDRA|=2;
+
 //***************
     point_menu=0;
     xxx_zmiana=0;
@@ -116,17 +144,22 @@ DDRA|=2;
 GLCD_ClearScreen();
 GLCD_B_ClearScreen(); //clear buffer
 ///->multiplexing    ( includes also mmc_disktimerproc )                          ///<-przy zmianie mikrokontrolera lub czestotliwosci zwrócic uwage
-    TCCR0A = (1<<WGM01); //CTC mode 256 prescaler 100Hz
-    TCCR0B  = (1<<CS02) ;
-    OCR0A =24;// div by 25
+    TCCR0A = (1<<WGM01); //CTC mode, 64 prescaler 1000Hz
+    TCCR0B  = (1<<CS01)  | (1<<CS00);
+    OCR0A =249;// div by 25
     TIMSK0 |=(1<<1);//enable compare match
     sei();//enable interrupts
+/*
+PORTA|=2;
+delay(100);
+PORTA&=~2;
+delay(100);
+*/
 
 ///->main program
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
-delay(1000);
 
 DDRB|=(1<<PB2);
 PORTB&=~(1<<PB2);
@@ -135,21 +168,11 @@ PORTB&=~(1<<PB2);
 /// 1.init disk
 res=1;
 while(res){
-res=disk_initialize(0);
-if(res!= FR_OK){
-
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("Error - disk 404",0,0);
-GLCD_B_WriteString("retrying...",0,1);
-GLCD_r;
-delay(1000);
-}
+res=err(disk_initialize(0),"Disk 404 ");
 }
 ///end 1
 ///2.mount
-res=f_mount(&fs1, "", 0);
-if(res== FR_OK){
-
+errc(f_mount(&fs1, "", 0),"MountERR");
 
 GLCD_B_ClearScreen();
 
@@ -161,75 +184,35 @@ a.y=0;
 a.w=128;
 a.h=64;
 
+errc(f_open(&file2, "c.txt", FA_WRITE | FA_CREATE_ALWAYS),"F2E");
 
+char komunikat[]="test123";
 
-res=f_open(&file1, "a.txt", FA_READ);
+errc(f_write(&file2,komunikat,5,&s1),"WriteERR");
 
-if(res==FR_OK){
-a.active=1;
+errc(f_close(&file2),"ClosingERR");
 
+errc(f_open(&file1, "a.txt", FA_READ),"FE");
 
+a.active=1; //run animation
 
 while(a.active){
-
-
 GLCD_r;
-f_lseek(&file1,(DWORD)1024*a.frame);
-if(res==FR_OK){
 
-}else{
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("LSE",0,0);
-GLCD_B_WriteChar((char)(res+48),0,1);
-GLCD_r;
-_delay_ms(1000);
-}
-res=f_read(&file1,&GLCD_Buffer[0],1024,&s1);
-if(res==FR_OK){
-
-}else{
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("RE",0,0);
-GLCD_B_WriteChar((char)(res+48),0,1);
-GLCD_r;
-_delay_ms(1000);
-}
+res=err(f_lseek(&file1,(DWORD)1024*a.frame),"LseekERR");
+res?res:err(f_read(&file1,&GLCD_Buffer[0],1024,&s1),"ReadERR");
 
 a.frame++;
-if(a.frame>=83){
+if(a.frame>=83 || res){ //end animation if this is end or error occured
     a.active=0;
 }
 
 
-
-
 }
-
 f_close(&file1);
-}else{
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("FE",0,0);
-GLCD_r;
-}
-//miejsce na gry
-
-//GLCD_B_ClearScreen();
-//GLCD_B_Bitmap_SD("menu.txt");
-//load_games_menu();
-//GLCD_r;
-
-//play();
-
 
 f_unmount("");
 ///end 2
-
-}else{
-_delay_ms(1000);
-    GLCD_B_ClearScreen();
-GLCD_B_WriteString("Error - mount",0,0);
-GLCD_r;
-}
 
 
 while(1){
@@ -243,11 +226,14 @@ while(1){
 ///__przerwania
 
 ISR(TIMER0_COMPA_vect){
-if(Timer_delay) Timer_delay--;
+licznik++;
+if(Timer_delay) Timer_delay--; //accurate delay
+if(licznik>=10){ //for 16MHz -> 100Hz
+
+
 mmc_disk_timerproc(); //for FatFS
 
-licznik++;
-if(licznik>=25){ //for 16MHz
+
         licznik=0;
         if(xxx_zmiana){
 xxx_zmiana=0;
@@ -304,13 +290,40 @@ while(i<64){
 f_close(&file1);
 
 }else{
-_delay_ms(1000);
+delay(1000);
     GLCD_B_ClearScreen();
 GLCD_B_WriteString("Error - opf",0,0);
 GLCD_r;
 }
 
 }
+
+
+uint8_t err(uint8_t r,char * com){
+#if DEBUG_MODE==1
+if(r){
+GLCD_B_ClearScreen();
+GLCD_B_WriteString(com,0,0);
+GLCD_B_WriteChar((char)(r+48),0,1);
+GLCD_r;
+delay(1000);
+}
+#endif // DEBUG_MODE
+return r;
+}
+
+uint8_t errc(uint8_t r,char * com){
+if(r){
+GLCD_B_ClearScreen();
+GLCD_B_WriteString(com,0,0);
+GLCD_B_WriteChar((char)(r+48),0,1);
+GLCD_r;
+while(1);
+}
+return r;
+}
+
+
 
 void GLCD_Animate_exp(char* name){
 res=f_open(&file1,name,FA_READ);
@@ -327,7 +340,7 @@ if(x){
 }else{
 GLCD_r;
 }
-_delay_ms(33);
+delay(33);
 }
 f_close(&file1);
 }
