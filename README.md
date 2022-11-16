@@ -1,7 +1,9 @@
 # RetCon
 
-Mini konsola Retro
+Mini Retro Console
 
-OK, so when microcontroller doesn't aswer try avrdude with -B300 flag ,
- it sets SCK to 2KHz so it can communicate even if microcontroller is going really slow
-f.e. avrdude -c usbasp -p m1284p -B300
+Based on LLKL language and KoKOS, works on FatFS.
+Display: WG12864B1 V1.0-SFYLYHTC06
+CPU: Atmega1284p
+
+
