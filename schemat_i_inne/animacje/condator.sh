@@ -1,3 +1,4 @@
+#!/bin/bash
 #by KK
 # license as always - you can freely use but you must give information that this program
 # was written by KK

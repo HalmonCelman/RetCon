@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1651184186 source:/home/halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/dlaEmilki=)/RetCon/schemat_i_inne/bitmapy/animacje/exportator/main.cpp
+	<iostream>
+	<stdio.h>
+

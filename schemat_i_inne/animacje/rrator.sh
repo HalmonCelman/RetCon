@@ -1,3 +1,4 @@
+#!/bin/bash
 #by KK
 # license as always - you can freely use but you must give information that this program
 # was written by KK
@@ -28,8 +29,8 @@ i=0;
 
 for file in frames/$dir/*
 do
-rename -n s/$prefix$i\.wbmp/$prefix2$i\.txt/ frames/$dir/*
-rename -n s/$prefix$i\.txt/$prefix2$i\.txt/ frames/$dir/*
+prename -n s/$prefix$i\.wbmp/$prefix2$i\.txt/ frames/$dir/* #prename on CentOS and fedora rename in another
+prename -n s/$prefix$i\.txt/$prefix2$i\.txt/ frames/$dir/* #prename on CentOS and fedora rename in another
 ((i+=1))
 done
 
@@ -44,8 +45,8 @@ i=0;
 for file in $dir/*.wbmp
 do
 echo -n "."
-rename s/$prefix$i\.wbmp/$prefix2$i\.txt/ frames/$dir/*
-rename s/$prefix$i\.txt/$prefix2$i\.txt/ frames/$dir/*
+prename s/$prefix$i\.wbmp/$prefix2$i\.txt/ frames/$dir/*
+prename s/$prefix$i\.txt/$prefix2$i\.txt/ frames/$dir/*
 ((i+=1))
 done
 echo "done!"
