@@ -27,6 +27,9 @@
 #include "FatFs_lib/mmc_avr.h"
 #include "FatFs_lib/rtc.h"
 
+///LLKL
+#include "LLKL/LLKL.h"
+
 ///__makra
 #define PREP_TRICK_DDR(x,y) x##y
 #define DDR(x) PREP_TRICK_DDR(DDR,x)

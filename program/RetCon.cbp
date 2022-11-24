@@ -71,11 +71,15 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="KS0108_lib/multi_buff.h" />
-		<Unit filename="LLKL_tiny_lib/LLKL_tiny.c">
+		<Unit filename="LLKL/LLKL.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="LLKL_tiny_lib/LLKL_tiny.h" />
-		<Unit filename="LLKL_tiny_lib/LLKL_tiny_conf.h" />
+		<Unit filename="LLKL/LLKL.h" />
+		<Unit filename="LLKL/LLKL_conf.h" />
+		<Unit filename="LLKL_drv/llkl_avr_drv.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LLKL_drv/llkl_avr_drv.h" />
 		<Unit filename="fuse.c">
 			<Option compilerVar="CC" />
 		</Unit>
