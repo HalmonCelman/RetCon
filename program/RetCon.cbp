@@ -76,10 +76,10 @@
 		</Unit>
 		<Unit filename="LLKL/LLKL.h" />
 		<Unit filename="LLKL/LLKL_conf.h" />
-		<Unit filename="LLKL_drv/llkl_avr_drv.c">
+		<Unit filename="LLKL_drv/llkl_atmega1284p.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="LLKL_drv/llkl_avr_drv.h" />
+		<Unit filename="LLKL_drv/llkl_atmega1284p.h" />
 		<Unit filename="fuse.c">
 			<Option compilerVar="CC" />
 		</Unit>
