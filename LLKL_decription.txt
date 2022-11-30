@@ -1,0 +1,58 @@
+////////////////////////////////////////////////////////
+LLKL description - by KK - All rights reserved
+////////////////////////////////////////////////////////
+-> LLKL have memory adressed by 64 bits from 0 to 18 446 744 073 709 551 615
+-> Number of command is adressed by 32bit unsigned integer from 0 to 4 294 967 295
+-> All registers are 8-bit
+
+-> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_RAM_SIZE)-1
+FastMeM_SIZE can be set in LLKL_config.h
+
+-> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number adress to 18446744073709551615( 0xFFFFFFFF )
+Flag_Number should be changed !only! when number of flags are changing
+
+-> flags are 1 byte universal registers( you can use it as regular registers, but at your own risk ):
+Bound :=(int64)FASTMeM_SIZE;
+O Flag - Overflow flag, sets when overflow occure - use it as ^O or &Bound, 
+M Flag - minus and additional flag, This flag i saying if your number is greater than 0 (0) or lower (1), and can be used for some additional informations - ^M or &Bound+1
+
+Avialibe commands:
+Form:
+(symbolic name) 	(number of command)
+(functional description)
+	(parameters)
+(output description)
+
+
+ADD 	1	
+Add two registers or register and number
+	REG,REG	or REG,INT
+Output on first REG,If OVF then O flag have OVF value
+*****************************************************************************************************************************
+SUB 	2
+Substract two registers or registers and number
+	REG,REG or REG,INT
+Output on first REG,If on minus then M flag eq 1, def 0, first register have module of result
+*****************************************************************************************************************************
+AND	3
+Logic AND operation between two registers or register and number
+Parameters:
+	REG,REG or REG,INT
+Output:
+	Output on first REG
+*****************************************************************************************************************************
+OR	4
+INC	5
+DEC	6
+SER	7
+MUL	8
+DIV	9
+RJMP	10
+JMP	11
+RET	12
+CP	13
+BREQ	14
+BRNE	15
+BRLO	16
+IN	17
+OUT	18
