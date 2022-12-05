@@ -7,6 +7,6 @@
 ///functions
 uint8_t llkl_get(void);
 uint8_t llkl_disp_char(uint8_t);
-
+void llkl_send_info(char*, uint64_t);
 
 #endif // LLKL_ATMEGA1284P_H_INCLUDED

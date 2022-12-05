@@ -9,10 +9,10 @@ LLKL description - by KK - All rights reserved
 
 -> All registers are 8-bit
 
--> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_RAM_SIZE)-1
+-> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_FAST_MEM_SIZE)-1
 FastMeM_SIZE can be set in LLKL_config.h
 
--> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number+FLabel_number adress to 18446744073709551615( 0xFFFFFFFF )
+-> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number+Label_number adress to 18446744073709551615( 0xFFFFFFFF )
 Flag_Number should be changed !only! when number of flags are changing
 
 -> flags are 1 byte universal registers( you can use it as regular registers, but at your own risk ):
@@ -22,7 +22,7 @@ Flag_Number should be changed !only! when number of flags are changing
 
 How to write:
 Flag:
- %(Flag) f.e. ^O, ^M, ^R
+ %(Flag) f.e. %O, %M, %R
 or
 &Bound+(Relative Flag adress), f.e.
 %O == &(Bound)
@@ -240,30 +240,30 @@ There is no output
 CP	28
 Compare two registers
 	REG,REG
-Output: %R= if equal:0 ; if lower: 1; if greater: 2
+Output: %R= if equal:1 ; if lower: 0; if greater: 2
 *****************************************************************************************************************************
 CPI	29
 Compare register and integer
 	REG,INT
-Output: %R= if equal:0 ; if lower: 1; if greater: 2
+Output: %R= if equal:1 ; if lower: 0; if greater: 2
 *****************************************************************************************************************************
 SEQ	30
-Skip next command if equal( if R flag=0 )
+Skip next command if equal( if R flag=1 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
 DEQ	31
-Do next command if equal( if R flag=0 )
+Do next command if equal( if R flag=1 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
 SLO	32
-Skip next command if lower( if R flag=1 )
+Skip next command if lower( if R flag=0 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
 DLO	33
-Do next command if lower( if R flag=1 )
+Do next command if lower( if R flag=0 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
