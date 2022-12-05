@@ -1,0 +1,55 @@
+ADD	( )
+ADDI	( )
+UADD	( )
+UADDI	( )
+
+SUB	( )
+SUBI	( )
+USUB	( )
+USUBI	( )
+
+MUL	( )
+MULI	( )
+UMUL	( )
+UMULI	( )
+
+DIV	( )
+DIVI	( )
+UDIV	( )
+UDIVI	( )
+
+AND	( )
+ANDI	( )
+
+OR	( )
+ORI	( )
+
+NOT	( )
+
+INC	( )
+DEC	( )
+
+SER	( )
+SERI	( )
+
+RJMP	( )
+JMP	( )
+
+RET	( )
+
+CP	( )
+CPI	( )
+
+SEQ	( )
+DEQ	( )
+SLO	( )
+DLO	( )
+SGR	( )
+DGR	( )
+
+IN	( )
+
+OUT	( )
+
+EXEC	( )
+

@@ -152,7 +152,7 @@
 
 1668619695 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_avr_drv.c
 
-1669764222 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL/LLKL.h
+1670012874 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL/LLKL.h
 	"LLKL_conf.h"
 
 1669759712 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL/LLKL_conf.h
@@ -160,9 +160,9 @@
 
 1668619648 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_avr_drv.h
 
-1669763610 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_atmega1284p.h
+1670012278 /home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_atmega1284p.h
 	"../LLKL/LLKL.h"
 
-1669759740 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_atmega1284p.c
+1670012249 source:/home/Halmon/Pulpit/KK/_MIKROKONTROLERY/inprogress/RetCon/program/LLKL_drv/llkl_atmega1284p.c
 	"llkl_atmega1284p.h"
 

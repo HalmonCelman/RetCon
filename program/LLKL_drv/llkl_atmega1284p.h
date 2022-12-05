@@ -5,8 +5,8 @@
 #include "../LLKL/LLKL.h"
 
 ///functions
-llkl_err llkl_get(void);
-llkl_err llkl_disp_char(uint8_t);
+uint8_t llkl_get(void);
+uint8_t llkl_disp_char(uint8_t);
 
 
 #endif // LLKL_ATMEGA1284P_H_INCLUDED

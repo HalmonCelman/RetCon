@@ -1,11 +1,9 @@
 #include "llkl_atmega1284p.h"
 
-llkl_err llkl_get(void){
-llkl_err err;
-err={0,0};
-return err;
+uint8_t llkl_get(void){
+return 0;
 }
 
-llkl_err llkl_disp_char(uint8_t n){
+uint8_t llkl_disp_char(uint8_t n){
 return 0;
 }
