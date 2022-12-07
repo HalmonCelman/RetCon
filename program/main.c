@@ -1,9 +1,6 @@
 /*
 *************************************************
 *         by KK        ©                                              *
-*  ten program nie ma byc uniwersalny              *
-*  jest pisany na prosbe i liczy sie głównie efekt  *
-* program pisany na atmega32                           *
 *************************************************
  */
 
@@ -177,7 +174,9 @@ res=err(disk_initialize(0),"Disk 404 ");
 ///2.mount
 errc(f_mount(&fs1, "", 0),"MountERR");
 
-GLCD_B_ClearScreen();
+errc(f_open(&file1, "uno.txt", FA_READ),"FRE");
+errc(f_open(&file2, "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
+/*GLCD_B_ClearScreen();
 
 a.name="a.txt";
 a.frame=0;
@@ -211,9 +210,11 @@ if(a.frame>=83 || res){ //end animation if this is end or error occured
 }
 
 
-}
+}*/
+llkl_send_info("process ended: ",0xFEDCBA98);
+llkl_send_info("process 2 ended: ",0x12345678);
 f_close(&file1);
-
+f_close(&file2);
 f_unmount("");
 ///end 2
 

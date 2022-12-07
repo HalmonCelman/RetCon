@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 LLKL description - by KK - All rights reserved
 ////////////////////////////////////////////////////////
--> LLKL have memory adressed by 64 bits from 0 to 18 446 744 073 709 551 615
+-> LLKL have memory adressed by 32 bits - up to 32GB
 -> Number of command is adressed by 32bit unsigned integer from 0 to 4 294 967 295
 -> Number of label is adressed by 32bit unsigned integer from 0 to 4 294 967 295
 
@@ -12,7 +12,7 @@ LLKL description - by KK - All rights reserved
 -> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_FAST_MEM_SIZE)-1
 FastMeM_SIZE can be set in LLKL_config.h
 
--> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number+Label_number adress to 18446744073709551615( 0xFFFFFFFF )
+-> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number+Label_number adress to 0xFFFF
 Flag_Number should be changed !only! when number of flags are changing
 
 -> flags are 1 byte universal registers( you can use it as regular registers, but at your own risk ):
@@ -29,7 +29,7 @@ or
 %M == &(Bound+1)
 %R == &(Bound+2)
 where
-Bound :=(int64)FASTMeM_SIZE;
+Bound :=(uint32)FASTMeM_SIZE;
 
 Register:
 
@@ -55,7 +55,7 @@ where it's allowed to use -INT (i) you should write -instead of '
 Additional:
 You can write *REG insted of &REG before register adress,
  it means for parser that adress of register is stored in 8 bytes beginning from *REG
-(LLKL memory is stored in 64 bits format)
+(LLKL memory is stored in 32 bits format)
 
 Avialibe commands:
 Form:
@@ -228,7 +228,7 @@ There is no output
 *****************************************************************************************************************************
 JMP	26
 It's an absolute jump to the offset of file
-	adress(64 bits value)
+	adress(32 bits value)
 There is no output
 *****************************************************************************************************************************
 RET	27
@@ -279,13 +279,13 @@ no output
 *****************************************************************************************************************************
 IN	36
 Get standard input( how many bytes and first REG), information from which stream you can give by M flag
-	INT(64bits), REG
+	INT(32bits), REG
 Output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
 (i) be aware because if you give this function too large INT it can replace all your memory. 
 *****************************************************************************************************************************
 OUT	37
 Give informations to standard output (how many bytes and first REG), information to which stream you can give by M flag
-	INT(64bits), REG
+	INT(32bits), REG
 Information given to standard output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
 *****************************************************************************************************************************
 EXEC	38

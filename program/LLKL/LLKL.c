@@ -34,8 +34,8 @@ llkl_err LLKL_exec(void){
     return exec_err;
 }
 
-uint64_t LLKL_load_reg_addr(uint8_t mode){
-uint64_t llkl_reg=0;
+uint32_t LLKL_load_reg_addr(uint8_t mode){
+uint32_t llkl_reg=0;
     if(mode==0){ //if normal mode
         for(int i=0;i<4;i++){ //read adress
             llkl_reg = (llkl_reg<<8) + llkl_get();
@@ -50,7 +50,7 @@ uint64_t llkl_reg=0;
         }
     }
     if(mode==2){ //if indirect mode
-    uint64_t llkl_pom=0;
+    uint32_t llkl_pom=0;
         for(int i=0;i<4;i++){ //get indirect adress
             llkl_pom = (llkl_pom<<8) + llkl_get();
         }
@@ -61,11 +61,11 @@ uint64_t llkl_reg=0;
     return llkl_reg;
 }
 
-uint8_t LLKL_load_mem(uint64_t adress){ //!!!!!!!!!!!!todo
+uint8_t LLKL_load_mem(uint32_t adress){ //!!!!!!!!!!!!todo
 return LLKL_FAST_MEM[adress];
 }
 
-void LLKL_save_mem(uint64_t adress, uint8_t value){ //!!!!!!!!!!!!todo
+void LLKL_save_mem(uint32_t adress, uint8_t value){ //!!!!!!!!!!!!todo
 LLKL_FAST_MEM[adress]=value;
 }
 
@@ -75,7 +75,7 @@ LLKL_FAST_MEM[adress]=value;
 llkl_err LLKL_seri(void){
 llkl_err inst_err;
 
-uint64_t llkl_reg; //adress of register
+uint32_t llkl_reg; //adress of register
 
 inst_err.status=LLKL_OK;
 

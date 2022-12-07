@@ -1,20 +1,9 @@
 #ifndef LLKL_TINY_H_INCLUDED
 #define LLKL_TINY_H_INCLUDED
 
-///types
-//uint8_t
-#ifndef uint8_t
-#define uint8_t  unsigned char
-#endif // uint8_t
-
-#ifndef uint32_t
-#define uint32_t  unsigned long int
-#endif // uint32_t
-
-#ifndef uint64_t
-#define uint64_t  unsigned long long int
-#endif // uint64_t
-
+///include
+#include <stdint.h>
+#include "LLKL_conf.h"
 
 ///Avialibe errors
 
@@ -34,13 +23,11 @@ typedef struct{
 
 
 
-///include
-#include "LLKL_conf.h"
 
 ///memory
 //***********LLKL_FLAG_MAP is in LLKL_conf.h in DANGER ZONE
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE];
-uint64_t LLKL_LABEL[LLKL_LABEL_NUMBER];
+uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 
 ///global varialibes
 volatile uint32_t llkl_compt; //command pointer
@@ -51,9 +38,9 @@ volatile uint8_t llkl_c; //command
 ///functions
 void LLKL_init(void);
 llkl_err LLKL_exec(void); //execute program
-uint64_t LLKL_load_reg_addr(uint8_t); //load adress of register - MODE: 0 - normal register adress &, 1 - flag %, 2 - indirect *, returns adress
-uint8_t LLKL_load_mem(uint64_t);
-void LLKL_save_mem(uint64_t,uint8_t);
+uint32_t LLKL_load_reg_addr(uint8_t); //load adress of register - MODE: 0 - normal register adress &, 1 - flag %, 2 - indirect *, returns adress
+uint8_t LLKL_load_mem(uint32_t);
+void LLKL_save_mem(uint32_t,uint8_t);
 ///llkl_instructions
 llkl_err LLKL_seri(void);
 
