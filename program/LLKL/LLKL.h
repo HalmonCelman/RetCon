@@ -21,17 +21,12 @@ typedef struct{
     uint8_t additional; //additional information about error
 } llkl_err;
 
-
-
-
 ///memory
 //***********LLKL_FLAG_MAP is in LLKL_conf.h in DANGER ZONE
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE];
 uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 
 ///global varialibes
-volatile uint32_t llkl_compt; //command pointer
-volatile uint32_t llkl_dpt; //dynamic pointer
 
 volatile uint8_t llkl_h8; //helpful 8bit varialibe
 volatile uint8_t llkl_c; //command

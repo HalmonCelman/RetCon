@@ -84,10 +84,7 @@
 ///__zmienne globalne
 
     unsigned char licznik=0;
-    FATFS fs1;
-    FIL file1,file2;
-    WORD s1;
-    BYTE res;
+
 
     uint8_t point_menu;
     volatile int Timer_delay;
@@ -174,8 +171,8 @@ res=err(disk_initialize(0),"Disk 404 ");
 ///2.mount
 errc(f_mount(&fs1, "", 0),"MountERR");
 
-errc(f_open(&file1, "uno.txt", FA_READ),"FRE");
-errc(f_open(&file2, "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
+errc(f_open(&file[FIL_MAIN], "uno.txt", FA_READ),"FRE");
+errc(f_open(&file[FIL_LOG], "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
 /*GLCD_B_ClearScreen();
 
 a.name="a.txt";
@@ -211,10 +208,14 @@ if(a.frame>=83 || res){ //end animation if this is end or error occured
 
 
 }*/
+LLKL_init();
+
+
+
 llkl_send_info("process ended: ",0xFEDCBA98);
 llkl_send_info("process 2 ended: ",0x12345678);
-f_close(&file1);
-f_close(&file2);
+f_close(&file[FIL_MAIN]);
+f_close(&file[FIL_LOG]);
 f_unmount("");
 ///end 2
 
@@ -262,9 +263,9 @@ xxx_zmiana=0;
 
 void GLCD_B_Bitmap_SD(char* name){
     char g[16];
-    res=f_open(&file1,name,FA_READ);
+    res=f_open(&file[FIL_D],name,FA_READ);
 if(res== FR_OK){
-f_read(&file1,g, 5 , &s1);
+f_read(&file[FIL_D],g, 5 , &s1);
 
 
 
@@ -275,7 +276,7 @@ i=0;
 int f=0;
 while(i<64){
     f=0;
-    res= f_read(&file1,g, 16 , &s1);
+    res= f_read(&file[FIL_D],g, 16 , &s1);
     while(f<16){
     j=0;
         while(j<8){
@@ -291,7 +292,7 @@ while(i<64){
 }
 
 
-f_close(&file1);
+f_close(&file[FIL_D]);
 
 }else{
 delay(1000);
@@ -330,11 +331,11 @@ return r;
 
 
 void GLCD_Animate_exp(char* name){
-res=f_open(&file1,name,FA_READ);
+res=f_open(&file[FIL_D],name,FA_READ);
 if(res== FR_OK){
 int x=0;
 while(!x){
-    f_read(&file1,GLCD_Buffer,1024,&s1);
+    f_read(&file[FIL_D],GLCD_Buffer,1024,&s1);
     if(s1!=1024){
         x=1;
     }
@@ -346,15 +347,15 @@ GLCD_r;
 }
 delay(33);
 }
-f_close(&file1);
+f_close(&file[FIL_D]);
 }
 }
 
 void GLCD_B_Bitmap_SD_exp(char* name){
-    res=f_open(&file1,name,FA_READ);
+    res=f_open(&file[FIL_D],name,FA_READ);
 if(res== FR_OK){
-    f_read(&file1,GLCD_Buffer,1024,&s1);
-f_close(&file1);
+    f_read(&file[FIL_D],GLCD_Buffer,1024,&s1);
+f_close(&file[FIL_D]);
 }
 
 }

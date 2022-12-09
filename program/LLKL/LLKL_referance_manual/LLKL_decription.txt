@@ -295,5 +295,7 @@ handler should be in file <program>.dllkl with source to file where this subprog
 1programs/subprogram2.llkl
 	(handler-32bits)
 There is no output
+*****************************************************************************************************************************
 
+If command returned = 255 it means that end of program has been reached
 
