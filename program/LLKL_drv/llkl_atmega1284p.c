@@ -1,9 +1,16 @@
 #include "llkl_atmega1284p.h"
 #include "../KS0108_lib/multi_buff.h"
 
-uint8_t llkl_init_program(char* source,uint8_t num){ //todo - from which place it's starting
+uint8_t llkl_init_program(char* source,uint8_t num){ //todo - from which place it's starting <-
 return f_open(&file[num],source,FA_READ); //open file in selected file
-//todo - initializing pointers file_pt
+
+for(int i=0;i<NUMOFFILES;i++){
+    file_pt[i].buffpt=0; //clear buffor page pointer
+    file_pt[i].compt=0; //clear command pointer
+    file_pt[i].dpt=0; // clear dynamic pointer
+    }
+llkl_actual_file=num;
+llkl_physical_read=1;
 }
 
 uint8_t llkl_end_program(uint8_t num){
@@ -11,8 +18,24 @@ return f_close(&file[num]); //close selected file
 }
 
 uint8_t llkl_get(void){
-//todo
-return 0;
+
+if(file_pt[llkl_actual_file].dpt >= LLKL_COMM_BUFF_SIZE)
+    llkl_physical_read = 1;
+
+
+if(llkl_physical_read){ //reload command buffer and set pointers - shild be read from last command to avoid chain broke but will be implemented later
+llkl_physical_read = 0;
+f_read(&file[llkl_actual_file],LLKL_COMM_BUFF,LLKL_COMM_BUFF_SIZE,&s1);
+if(s1<LLKL_COMM_BUFF_SIZE){
+LLKL_COMM_BUFF[s1]=0xFF;
+}
+file_pt[llkl_actual_file].buffpt++;
+file_pt[llkl_actual_file].dpt = 0;
+file_pt[llkl_actual_file].compt = 0;
+
+}
+
+return LLKL_COMM_BUFF[file_pt[llkl_actual_file].dpt++];
 }
 
 uint8_t llkl_disp_char(uint8_t n){

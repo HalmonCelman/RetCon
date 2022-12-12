@@ -16,6 +16,9 @@ when DEBUG mode is off then LLKL should be faster but won't show errors
 ///RAM setting - set how many bytes you are giving to fastMeM ( fast Memory Matrix )
 #define LLKL_FAST_MEM_SIZE 1024
 
+///Command buffer size
+#define LLKL_COMM_BUFF_SIZE 1024
+
 ///Label setting -set how many fast labels you want to use
 #define LLKL_LABEL_NUMBER 5
 

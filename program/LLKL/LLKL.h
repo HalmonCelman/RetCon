@@ -24,6 +24,7 @@ typedef struct{
 ///memory
 //***********LLKL_FLAG_MAP is in LLKL_conf.h in DANGER ZONE
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE];
+uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
 uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 
 ///global varialibes

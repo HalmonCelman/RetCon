@@ -26,9 +26,9 @@
  #define LLKL_PT_SUBP(x) file_pt[FIL_SUBOFFS+x]
 
  typedef struct{
-    volatile uint32_t llkl_buffpt; // buffor pointer -it's an value that says which load of buffer is now readed
-    volatile uint32_t llkl_compt; //command pointer - points which command is actually in use(in this buffer load)
-    volatile uint32_t llkl_dpt; //dynamic pointer - which char is actually analyzed
+    volatile uint32_t buffpt; // buffor pointer -it's an value that says which load of buffer is now readed
+    volatile uint32_t compt; //command pointer - points which command is actually in use(in this buffer load)
+    volatile uint32_t dpt; //dynamic pointer - which char is actually analyzed
 } llkl_pt;
 
 
@@ -40,6 +40,8 @@
     FATFS fs1;
     WORD s1;
     BYTE res;
+volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer
+volatile uint8_t llkl_actual_file; //says if it's needed to reload buffer
 
 ///functions
 extern uint8_t errc(uint8_t,char*);
