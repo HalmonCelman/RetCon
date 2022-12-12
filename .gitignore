@@ -30,3 +30,4 @@ fp-info-cache
 **/bin/
 **/obj/
 *.run
+.vscode/
