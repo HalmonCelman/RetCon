@@ -14,7 +14,10 @@ llkl_err LLKL_exec(void){
     exec_err.status=LLKL_OK; //default - OK
 
     llkl_c=llkl_get(); //read command
-
+    if(llkl_c==0xFF){
+        exec_err.status=LLKL_EOP;
+        return exec_err;
+    }
     #if LLKL_DEBUG_MODE==1
         llkl_send_info("MainExec command: ",llkl_c); //send debug info
     #endif // LLKL_DEBUG_MODE
@@ -65,8 +68,13 @@ uint8_t LLKL_load_mem(uint32_t adress){ //!!!!!!!!!!!!todo
 return LLKL_FAST_MEM[adress];
 }
 
-void LLKL_save_mem(uint32_t adress, uint8_t value){ //!!!!!!!!!!!!todo
-LLKL_FAST_MEM[adress]=value;
+void LLKL_save_mem(uint32_t adress, uint8_t value){ 
+if(adress<LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER){
+    LLKL_FAST_MEM[adress]=value;
+}else{
+   llkl_external_mem_write(adress,value);
+}
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +96,7 @@ inst_err.status=LLKL_OK;
     llkl_send_info("seri adress: ",llkl_reg); //send debug info
     LLKL_CHECK_INT(inst_err); //check if it's a number
     llkl_h8=llkl_get(); //read value
-    llkl_send_info("seri value: ",llkl_reg); //send debug info
+    llkl_send_info("seri value: ",llkl_h8); //send debug info
 #else
     llkl_h8=llkl_get(); //load mode of register
     llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE); //load adress
@@ -101,12 +109,3 @@ LLKL_save_mem(llkl_reg,llkl_h8);
 return inst_err;
 }
 
-/*
-llkl_err LLKL_seri(void){
-llkl_err inst_err;
-//main instruction code
-
-//////////////////////////////////////////
-return inst_err;
-}
-*/

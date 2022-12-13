@@ -4,12 +4,12 @@
 *************************************************
  */
 
+#define F_CPU 16000000UL
 
 ///__biblioteki standardowe
 #include <avr/io.h>
 #include <stdio.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 
 ///__ekran WinCom WG12864D ze sterownikiem KS0108
 #include "KS0108_lib/KS0108.h"
@@ -171,7 +171,6 @@ res=err(disk_initialize(0),"Disk 404 ");
 ///2.mount
 errc(f_mount(&fs1, "", 0),"MountERR");
 
-errc(f_open(&file[FIL_MAIN], "uno.txt", FA_READ),"FRE");
 errc(f_open(&file[FIL_LOG], "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
 /*GLCD_B_ClearScreen();
 
@@ -209,9 +208,15 @@ if(a.frame>=83 || res){ //end animation if this is end or error occured
 
 }*/
 LLKL_init();
-
-
-
+err(llkl_init_program("uno.txt",FIL_MAIN),"Error occured!");
+uint8_t res=0;
+while(!res){
+res=LLKL_exec().status;
+}
+if(res != LLKL_EOP){
+     llkl_send_info("ERROR EXEC: ",res);
+    err(res,"ERROR :");
+}
 llkl_send_info("process ended: ",0xFEDCBA98);
 llkl_send_info("process 2 ended: ",0x12345678);
 f_close(&file[FIL_MAIN]);

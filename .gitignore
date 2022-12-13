@@ -25,9 +25,10 @@ fp-info-cache
 *.xml
 *.csv
 
+#build files
+*.o
+*.hex
+*.elf
 
 # Others
-**/bin/
-**/obj/
-*.run
 .vscode/

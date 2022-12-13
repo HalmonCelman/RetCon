@@ -40,8 +40,9 @@
     FATFS fs1;
     WORD s1;
     BYTE res;
-volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer
-volatile uint8_t llkl_actual_file; //says if it's needed to reload buffer
+volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
+volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
+volatile uint8_t llkl_actual_file; //says which file is already used
 
 ///functions
 extern uint8_t errc(uint8_t,char*);
@@ -49,6 +50,14 @@ uint8_t llkl_init_program(char*, uint8_t);
 uint8_t llkl_end_program(uint8_t);
 uint8_t llkl_get(void);
 uint8_t llkl_disp_char(uint8_t);
+void llkl_external_mem_write(uint32_t,uint8_t);
 void llkl_send_info(char*, uint32_t);
+
+
+extern volatile int Timer_delay;
+
+#ifndef delay
+#define delay(x) Timer_delay=x;while(Timer_delay);
+#endif
 
 #endif // LLKL_ATMEGA1284P_H_INCLUDED
