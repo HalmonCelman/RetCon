@@ -172,7 +172,7 @@ res=err(disk_initialize(0),"Disk 404 ");
 errc(f_mount(&fs1, "", 0),"MountERR");
 
 errc(f_open(&file[FIL_LOG], "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
-/*GLCD_B_ClearScreen();
+GLCD_B_ClearScreen();
 
 a.name="a.txt";
 a.frame=0;
@@ -182,23 +182,15 @@ a.y=0;
 a.w=128;
 a.h=64;
 
-errc(f_open(&file2, "c.txt", FA_WRITE | FA_CREATE_ALWAYS),"F2E");
-
-char komunikat[]="test123";
-
-errc(f_write(&file2,komunikat,5,&s1),"WriteERR");
-
-errc(f_close(&file2),"ClosingERR");
-
-errc(f_open(&file1, "a.txt", FA_READ),"FE");
+errc(f_open(&file[FIL_D], "a.txt", FA_READ),"FE");
 
 a.active=1; //run animation
 
 while(a.active){
 GLCD_r;
 
-res=err(f_lseek(&file1,(DWORD)1024*a.frame),"LseekERR");
-res?res:err(f_read(&file1,&GLCD_Buffer[0],1024,&s1),"ReadERR");
+res=err(f_lseek(&file[FIL_D],(DWORD)1024*a.frame),"LseekERR");
+res?res:err(f_read(&file[FIL_D],&GLCD_Buffer[0],1024,&s1),"ReadERR");
 
 a.frame++;
 if(a.frame>=83 || res){ //end animation if this is end or error occured
@@ -206,8 +198,8 @@ if(a.frame>=83 || res){ //end animation if this is end or error occured
 }
 
 
-}*/
-LLKL_init();
+}
+/*LLKL_init();
 err(llkl_init_program("uno.txt",FIL_MAIN),"Error occured!");
 uint8_t res=0;
 while(!res){
@@ -218,7 +210,7 @@ if(res != LLKL_EOP){
     err(res,"ERROR :");
 }
 llkl_send_info("process ended: ",0xFEDCBA98);
-llkl_send_info("process 2 ended: ",0x12345678);
+llkl_send_info("process 2 ended: ",0x12345678);*/
 f_close(&file[FIL_MAIN]);
 f_close(&file[FIL_LOG]);
 f_unmount("");
