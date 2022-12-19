@@ -18,6 +18,9 @@
 #include "mmc_avr.h"	/* Header file of existing SD control module */
 #endif
 
+// gcc 12
+volatile BYTE Timer1;
+volatile UINT Timer2;
 
 /*-----------------------------------------------------------------------*/
 /* Get Drive Status                                                      */

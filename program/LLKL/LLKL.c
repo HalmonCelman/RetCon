@@ -1,5 +1,15 @@
 #include "LLKL.h"
 
+///declarations of buffers due to gcc 12 
+uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
+uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
+uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
+uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
+
+volatile uint8_t llkl_c;
+volatile uint8_t llkl_h8;
+
+
 void LLKL_init(void){
 ///initialze FLAG_MAP
 LLKL_FLAG_MAP[0]='O';   //OVF - Overflow flag

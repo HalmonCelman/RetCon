@@ -6,7 +6,7 @@
 #Configurable part
 DEVICE = atmega1284p
 PROGRAMMER = usbasp
-COMPILE = avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=c99 
+COMPILE = avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=c99
 DUDEFLAGS = 
 
 

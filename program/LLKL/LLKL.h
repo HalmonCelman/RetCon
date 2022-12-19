@@ -24,20 +24,22 @@ typedef struct{
 
 ///memory
 //***********LLKL_FLAG_MAP is in LLKL_conf.h in DANGER ZONE
-uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
-uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
-uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
+extern uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
+extern uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
+extern uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 
 ///global varialibes
 
-volatile uint8_t llkl_h8; //helpful 8bit varialibe
-volatile uint8_t llkl_c; //command
+extern volatile uint8_t llkl_h8; //helpful 8bit varialibe
+extern volatile uint8_t llkl_c; //command
 ///functions
+
 void LLKL_init(void);
 llkl_err LLKL_exec(void); //execute program
 uint32_t LLKL_load_reg_addr(uint8_t); //load adress of register - MODE: 0 - normal register adress &, 1 - flag %, 2 - indirect *, returns adress
 uint8_t LLKL_load_mem(uint32_t);
 void LLKL_save_mem(uint32_t,uint8_t);
+
 ///llkl_instructions
 llkl_err LLKL_seri(void);
 
@@ -48,9 +50,5 @@ llkl_err LLKL_seri(void);
 
 #define LLKL_CHECK_REG(x) llkl_h8=llkl_get(); \
  if(!(llkl_h8=='&' || llkl_h8=='%' || llkl_h8=='*')){ x.status=LLKL_EXPECTED_SYMBOL;x.additional='&';return x;}  //x should be an error handler, which symbol has been checked is in llkl_h8 varialibe
-
-
-
-
 
 #endif // LLKL_TINY_H_INCLUDED

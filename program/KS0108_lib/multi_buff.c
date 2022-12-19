@@ -2,6 +2,13 @@
 #include <avr/pgmspace.h>
 #include "font5x8.h"
 #include "multi_buff.h"
+
+
+//gcc 12
+unsigned char GLCD_Buffer[GLCD_Buffer_size];
+volatile unsigned char xxx_zmiana;
+
+
 void GLCD_B_SetPixel(unsigned char x, unsigned char y)
 {
 unsigned char tmp;

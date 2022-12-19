@@ -28,6 +28,6 @@ when DEBUG mode is off then LLKL should be faster but won't show errors
 
 #define LLKL_FLAG_NUMBER 3
 
-uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
+extern uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
 
 #endif // LLKL_TINY_CONF_INCLUDED

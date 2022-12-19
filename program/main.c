@@ -5,7 +5,9 @@
  */
 
 #define F_CPU 16000000UL
-
+#ifndef __AVR_ATmega1284P__
+#define __AVR_ATmega1284P__
+#endif
 ///__biblioteki standardowe
 #include <avr/io.h>
 #include <stdio.h>
@@ -84,7 +86,7 @@
 ///__zmienne globalne
 
     unsigned char licznik=0;
-
+    
 
     uint8_t point_menu;
     volatile int Timer_delay;

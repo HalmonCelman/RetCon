@@ -39,8 +39,8 @@ typedef struct {
 
 /*---------------------------------------*/
 /* Prototypes for disk control functions */
-volatile BYTE Timer1;
-volatile UINT Timer2;
+extern volatile BYTE Timer1;
+extern volatile UINT Timer2;
 
 
 

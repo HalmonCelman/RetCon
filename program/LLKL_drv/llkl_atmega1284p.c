@@ -1,6 +1,16 @@
 #include "llkl_atmega1284p.h"
 #include "../KS0108_lib/multi_buff.h"
 
+FIL file[NUMOFFILES];
+llkl_pt file_pt[NUMOFFILES];
+
+
+volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
+volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
+volatile uint8_t llkl_actual_file; //says which file is already used
+
+
+
 uint8_t llkl_init_program(char* source,uint8_t num){ //todo - from which place it's starting <-
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("INFO: opening file ",num);

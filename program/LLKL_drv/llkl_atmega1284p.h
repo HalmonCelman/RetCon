@@ -33,16 +33,16 @@
 
 
  ///tables
-    FIL file[NUMOFFILES];
-    llkl_pt file_pt[NUMOFFILES];
+    extern FIL file[NUMOFFILES]; //extern and declaration in llkl_atmega1284p needed for gcc 12
+    extern llkl_pt file_pt[NUMOFFILES]; //extern and declaration in llkl_atmega1284p needed for gcc 12
 
 ///varialibes
-    FATFS fs1;
-    WORD s1;
-    BYTE res;
-volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
-volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
-volatile uint8_t llkl_actual_file; //says which file is already used
+    extern FATFS fs1;
+    extern WORD s1;
+    extern BYTE res;
+extern volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
+extern volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
+extern volatile uint8_t llkl_actual_file; //says which file is already used
 
 ///functions
 extern uint8_t errc(uint8_t,char*);
