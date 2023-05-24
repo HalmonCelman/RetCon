@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name "schemat_dip40-rescue")(type "Legacy")(uri "${KIPRJMOD}/schemat_dip40-rescue.lib")(options "")(descr ""))
+  (lib (name "USBasp")(type "Legacy")(uri "${KIPRJMOD}/USBasp.lib")(options "")(descr ""))
+  (lib (name "SD")(type "Legacy")(uri "${KIPRJMOD}/SD.lib")(options "")(descr ""))
+)

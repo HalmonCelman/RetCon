@@ -86,8 +86,9 @@
 ///__zmienne globalne
 
     unsigned char licznik=0;
-    
-
+    BYTE res;
+    UINT s1;
+    FATFS fs1;
     uint8_t point_menu;
     volatile int Timer_delay;
 
@@ -201,7 +202,7 @@ if(a.frame>=83 || res){ //end animation if this is end or error occured
 
 
 }
-/*LLKL_init();
+LLKL_init();
 err(llkl_init_program("uno.txt",FIL_MAIN),"Error occured!");
 uint8_t res=0;
 while(!res){
@@ -212,7 +213,7 @@ if(res != LLKL_EOP){
     err(res,"ERROR :");
 }
 llkl_send_info("process ended: ",0xFEDCBA98);
-llkl_send_info("process 2 ended: ",0x12345678);*/
+llkl_send_info("process 2 ended: ",0x12345678);
 f_close(&file[FIL_MAIN]);
 f_close(&file[FIL_LOG]);
 f_unmount("");
