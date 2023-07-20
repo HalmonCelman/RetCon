@@ -1,17 +1,18 @@
-#ifndef LLKL_ATMEGA1284P_H_INCLUDED
-#define LLKL_ATMEGA1284P_H_INCLUDED
+#ifndef LLKL_RETCON_H_INCLUDED
+#define LLKL_RETCON_H_INCLUDED
 
 ///includes
-#include "../LLKL/LLKL.h"
+#include <stdint.h>
+#include <LLKL.h>
 #include "../FatFs_lib/ff.h"
 
 #define NUMOFFILES 4
 /*
- file 1 - main program
- file 2 - logs
- file 3 - additional data - if you want to copy something or for  music etc
- file 4 - data - animations, etc
- file 5 - subprogram 1
+ file 0 - main program
+ file 1 - logs
+ file 2 - additional data - if you want to copy something or for  music etc
+ file 3 - data - animations, etc
+ file 4 - subprogram 1
  */
  ///defines to avialibe files usages
  #define FIL_MAIN 0 //main program
@@ -60,4 +61,4 @@ extern volatile int Timer_delay;
 #define delay(x) Timer_delay=x;while(Timer_delay);
 #endif
 
-#endif // LLKL_ATMEGA1284P_H_INCLUDED
+#endif // LLKL_RETCON_H_INCLUDED

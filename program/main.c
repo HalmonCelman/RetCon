@@ -1,6 +1,6 @@
 /*
 *************************************************
-*         by KK        ©                        *
+*         by KK        RetCon core              *
 *************************************************
  */
 
@@ -10,24 +10,28 @@
 #endif
 ///__biblioteki standardowe
 #include <avr/io.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <avr/interrupt.h>
 
-///__ekran WinCom WG12864D ze sterownikiem KS0108
-#include "KS0108_lib/KS0108.h"
-#include "KS0108_lib/graphic.h"
-#include "KS0108_lib/font5x8.h"
-#include "KS0108_lib/multi_buff.h"
+/// __ekran WinCom WG12864D ze sterownikiem KS0108
+#include <KS0108.h>
+#include <graphic.h>
+#include <font5x8.h>
+#include <multi_buff.h>
 
-///FAT FS
-#include "FatFs_lib/diskio.h"
-#include "FatFs_lib/ff.h"
-#include "FatFs_lib/ffconf.h"
-#include "FatFs_lib/mmc_avr.h"
-#include "FatFs_lib/rtc.h"
+/// FAT FS
+#include <diskio.h>
+#include <ff.h>
+#include <ffconf.h>
+#include <mmc_avr.h>
+#include <rtc.h>
 
-///LLKL
-#include "LLKL/LLKL.h"
+/// LLKL
+#include <LLKL.h>
+
+// Driver
+#include <LLKL_RetCon.h>
 
 ///__makra
 #define PREP_TRICK_DDR(x,y) x##y
@@ -52,7 +56,7 @@
 
 #define R 13*point_menu
 
-///__przyciski
+///__bindings
 #define K_U_PIN 0  //up
 #define K_U_PORT D
 

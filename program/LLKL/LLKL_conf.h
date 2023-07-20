@@ -10,8 +10,6 @@ when DEBUG mode is off then LLKL should be faster but won't show errors
 */
 ///CPU
 #define LLKL_CPU AVR
-/// include section
-#include "../LLKL_drv/llkl_atmega1284p.h"
 
 ///RAM setting - set how many bytes you are giving to fastMeM ( fast Memory Matrix )
 #define LLKL_FAST_MEM_SIZE 1024

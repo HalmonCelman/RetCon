@@ -18,7 +18,7 @@ Flag_Number should be changed !only! when number of flags are changing
 -> flags are 1 byte universal registers( you can use it as regular registers, but at your own risk ):
 0. 	O Flag - Overflow flag, sets when overflow occure 
 1. 	M Flag - minus and additional flag, This flag i saying if your number is greater than 0 (0) or lower (1), and can be used for some additional informations 
-2. 	R Flag - rest and result flag,8 older bits of multilying, rest of dividing and result of comparing
+2. 	R Flag - rest and result flag,8 older bits of multiplying, rest of dividing and result of comparing
 
 How to write:
 Flag:
@@ -50,7 +50,7 @@ f.e.
 Integers:
 all integers must have prefix '
 
-where it's allowed to use -INT (i) you should write -instead of '
+where it's allowed to use -INT (i) you should write - instead of '
 
 Additional:
 You can write *REG insted of &REG before register adress,
