@@ -6,7 +6,7 @@
 
 //gcc 12
 unsigned char GLCD_Buffer[GLCD_Buffer_size];
-volatile unsigned char xxx_zmiana;
+volatile unsigned char bufferSwitch;
 
 
 void GLCD_B_SetPixel(unsigned char x, unsigned char y)

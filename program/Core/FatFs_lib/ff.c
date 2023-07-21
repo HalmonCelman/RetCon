@@ -6291,8 +6291,29 @@ FRESULT f_mkfs (
 	LEAVE_MKFS(FR_OK);
 }
 
+#if !FF_FS_READONLY && !FF_FS_NORTC
+//pobieranie czasu
 
+DWORD get_fattime (void)
+{
+	RTC rtc;
 
+	rtc.year=2022;
+	rtc.month=1;
+	rtc.mday=1;
+	rtc.hour=1;
+	rtc.min=1;
+	rtc.sec=1;
+
+	/* Pack date and time into a DWORD variable */
+	return	  ((DWORD)(rtc.year - 1980) << 25)
+			| ((DWORD)rtc.month << 21)
+			| ((DWORD)rtc.mday << 16)
+			| ((DWORD)rtc.hour << 11)
+			| ((DWORD)rtc.min << 5)
+			| ((DWORD)rtc.sec >> 1);
+}
+#endif
 
 #if FF_MULTI_PARTITION
 /*-----------------------------------------------------------------------*/

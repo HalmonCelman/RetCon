@@ -1,5 +1,5 @@
 #include "LLKL_RetCon.h"
-#include "../KS0108_lib/multi_buff.h"
+#include <multi_buff.h>
 
 FIL file[NUMOFFILES];
 llkl_pt file_pt[NUMOFFILES];

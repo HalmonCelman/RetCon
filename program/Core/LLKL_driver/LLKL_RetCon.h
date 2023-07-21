@@ -4,7 +4,7 @@
 ///includes
 #include <stdint.h>
 #include <LLKL.h>
-#include "../FatFs_lib/ff.h"
+#include <ff.h>
 
 #define NUMOFFILES 4
 /*
@@ -34,8 +34,8 @@
 
 
  ///tables
-    extern FIL file[NUMOFFILES]; //extern and declaration in llkl_atmega1284p needed for gcc 12
-    extern llkl_pt file_pt[NUMOFFILES]; //extern and declaration in llkl_atmega1284p needed for gcc 12
+    extern FIL file[NUMOFFILES];
+    extern llkl_pt file_pt[NUMOFFILES]; 
 
 ///varialibes
     extern FATFS fs1;
@@ -54,11 +54,5 @@ uint8_t llkl_disp_char(uint8_t);
 void llkl_external_mem_write(uint32_t,uint8_t);
 void llkl_send_info(char*, uint32_t);
 
-
-extern volatile int Timer_delay;
-
-#ifndef delay
-#define delay(x) Timer_delay=x;while(Timer_delay);
-#endif
 
 #endif // LLKL_RETCON_H_INCLUDED
