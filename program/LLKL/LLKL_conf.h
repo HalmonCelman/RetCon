@@ -3,7 +3,7 @@
 
 
 ///MODE
-#define LLKL_DEBUG_MODE 1  //on: 1, off: 0 - default 1
+#define LLKL_DEBUG_MODE 0  //on: 1, off: 0 - default 1
 /*
 if LLKL is in DEBUG mode it will return errors but may be slower
 when DEBUG mode is off then LLKL should be faster but won't show errors

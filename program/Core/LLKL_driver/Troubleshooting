@@ -1,0 +1,7 @@
+**INFOERR <some number>** 
+
+it says that when you were trying to send some info he couldn't save it to log file,
+ number is return value for f_write function from elm_Chan library: http://elm-chan.org/fsw/ff/doc/write.html
+-------------------------------------------------------------------------------------------------------------------
+val21CE val22CE and nCE
+all are about same thing - Conversion error, but in fact they say that you can't save to the log file - cause is the same as above

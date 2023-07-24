@@ -4,8 +4,7 @@
 *************************************************
  */
 #include "main.h"
-
-#define DEBUG_MODE 1
+#include <config.h>
 
 
 int main(void)
@@ -24,7 +23,6 @@ init_buffering();
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
-
 init_fs();
 
 animate("a.txt");

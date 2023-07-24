@@ -1,4 +1,5 @@
 #include "LLKL_RetCon.h"
+#include <config.h>
 #include <multi_buff.h>
 
 FIL file[NUMOFFILES];
@@ -19,9 +20,9 @@ uint8_t llkl_pom=f_open(&file[num],source,FA_READ); //open file in selected file
 if(llkl_pom) return llkl_pom;
 
 for(int i=0;i<NUMOFFILES;i++){
-    file_pt[i].buffpt=0; //clear buffor page pointer
-    file_pt[i].compt=0; //clear command pointer
-    file_pt[i].dpt=0; // clear dynamic pointer
+    file_pt[i].buffCounter=0; //clear buffor page pointer
+    file_pt[i].command=0; //clear command pointer
+    file_pt[i].dCounter=0; // clear dynamic pointer
     }
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("INFO: opened succesfully ",0);
@@ -40,11 +41,11 @@ return f_close(&file[num]); //close selected file
 
 uint8_t llkl_get(void){
 
-if(file_pt[llkl_actual_file].dpt >= LLKL_COMM_BUFF_SIZE)
+if(file_pt[llkl_actual_file].dCounter >= LLKL_COMM_BUFF_SIZE)
     llkl_physical_read = 1;
 
 
-if(llkl_physical_read | llkl_reload_buffer){ //reload command buffer and set pointers - shild be read from last command to avoid chain broke but will be implemented later 
+if(llkl_physical_read | llkl_reload_buffer){ //reload command buffer and set pointers - should be read from last command to avoid chain broke but will be implemented later 
 
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("INFO: reloading buffer ",(llkl_physical_read<<1)|llkl_reload_buffer);
@@ -56,17 +57,17 @@ LLKL_COMM_BUFF[s1]=0xFF; //reached EOF
 }
 if(llkl_physical_read){
 llkl_physical_read = 0;
-file_pt[llkl_actual_file].buffpt++; //next page
+file_pt[llkl_actual_file].buffCounter++; //next page
 }
 if(llkl_reload_buffer){
 llkl_reload_buffer = 0;
 }
-file_pt[llkl_actual_file].dpt = 0;
-file_pt[llkl_actual_file].compt = 0;
+file_pt[llkl_actual_file].dCounter = 0;
+file_pt[llkl_actual_file].command = 0;
 
 }
 
-uint8_t llkl_pom= LLKL_COMM_BUFF[file_pt[llkl_actual_file].dpt++];
+uint8_t llkl_pom= LLKL_COMM_BUFF[file_pt[llkl_actual_file].dCounter++];
 
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("INFO: llkl_get() ",llkl_pom);
@@ -88,46 +89,48 @@ void llkl_send_info(char* info,uint32_t value){
 GLCD_B_ClearScreen();
 GLCD_B_WriteString(info,0,0);
 int len=0;
-while(*info){
+while(*info++){
 len++;
-info++;
 }
 info-=len;
+#if LLKL_DEBUG_MODE
 errc(f_write(&file[FIL_LOG],info,len,&s1),"INFOERR");
-
+#endif
 uint8_t val2, val21, val22,hex;
 
-for(int i=0;i<4;i++){
+for(int i=0;i<4;i++){ //conversion to hex
 val2 = (value>>(32-8-i*8));
 val21= (val2>>4);
 val22 = val2<<4;
 val22=val22>>4;
 
 if(val21>=10){
-hex=val21+'a'-10;
+    hex=val21+'a'-10;
 } else{
-hex=val21+48;
+    hex=val21+48;
 }
 GLCD_B_WriteChar(hex,i*14,1);
-errc(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE");
-
+#if LLKL_DEBUG_MODE
+err(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE"); //CE - conversion error
+#endif
 if(val22>=10){
 hex=val22+'a'-10;
 } else{
 hex=val22+48;
 }
 GLCD_B_WriteChar(hex,6+i*14,1);
-errc(f_write(&file[FIL_LOG],&hex,1,&s1),"var22CE");
+#if LLKL_DEBUG_MODE
+errc(f_write(&file[FIL_LOG],&hex,1,&s1),"val22CE");
+#endif
 }
 GLCD_r;
+#if LLKL_DEBUG_MODE
 errc(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE");
-
-//delay(1000);
+#endif
 }
 
 
 
-   void llkl_external_mem_write(uint32_t adress, uint8_t value){
+void llkl_external_mem_write(uint32_t adress, uint8_t value){
 
-
-   }
+}

@@ -17,6 +17,8 @@ FATFS fs1;
 
 
 void init_buffering(void){
+	timerDelay=0;
+	counter=0;
 	///->multiplexing    ( includes also mmc_disktimerproc )                          ///<-przy zmianie mikrokontrolera lub czestotliwosci zwrócic uwage
     TCCR0A = (1<<WGM01); //CTC mode, 64 prescaler 1000Hz
     TCCR0B  = (1<<CS01)  | (1<<CS00);

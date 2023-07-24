@@ -27,26 +27,27 @@
  #define LLKL_PT_SUBP(x) file_pt[FIL_SUBOFFS+x]
 
  typedef struct{
-    volatile uint32_t buffpt; // buffor pointer -it's an value that says which load of buffer is now readed
-    volatile uint32_t compt; //command pointer - points which command is actually in use(in this buffer load)
-    volatile uint32_t dpt; //dynamic pointer - which char is actually analyzed
+    volatile uint32_t buffCounter; // buffor counter - it's value that says which load of buffer is now readed 
+    volatile uint32_t command; //actual command - says which command is actually in use(in this buffer load)
+    volatile uint32_t dCounter; //dynamic counter - which char is actually analyzed
 } llkl_pt;
 
 
  ///tables
-    extern FIL file[NUMOFFILES];
-    extern llkl_pt file_pt[NUMOFFILES]; 
+extern FIL file[NUMOFFILES];
+extern llkl_pt file_pt[NUMOFFILES]; 
 
 ///varialibes
-    extern FATFS fs1;
-    extern WORD s1;
-    extern BYTE res;
+extern FATFS fs1;
+extern WORD s1;
+extern BYTE res;
 extern volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
 extern volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
 extern volatile uint8_t llkl_actual_file; //says which file is already used
 
 ///functions
 extern uint8_t errc(uint8_t,char*);
+extern uint8_t err(uint8_t,char*);
 uint8_t llkl_init_program(char*, uint8_t);
 uint8_t llkl_end_program(uint8_t);
 uint8_t llkl_get(void);
