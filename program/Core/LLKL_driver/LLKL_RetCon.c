@@ -50,39 +50,38 @@ uint8_t llkl_end_main_program(void){
 
 uint8_t llkl_get(void){
 
-if(file_pt[llkl_actual_file].dCounter >= LLKL_COMM_BUFF_SIZE)
-    llkl_physical_read = 1;
+    if(file_pt[llkl_actual_file].dCounter >= LLKL_COMM_BUFF_SIZE)
+        llkl_physical_read = 1;
 
 
-if(llkl_physical_read | llkl_reload_buffer){ //reload command buffer and set pointers - should be read from last command to avoid chain broke but will be implemented later 
+    if(llkl_physical_read | llkl_reload_buffer){ //reload command buffer and set pointers - should be read from last command to avoid chain broke but will be implemented later 
 
-#if LLKL_DEBUG_MODE==1
-    llkl_send_info("INFO: reloading buffer ",(llkl_physical_read<<1)|llkl_reload_buffer);
-#endif
+        #if LLKL_DEBUG_MODE==1
+            llkl_send_info("INFO: reloading buffer ",(llkl_physical_read<<1)|llkl_reload_buffer);
+        #endif
+        
+        f_read(&file[llkl_actual_file],LLKL_COMM_BUFF,LLKL_COMM_BUFF_SIZE,&s1);
+        if(s1<LLKL_COMM_BUFF_SIZE){
+            LLKL_COMM_BUFF[s1]=0xFF; //reached EOF
+        }
+        if(llkl_physical_read){
+            llkl_physical_read = 0;
+            file_pt[llkl_actual_file].buffCounter++; //next page
+        }
+        if(llkl_reload_buffer){
+            llkl_reload_buffer = 0;
+        }
+        file_pt[llkl_actual_file].dCounter = 0;
+        file_pt[llkl_actual_file].command = 0;
 
-f_read(&file[llkl_actual_file],LLKL_COMM_BUFF,LLKL_COMM_BUFF_SIZE,&s1);
-if(s1<LLKL_COMM_BUFF_SIZE){
-LLKL_COMM_BUFF[s1]=0xFF; //reached EOF
-}
-if(llkl_physical_read){
-llkl_physical_read = 0;
-file_pt[llkl_actual_file].buffCounter++; //next page
-}
-if(llkl_reload_buffer){
-llkl_reload_buffer = 0;
-}
-file_pt[llkl_actual_file].dCounter = 0;
-file_pt[llkl_actual_file].command = 0;
+    }
+    uint8_t llkl_pom = LLKL_COMM_BUFF[file_pt[llkl_actual_file].dCounter++];
 
-}
+    #if LLKL_DEBUG_MODE==1
+        llkl_send_info("INFO: llkl_get() ",llkl_pom);
+    #endif
 
-uint8_t llkl_pom= LLKL_COMM_BUFF[file_pt[llkl_actual_file].dCounter++];
-
-#if LLKL_DEBUG_MODE==1
-    llkl_send_info("INFO: llkl_get() ",llkl_pom);
-#endif
-
-return llkl_pom;
+    return llkl_pom;
 }
 
 uint8_t llkl_disp_char(uint8_t n){
@@ -107,9 +106,7 @@ while(*info++){
 len++;
 }
 info-=len;
-#if LLKL_DEBUG_MODE
-errc(f_write(&file[FIL_LOG],info,len,&s1),"INFOERR");
-#endif
+llkl_throw_error(f_write(&file[FIL_LOG],info,len,&s1),"INFOERR",0);
 uint8_t val2, val21, val22,hex;
 
 for(int i=0;i<4;i++){ //conversion to hex
@@ -125,7 +122,7 @@ if(val21>=10){
 }
 GLCD_B_WriteChar(hex,i*14,1);
 #if LLKL_DEBUG_MODE
-err(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE"); //CE - conversion error
+llkl_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE",0); //CE - conversion error
 #endif
 if(val22>=10){
 hex=val22+'a'-10;
@@ -134,12 +131,12 @@ hex=val22+48;
 }
 GLCD_B_WriteChar(hex,6+i*14,1);
 #if LLKL_DEBUG_MODE
-errc(f_write(&file[FIL_LOG],&hex,1,&s1),"val22CE");
+llkl_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val22CE",0);
 #endif
 }
 GLCD_r;
 #if LLKL_DEBUG_MODE
-errc(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE");
+llkl_throw_error(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE",0);
 #endif
 }
 
@@ -158,6 +155,25 @@ void llkl_throw_error(uint8_t condition,char * message,uint8_t critical){
     }
 }
 
-void llkl_external_mem_write(uint32_t adress, uint8_t value){
 
+void llkl_init_external_memory(void){
+    f_open(&file[FIL_SLOWMEM],SLOWMEMPATH,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
+}
+
+void llkl_close_external_memory(void){
+    f_close(&file[FIL_SLOWMEM]);
+}
+
+void llkl_external_mem_write(uint32_t adress, uint8_t value){
+    adress-=LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER;
+    f_lseek(&file[FIL_SLOWMEM],adress);
+    llkl_throw_error(f_write(&file[FIL_SLOWMEM],"RC.memory",1,&s1),"SLOW MEMORY SAVE FAILED!",0);
+}
+
+uint8_t llkl_external_mem_read(uint32_t adress){ //todo reading more than 1 byte
+    uint8_t value;
+    adress-=LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER;
+    f_lseek(&file[FIL_SLOWMEM],adress);
+    llkl_throw_error(f_read(&file[FIL_SLOWMEM],&value,1,&s1),"SLOW MEMORY LOAD FAILED!",0);
+    return value;
 }

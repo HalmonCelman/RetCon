@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.26.4)
 
 # Compiler setup
 set(CMAKE_C_COMPILER avr-gcc)
-add_compile_options(-Wall -std=c99 -mmcu=atmega1284p -Wno-array-bounds)
+add_compile_options(-Wall -std=c99 -mmcu=atmega1284p -Wno-array-bounds -Os)
 add_link_options(-mmcu=atmega1284p)
 
 # paths to libraries

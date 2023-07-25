@@ -7,26 +7,25 @@
 #include <ff.h>
 
 #define NUMOFFILES 4
+#define SLOWMEMPATH "RC/RC.memory" //path to slow memory on SD card
+
 /*
  file 0 - main program
  file 1 - logs
  file 2 - additional data - if you want to copy something or for  music etc
  file 3 - data - animations, etc
- file 4 - subprogram 1
+ file 4 - external memory file - SLOWMeM
  */
- ///defines to avialibe files usages
- #define FIL_MAIN 0 //main program
- #define FIL_LOG 1 //log file
- #define FIL_AD 2 //additional data file
- #define FIL_D 3 //data file
- #define FIL_SUBOFFS 4 //offset for subprograms, also first subprogram
-///and to file pointers
- #define LLKL_PT_MAIN file_pt[FIL_MAIN]
- #define LLKL_PT_DATA file_pt[FIL_D]
- #define LLKL_PT_DATA2 file_pt[FIL_AD]
- #define LLKL_PT_SUBP(x) file_pt[FIL_SUBOFFS+x]
+///defines to avialibe files usages
+typedef enum{
+    FIL_MAIN = 0, //main program
+    FIL_LOG, //log file
+    FIL_AD, //additional data file
+    FIL_D, //data file
+    FIL_SLOWMEM //slow memory
+} LLKL_FILES;
 
- typedef struct{
+typedef struct{
     volatile uint32_t buffCounter; // buffor counter - it's value that says which load of buffer is now readed 
     volatile uint32_t command; //actual command - says which command is actually in use(in this buffer load)
     volatile uint32_t dCounter; //dynamic counter - which char is actually analyzed
@@ -49,10 +48,15 @@ extern volatile uint8_t llkl_actual_file; //says which file is already used
 extern uint8_t errc(uint8_t,char*);
 extern uint8_t err(uint8_t,char*);
 
+#if LLKL_USE_EXTERNAL_MEMORY
+    void llkl_init_external_memory(void);
+    void llkl_external_mem_write(uint32_t,uint8_t);
+    uint8_t llkl_external_mem_read(uint32_t);
+    void llkl_close_external_memory(void);
+#endif
 uint8_t llkl_init_main_program(char*,uint32_t);
 uint8_t llkl_end_main_program(void);
 uint8_t llkl_get(void);
-void llkl_external_mem_write(uint32_t,uint8_t);
 void llkl_send_info(char*, uint32_t);
 void llkl_throw_error(uint8_t,char *,uint8_t);
 

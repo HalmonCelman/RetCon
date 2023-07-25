@@ -2,8 +2,9 @@
 #define LLKL_TINY_CONF_INCLUDED
 
 
-///MODE
+///options
 #define LLKL_DEBUG_MODE 1 //on: 1, off: 0 - default 1
+#define LLKL_USE_EXTERNAL_MEMORY 1 //if true, external memory will be used - much more memory but this memory will be slower
 /*
 if LLKL is in DEBUG mode it will return errors but may be slower
 when DEBUG mode is off then LLKL should be faster but won't show errors
@@ -26,6 +27,6 @@ when DEBUG mode is off then LLKL should be faster but won't show errors
 
 #define LLKL_FLAG_NUMBER 3
 
-extern uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
+extern const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
 
 #endif // LLKL_TINY_CONF_INCLUDED

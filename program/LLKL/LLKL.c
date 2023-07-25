@@ -4,17 +4,22 @@
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
 uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
 uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
-uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER];
+const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER]={'O','M','R'};
 
 volatile uint8_t llkl_c;
 volatile uint8_t llkl_h8;
 
 
 void LLKL_init(void){
-///initialze FLAG_MAP
-LLKL_FLAG_MAP[0]='O';   //OVF - Overflow flag
-LLKL_FLAG_MAP[1]='M';   // MUL - Multiplication flag
-LLKL_FLAG_MAP[2]='R';   // Rest flag
+    #if LLKL_USE_EXTERNAL_MEMORY
+        llkl_init_external_memory();
+    #endif
+}
+
+void LLKL_end(void){
+    #if LLKL_USE_EXTERNAL_MEMORY
+        llkl_close_external_memory();
+    #endif
 }
 
 void LLKL_run(char * name){
@@ -89,17 +94,28 @@ uint32_t llkl_reg=0;
     return llkl_reg;
 }
 
-uint8_t LLKL_load_mem(uint32_t adress){ //!!!!!!!!!!!!todo
-return LLKL_FAST_MEM[adress];
+uint8_t LLKL_load_mem(uint32_t adress){
+     #if LLKL_USE_EXTERNAL_MEMORY    
+        if(adress<LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER){
+            return LLKL_FAST_MEM[adress];
+        }else{
+            return llkl_external_mem_read(adress);
+        }
+    #else
+        return LLKL_FAST_MEM[adress];
+    #endif
 }
 
 void LLKL_save_mem(uint32_t adress, uint8_t value){ 
-if(adress<LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER){
-    LLKL_FAST_MEM[adress]=value;
-}else{
-   llkl_external_mem_write(adress,value);
-}
-
+    #if LLKL_USE_EXTERNAL_MEMORY    
+        if(adress<LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER){
+            LLKL_FAST_MEM[adress]=value;
+        }else{
+        llkl_external_mem_write(adress,value);
+        }
+    #else
+        LLKL_FAST_MEM[adress]=value;
+    #endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
