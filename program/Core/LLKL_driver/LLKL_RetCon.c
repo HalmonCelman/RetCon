@@ -12,13 +12,13 @@ volatile uint8_t llkl_actual_file; //says which file is already used
 
 
 
-uint8_t llkl_init_program(char* source,uint8_t num){ //todo - from which place it's starting <-
+uint8_t llkl_init_program(char* source,uint8_t num,uint32_t position){
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("INFO: opening file ",num);
 #endif
 uint8_t llkl_pom=f_open(&file[num],source,FA_READ); //open file in selected file
 if(llkl_pom) return llkl_pom;
-
+llkl_pom=f_lseek(&file[num],position);
 for(int i=0;i<NUMOFFILES;i++){
     file_pt[i].buffCounter=0; //clear buffor page pointer
     file_pt[i].command=0; //clear command pointer
@@ -32,11 +32,20 @@ llkl_reload_buffer=1; //reload data
 return 0;
 }
 
+uint8_t llkl_init_main_program(char* source,uint32_t position){
+    return llkl_init_program(source,FIL_MAIN,position);
+}
+
+
 uint8_t llkl_end_program(uint8_t num){
 #if LLKL_DEBUG_MODE==1
     llkl_send_info("closing program in: ",num);
 #endif
 return f_close(&file[num]); //close selected file
+}
+
+uint8_t llkl_end_main_program(void){
+    return llkl_end_program(FIL_MAIN);
 }
 
 uint8_t llkl_get(void){
@@ -84,6 +93,11 @@ uint8_t llkl_disp_char(uint8_t n){
 return 0;
 }
 
+/*
+llkl_send_info: sends info to the user
+info - information which you want to send
+value - additional number which will show after info
+*/
 void llkl_send_info(char* info,uint32_t value){
 
 GLCD_B_ClearScreen();
@@ -130,6 +144,19 @@ errc(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE");
 }
 
 
+/*
+llkl_throw_error: throws error if critical always, if not only in debug
+condition - if true, error will be thrown
+message - message which will be displayed
+critical - if true, program will stop if condition also true
+*/
+void llkl_throw_error(uint8_t condition,char * message,uint8_t critical){
+    if(critical){
+        errc(condition,message);
+    }else{
+        err(condition,message);
+    }
+}
 
 void llkl_external_mem_write(uint32_t adress, uint8_t value){
 

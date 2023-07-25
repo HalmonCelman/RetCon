@@ -17,7 +17,22 @@ LLKL_FLAG_MAP[1]='M';   // MUL - Multiplication flag
 LLKL_FLAG_MAP[2]='R';   // Rest flag
 }
 
+void LLKL_run(char * name){
+    uint8_t res=0;
+    res=llkl_init_main_program("uno.txt",0);
+    llkl_throw_error(res,"Failed to run program!",0);
 
+    if(!res){ //if initialized properly
+    while(!res){
+        res=LLKL_exec().status;
+    }
+    if(res != LLKL_EOP){
+        llkl_send_info("ERROR EXEC: ",res);
+        llkl_throw_error(res,"ERROR :",0);
+    }
+    llkl_end_main_program();
+    }
+}
 llkl_err LLKL_exec(void){
     llkl_err exec_err; //error status
 

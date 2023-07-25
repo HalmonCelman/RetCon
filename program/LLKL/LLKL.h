@@ -35,15 +35,19 @@ extern volatile uint8_t llkl_c; //command
 ///functions
 
 void LLKL_init(void);
-llkl_err LLKL_exec(void); //execute program
+void LLKL_run(char *);
+llkl_err LLKL_exec(void); //execute command
 uint32_t LLKL_load_reg_addr(uint8_t); //load adress of register - MODE: 0 - normal register adress &, 1 - flag %, 2 - indirect *, returns adress
 uint8_t LLKL_load_mem(uint32_t);
 void LLKL_save_mem(uint32_t,uint8_t);
 
 //driver functions - this functions should be specified in driver for device
+extern uint8_t llkl_init_main_program(char*,uint32_t);
+extern uint8_t llkl_end_main_program(void);
 extern uint8_t llkl_get(void);
-extern void llkl_send_info(char*, uint32_t);
 extern void llkl_external_mem_write(uint32_t,uint8_t);
+extern void llkl_send_info(char*, uint32_t);
+extern void llkl_throw_error(uint8_t,char *,uint8_t);
 
 ///llkl_instructions
 llkl_err LLKL_seri(void);

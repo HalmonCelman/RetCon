@@ -11,14 +11,24 @@ int main(void)
 {
 
 //***************
-    ///->start ekranu
-    GLCD_Initalize();
-    key_init();
+///->start ekranu
+GLCD_Initalize();
+key_init();
 GLCD_ClearScreen();
 GLCD_B_ClearScreen(); //clear buffer
 
 init_buffering();
 
+#if DEBUG_MODE
+GLCD_B_ClearScreen();
+#if LLKL_DEBUG_MODE
+GLCD_B_WriteString("DEBUG MODE WITH LLKL",0,0);
+#else
+GLCD_B_WriteString("DEBUG MODE WITHOUT LLKL",0,0);
+#endif
+GLCD_r;
+delay(100);
+#endif
 ///->main program
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting KoKOS...",0,0);
@@ -28,21 +38,10 @@ init_fs();
 animate("a.txt");
 
 LLKL_init();
-err(llkl_init_program("uno.txt",FIL_MAIN),"Error occured!");
 
-uint8_t res=0;
-while(!res){
-res=LLKL_exec().status;
-}
-if(res != LLKL_EOP){
-    llkl_send_info("ERROR EXEC: ",res);
-    err(res,"ERROR :");
-}
-llkl_send_info("process ended: ",0xFEDCBA98);
-llkl_send_info("process 2 ended: ",0x12345678);
+LLKL_run("uno.txt");
 
 close_fs();
-
 
 while(1){
 
