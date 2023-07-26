@@ -11,20 +11,22 @@ volatile uint8_t llkl_h8;
 
 
 void LLKL_init(void){
+    llkl_init_cache();
     #if LLKL_USE_EXTERNAL_MEMORY
-        llkl_init_external_memory();
+        //llkl_init_external_memory();
     #endif
 }
 
 void LLKL_end(void){
     #if LLKL_USE_EXTERNAL_MEMORY
-        llkl_close_external_memory();
+        //llkl_close_external_memory();
     #endif
+    llkl_remove_cache();
 }
 
 void LLKL_run(char * name){
     uint8_t res=0;
-    res=llkl_init_main_program("uno.txt",0);
+    res=llkl_init_main_program(name,0);
     llkl_throw_error(res,"Failed to run program!",0);
 
     if(!res){ //if initialized properly

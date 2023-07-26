@@ -7,8 +7,8 @@
 #include <ff.h>
 
 #define NUMOFFILES 4
-#define SLOWMEMPATH "RC/RC.memory" //path to slow memory on SD card
-
+#define SLOWMEMFILE "RC.mem" //file for slow memory on SD card
+#define CACHEDIR "RC" 
 /*
  file 0 - main program
  file 1 - logs
@@ -54,6 +54,8 @@ extern uint8_t err(uint8_t,char*);
     uint8_t llkl_external_mem_read(uint32_t);
     void llkl_close_external_memory(void);
 #endif
+void llkl_init_cache(void);
+void llkl_remove_cache(void);
 uint8_t llkl_init_main_program(char*,uint32_t);
 uint8_t llkl_end_main_program(void);
 uint8_t llkl_get(void);

@@ -2,8 +2,6 @@ set(FATFS_SOURCES
 diskio.c
 ff.c
 mmc_avr_spi.c
-ffunicode.c
-ffsystem.c
 )
 
 set(FATFS_HEADERS

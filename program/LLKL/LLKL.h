@@ -49,7 +49,8 @@ void LLKL_save_mem(uint32_t,uint8_t);
     extern uint8_t llkl_external_mem_read(uint32_t);
     extern void llkl_close_external_memory(void);
 #endif
-
+extern void llkl_init_cache(void);
+extern void llkl_remove_cache(void);
 extern uint8_t llkl_init_main_program(char*,uint32_t);
 extern uint8_t llkl_end_main_program(void);
 extern uint8_t llkl_get(void);

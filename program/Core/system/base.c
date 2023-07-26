@@ -5,6 +5,7 @@
 #include <KS0108.h>
 #include <mmc_avr.h>
 #include <LLKL_RetCon.h>
+#include <config.h>
 
 uint8_t pointMenu;
 unsigned char counter;

@@ -35,11 +35,11 @@ GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
 init_fs();
 
-animate("a.anim");
+animate("a.am");
 
 LLKL_init();
 
-LLKL_run("uno.llkl");
+LLKL_run("uno.l");
 
 LLKL_end();
 
