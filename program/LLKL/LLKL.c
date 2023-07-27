@@ -19,8 +19,8 @@ static uint32_t LLKL_get32bit(void){
 
 
 void LLKL_init(void){
-    llkl_init_cache();
     #if LLKL_USE_EXTERNAL_MEMORY
+        llkl_init_cache();
         llkl_init_external_memory();
     #endif
 }
@@ -28,8 +28,8 @@ void LLKL_init(void){
 void LLKL_end(void){
     #if LLKL_USE_EXTERNAL_MEMORY
         llkl_close_external_memory();
+        //llkl_remove_cache();
     #endif
-    llkl_remove_cache();
 }
 
 void LLKL_run(char * name){

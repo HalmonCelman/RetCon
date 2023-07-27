@@ -142,7 +142,7 @@ llkl_throw_error(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE",0);
 
 
 /*
-llkl_throw_error: throws error if critical always, if not only in debug
+llkl_throw_error: throws error if critical always, if not - only in debug
 condition - if true, error will be thrown
 message - message which will be displayed
 critical - if true, program will stop if condition also true
@@ -209,13 +209,13 @@ void llkl_set_label(uint32_t labelNumber){
         #if LLKL_USE_EXTERNAL_MEMORY
             llkl_throw_error(f_lseek(&file[FIL_LABELS],(labelNumber-LLKL_LABEL_NUMBER)*4),"Cannot lseek save label",0);
             llkl_throw_error(f_write(&file[FIL_LABELS],&labelValue,4,&s1),"Cannot save label",0);
-            #if LLKL_DEBUG_MODE
-                llkl_send_info("Label set ",labelValue);
-            #endif
         #else
             llkl_throw_error(1,"WRONG LABEL NUMBER",0);
         #endif
     }
+    #if LLKL_DEBUG_MODE
+        llkl_send_info("Label set ",labelValue);
+    #endif
 }
 
 uint64_t llkl_get_label(uint32_t labelNumber){

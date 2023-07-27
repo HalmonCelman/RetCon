@@ -72,5 +72,6 @@ uint8_t llkl_get(void);
 void llkl_send_info(char*, uint32_t);
 void llkl_throw_error(uint8_t,char *,uint8_t);
 void llkl_set_label(uint32_t);
+uint64_t llkl_get_label(uint32_t);
 
 #endif // LLKL_RETCON_H_INCLUDED
