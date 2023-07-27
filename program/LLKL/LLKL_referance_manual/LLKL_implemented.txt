@@ -1,22 +1,14 @@
 ADD 	( )
 ADDI	( )
-UADD	( )
-UADDI	( )
 
 SUB	    ( )
 SUBI	( )
-USUB	( )
-USUBI	( )
 
 MUL	    ( )
 MULI	( )
-UMUL	( )
-UMULI	( )
 
 DIV 	( )
 DIVI	( )
-UDIV	( )
-UDIVI	( )
 
 AND	    ( )
 ANDI	( )
@@ -35,8 +27,6 @@ SERI	(x)
 RJMP	( )
 JMP	    ( )
 
-RET	    ( )
-
 CP  	( )
 CPI	    ( )
 
@@ -50,6 +40,4 @@ DGR	    ( )
 IN	    ( )
 
 OUT	    ( )
-
-EXEC	( )
 

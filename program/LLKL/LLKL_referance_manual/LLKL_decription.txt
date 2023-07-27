@@ -16,7 +16,7 @@ FastMeM_SIZE can be set in LLKL_config.h
 
 -> flags are 1 byte universal registers:
 0. 	O Flag - Overflow flag, sets when overflow occure 
-1. 	M Flag - minus and additional flag, This flag i saying if your number is greater than 0 (0) or lower (1), and can be used for some additional informations 
+1. 	A Flag - additional flag - for additional information
 2. 	R Flag - rest and result flag,8 older bits of multiplying, rest of dividing and result of comparing
 
 How to write:
@@ -39,11 +39,6 @@ f.e.
 :1
 ...
 
-Integers:
-all integers must have prefix '
-
-where it's allowed to use -INT (i) you should write - instead of '
-
 Additional:
 You can write *REG insted of &REG before register adress,
  it means for parser that adress of register is stored in 4 bytes beginning from *REG
@@ -60,114 +55,74 @@ Form:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
 ADD 	0	
-Add two registers(signed)
-	REG,REG
-Output on first REG,If OVF then O flag have OVF value, and REG=255 so REG+%O is the answer
+Add registers
+	INT,REG
+Output on first REG normal: O=0,If OVF then O flag=255, and REG have OVF value so REG+%O is the answer(if it's not double overflow, if it is then REG have rest from divide of 256(8 bit registers))
+INT is the number of registers used in adding - registers should be one after another
+In this case you can always check if OVF occured just by checking if it's 0 or not
 *****************************************************************************************************************************
-ADDI	1	
-Add register and number(signed)
+ADDI 	1
+Add register and integer
 	REG,INT
-Output on first REG,If OVF then O flag have OVF value, and REG=255 so REG+%O is the answer
-*****************************************************************************************************************************
-*****************************************************************************************************************************
-UADD 	2	
-Add two registers(unsigned)
-	REG,REG
-Output on first REG,If OVF then O flag have OVF value, and REG=255 so REG+%O is the answer
-*****************************************************************************************************************************
-UADDI	3	
-Add register and number(unsigned)
-	REG,INT
-Output on first REG,If OVF then O flag have OVF value, and REG=255 so REG+%O is the answer
+Output on first REG normal: O=0,If OVF then O flag=255, and REG have OVF value so REG+%O is the answer
 *****************************************************************************************************************************
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 							SUB
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
-SUB 	4
-Substract two registers(signed)
-	REG,REG
-Output on first REG, if lower than -128 then O flag is set to (signed) result of sub +128, so %O + REG is real result
+SUB 	2
+Substract registers from first one
+	INT,REG
+Output on first REG normal: O=0, if lower than 0 then O flag is set to the substraction result REG=0, if lower than -255 REG=substraction on minus
+f.e SUB 3, (registers value)0,255,128 = -383 so O=255 and REG=128  
+INT is the number of registers used in substracting - registers should be one after another
 *****************************************************************************************************************************
-SUBI 	5
-Substract register and integer(signed)
+SUBI 	3
+Substract integer from register
 	REG,INT
-Output on first REG, if lower than -128 then O flag is set to (signed) result of sub +128, so %O + REG is real result
+Output on first REG normal: O=0, if lower than 0 then O flag is set to the substraction result REG=0, if lower than -255 REG=substraction on minus
 *****************************************************************************************************************************
-USUB 	6
-Substract two registers(unsigned)
-	REG,REG
-Output on first REG, If on minus then M flag eq 1, def 0, first register have module of result
-*****************************************************************************************************************************
-USUBI 	7
-Substract registers and integer(unsigned)
-	REG,INT
-Output on first REG,If on minus then M flag eq 1, def 0, first register have module of result
-*****************************************************************************************************************************
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							MUL
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
-MUL	8
-Multiplies values from two registers(signed)
-	REG,REG
+MUL		4
+Multiplies values from registers
+	INT,REG
 Output: most important part is in R(older 8 bits), second part is in first REG
+as in ADD and SUB
 *****************************************************************************************************************************
-MULI	9
-Multiplies register by integer(signed)
+MULI	5
+Multiplies register by integer
 	REG,INT
 Output: most important part is in R(older 8 bits), second part is in first REG
-*****************************************************************************************************************************
-UMUL	10
-Multiplies values from two registers(unsigned)
-	REG,REG
-Output: most important part is in R(older 8 bits), second part is in first REG
-*****************************************************************************************************************************
-UMULI	11
-Multiplies register by integer(unsigned)
-	REG,INT
-Output: most important part is in R(older 8 bits), second part is in first REG, if result is on minus then M flag is 1
-(i) -INT allowed
 *****************************************************************************************************************************
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 							DIV
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
-DIV	12
-Divide with rest register by register(signed)
-	REG,REG
+DIV		6
+Divide with rest register by registers
+	INT,REG
 Output of division is in first REG, rest of division is in R Flag
 *****************************************************************************************************************************
-DIVI	13
-Divide with rest register by integer(signed)
+DIVI	7
+Divide with rest register by integer
 	REG,INT
 Output of division is in first REG, rest of division is in R Flag
-*****************************************************************************************************************************
-UDIV	14
-Divide with rest register by register(unsigned)
-	REG,REG
-Output of division is in first REG, rest of division is in R Flag
-*****************************************************************************************************************************
-UDIVI	15
-Divide with rest register by integer(unsigned)
-	REG,INT
-Output of division is in first REG, rest of division is in R Flag, if result is on minus then M flag is 1
-(i) -INT allowed
 *****************************************************************************************************************************
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 							AND
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
-AND	16
-Logic AND operation between two registers
-	REG,REG
+AND		8
+Logic AND operation between registers
+	INT,REG
 Output on first REG
 *****************************************************************************************************************************
-ANDI	17
+ANDI	9
 Logic AND operation between register and integer
 	REG,INT
 Output on first REG
@@ -177,117 +132,102 @@ Output on first REG
 							OR
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 *****************************************************************************************************************************
-OR	18
-Logic OR operation between two registers or register and integer
-	REG,REG or REG,INT
+OR		10
+Logic OR operation between registers
+	INT,REG
 Output on first REG
 *****************************************************************************************************************************
-ORI	19
-Logic OR operation between two registers or register and integer
-	REG,REG or REG,INT
+ORI		11
+Logic OR operation between register and integer
+	REG,INT
 Output on first REG
 *****************************************************************************************************************************
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-NOT	20
+NOT		12
 logic negate of Register
 	REG
 Output in REG
 *****************************************************************************************************************************
-INC	21
+INC		13
 Increment value in register
 	REG
 Output: value incremented by 1 in this register if OVF occure then O flag is set and REG=0
 *****************************************************************************************************************************
-DEC	22
+DEC		14
 Decrement value in register
 	REG
 Output on REG, when result is -1 then REG=0 and M=1
 *****************************************************************************************************************************
-SER	23
+SER		15
 Sets value in register to value of another register
 	REG,REG
 Output: First REG=Second REG
 *****************************************************************************************************************************
-SERI	24
+SERI	16
 Sets value in register to integer
 	REG,INT
 Output: REG=INT
 *****************************************************************************************************************************
-RJMP	25
+RJMP	17
 Jump to some label;
-	:(labelnumber)
+	(labelnumber)
 There is no output
 *****************************************************************************************************************************
-JMP	26
+JMP		18
 It's an absolute jump to the offset of file
 	adress(32 bits value)
 There is no output
 *****************************************************************************************************************************
-RET	27
-Used to end subprogram and back to parent function,
-or to back from label and continue program from next command after rjmp
-	(no arguments)
-There is no output
-*****************************************************************************************************************************
-CP	28
+CP		19
 Compare two registers
 	REG,REG
 Output: %R= if equal:1 ; if lower: 0; if greater: 2
 *****************************************************************************************************************************
-CPI	29
+CPI		20
 Compare register and integer
 	REG,INT
 Output: %R= if equal:1 ; if lower: 0; if greater: 2
 *****************************************************************************************************************************
-SEQ	30
+SEQ		21
 Skip next command if equal( if R flag=1 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-DEQ	31
+DEQ		22
 Do next command if equal( if R flag=1 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-SLO	32
+SLO 	23
 Skip next command if lower( if R flag=0 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-DLO	33
+DLO		24
 Do next command if lower( if R flag=0 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-SGR	34
+SGR		25
 Skip next command if greater( if R flag=2 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-DGR	35
+DGR		26
 Do next command if greater( if R flag=2 )
 	(no arguments)
 no output
 *****************************************************************************************************************************
-IN	36
+IN		27
 Get standard input( how many bytes and first REG), information from which stream you can give by M flag
 	INT(32bits), REG
 Output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
 (i) be aware because if you give this function too large INT it can replace all your memory. 
 *****************************************************************************************************************************
-OUT	37
+OUT		28
 Give informations to standard output (how many bytes and first REG), information to which stream you can give by M flag
 	INT(32bits), REG
 Information given to standard output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
 *****************************************************************************************************************************
-EXEC	38
-It execute subprogram from another file by it's handler, 
-handler should be in file <program>.dllkl with source to file where this subprogram is. f.e:
-0programs/subprogram.llkl
-1programs/subprogram2.llkl
-	(handler-32bits)
-There is no output
-*****************************************************************************************************************************
-
 If command returned = 255 it means that end of program has been reached
 

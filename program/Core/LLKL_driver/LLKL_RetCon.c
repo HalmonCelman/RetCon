@@ -193,9 +193,9 @@ void llkl_init_cache(void){
 }
 
 void llkl_remove_cache(void){
-    llkl_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",1);
-    llkl_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",1);
-    llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
+    llkl_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",0);
+    llkl_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",0);
+    llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",0);
     llkl_send_info("Cache deleted ",0);
 }
 

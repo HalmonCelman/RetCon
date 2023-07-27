@@ -4,7 +4,7 @@
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
 uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
 uint64_t LLKL_LABEL[LLKL_LABEL_NUMBER];
-const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER]={'O','M','R'};
+const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER]={'O','A','R'};
 
 volatile uint8_t llkl_c;
 volatile uint8_t llkl_h8;
@@ -48,6 +48,8 @@ void LLKL_run(char * name){
     llkl_end_main_program();
     }
 }
+
+
 llkl_err LLKL_exec(void){
     llkl_err exec_err; //error status
 
@@ -67,7 +69,7 @@ llkl_err LLKL_exec(void){
     #endif // LLKL_DEBUG_MODE
 
     switch(llkl_c){ //execute
-        case 24:    //SERI
+        case LLKL_SERI:    //SERI
             exec_err=LLKL_seri();
         break;
 
@@ -146,13 +148,11 @@ inst_err.status=LLKL_OK;
     llkl_send_info("seri reg mode: ",LLKL_REG_MODE); //send debug info
     llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE); //load register adress
     llkl_send_info("seri adress: ",llkl_reg); //send debug info
-    LLKL_CHECK_INT(inst_err); //check if it's a number
     llkl_h8=llkl_get(); //read value
     llkl_send_info("seri value: ",llkl_h8); //send debug info
 #else
     llkl_h8=llkl_get(); //load mode of register
     llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE); //load adress
-    llkl_get(); //ignore '
     llkl_h8=llkl_get(); //read value
 #endif // LLKL_DEBUG_MODE
 

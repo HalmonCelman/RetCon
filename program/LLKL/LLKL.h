@@ -15,7 +15,9 @@ typedef enum{
     LLKL_EOP //end of program
 }  llkl_err_status ;
 
-
+typedef enum{
+    LLKL_SERI = 16
+} llkl_command_list;
 ///error stream
 typedef struct{
     llkl_err_status status; //actual status returned
