@@ -3,11 +3,19 @@
 ///declarations of buffers due to gcc 12 
 uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
 uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
-uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
+uint64_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER]={'O','M','R'};
 
 volatile uint8_t llkl_c;
 volatile uint8_t llkl_h8;
+
+static uint32_t LLKL_get32bit(void){
+    uint32_t val32=0;
+    for(int i=0;i<4;i++){ //read adress
+        val32 = (val32<<8) + llkl_get();
+    }
+    return val32;
+}
 
 
 void LLKL_init(void){
@@ -46,6 +54,10 @@ llkl_err LLKL_exec(void){
     exec_err.status=LLKL_OK; //default - OK
 
     llkl_c=llkl_get(); //read command
+    if(LLKL_CHECK_LABEL(llkl_c)){
+        llkl_set_label(LLKL_get32bit());
+        llkl_c=llkl_get(); // read once more
+    }
     if(llkl_c==0xFF){
         exec_err.status=LLKL_EOP;
         return exec_err;
@@ -72,9 +84,7 @@ llkl_err LLKL_exec(void){
 uint32_t LLKL_load_reg_addr(uint8_t mode){
 uint32_t llkl_reg=0;
     if(mode==0){ //if normal mode
-        for(int i=0;i<4;i++){ //read adress
-            llkl_reg = (llkl_reg<<8) + llkl_get();
-        }
+        llkl_reg=LLKL_get32bit();
         llkl_reg+=LLKL_FLAG_NUMBER;
     }
     if(mode==1){ //if flag mode
@@ -86,11 +96,7 @@ uint32_t llkl_reg=0;
         }
     }
     if(mode==2){ //if indirect mode
-    uint32_t llkl_pom=0;
-        for(int i=0;i<4;i++){ //get indirect adress
-            llkl_pom = (llkl_pom<<8) + llkl_get();
-        }
-        llkl_pom+=LLKL_FLAG_NUMBER;
+        uint32_t llkl_pom=LLKL_get32bit()+LLKL_FLAG_NUMBER;
         for(int i=0;i<4;i++){ //get direct adress
             llkl_reg = (llkl_reg<<8) + LLKL_load_mem(llkl_pom+i);
         }

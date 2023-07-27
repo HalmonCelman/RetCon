@@ -5,7 +5,6 @@
 FIL file[NUMOFFILES];
 llkl_pt file_pt[NUMOFFILES];
 
-
 volatile uint8_t llkl_physical_read; //says if it's needed to reload buffer - caused end of buffer
 volatile uint8_t llkl_reload_buffer; //says if it's needed to reload buffer - caused change of file
 volatile uint8_t llkl_actual_file; //says which file is already used
@@ -156,12 +155,15 @@ void llkl_throw_error(uint8_t condition,char * message, uint8_t critical){
     }
 }
 
+#if LLKL_USE_EXTERNAL_MEMORY
 
 void llkl_init_external_memory(void){
     f_open(&file[FIL_SLOWMEM],SLOWMEMFILE,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
+    f_open(&file[FIL_LABELS],LABELFILE,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
 }
 
 void llkl_close_external_memory(void){
+    f_close(&file[FIL_LABELS]);
     f_close(&file[FIL_SLOWMEM]);
 }
 
@@ -191,7 +193,45 @@ void llkl_init_cache(void){
 }
 
 void llkl_remove_cache(void){
+    llkl_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",1);
     llkl_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",1);
     llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
     llkl_send_info("Cache deleted ",0);
+}
+
+#endif
+
+void llkl_set_label(uint32_t labelNumber){
+    uint64_t labelValue=(((uint64_t)file_pt[FIL_MAIN].buffCounter)<<32)+file_pt[FIL_MAIN].dCounter;
+    if(labelNumber<LLKL_LABEL_NUMBER){
+        LLKL_LABEL[labelNumber]=labelValue;
+    }else{
+        #if LLKL_USE_EXTERNAL_MEMORY
+            llkl_throw_error(f_lseek(&file[FIL_LABELS],(labelNumber-LLKL_LABEL_NUMBER)*4),"Cannot lseek save label",0);
+            llkl_throw_error(f_write(&file[FIL_LABELS],&labelValue,4,&s1),"Cannot save label",0);
+            #if LLKL_DEBUG_MODE
+                llkl_send_info("Label set ",labelValue);
+            #endif
+        #else
+            llkl_throw_error(1,"WRONG LABEL NUMBER",0);
+        #endif
+    }
+}
+
+uint64_t llkl_get_label(uint32_t labelNumber){
+    uint64_t labelValue=0;
+    if(labelNumber<LLKL_LABEL_NUMBER){
+        labelValue=LLKL_LABEL[labelNumber];
+    }else{
+        #if LLKL_USE_EXTERNAL_MEMORY
+            llkl_throw_error(f_lseek(&file[FIL_LABELS],(labelNumber-LLKL_LABEL_NUMBER)*4),"Cannot lseek read label",0);
+            llkl_throw_error(f_read(&file[FIL_LABELS],&labelValue,4,&s1),"Cannot read label",0);
+        #else
+            llkl_throw_error(1,"WRONG LABEL NUMBER",0);
+        #endif
+    }
+    #if LLKL_DEBUG_MODE
+        llkl_send_info("Label get ",labelValue);
+    #endif
+    return labelValue;
 }

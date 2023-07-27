@@ -6,15 +6,24 @@
 #include <LLKL.h>
 #include <ff.h>
 
-#define NUMOFFILES 5
+#if LLKL_USE_EXTERNAL_MEMORY
+
+#define NUMOFFILES 6
 #define CACHEDIR "RC"
 #define SLOWMEMFILE CACHEDIR"/rc.mem" //file for slow memory on SD card
+#define LABELFILE CACHEDIR"/rc.lab" //file for labels
+
+#else
+#define NUMOFFILES 4
+#endif
+
 /*
  file 0 - main program
  file 1 - logs
  file 2 - additional data - if you want to copy something or for  music etc
  file 3 - data - animations, etc
  file 4 - external memory file - SLOWMeM
+ file 5 - external memory file - Labels
  */
 ///defines to avialibe files usages
 typedef enum{
@@ -22,7 +31,8 @@ typedef enum{
     FIL_LOG, //log file
     FIL_AD, //additional data file
     FIL_D, //data file
-    FIL_SLOWMEM //slow memory
+    FIL_SLOWMEM, //slow memory
+    FIL_LABELS //slow memory
 } LLKL_FILES;
 
 typedef struct{
@@ -61,6 +71,6 @@ uint8_t llkl_end_main_program(void);
 uint8_t llkl_get(void);
 void llkl_send_info(char*, uint32_t);
 void llkl_throw_error(uint8_t,char *,uint8_t);
-
+void llkl_set_label(uint32_t);
 
 #endif // LLKL_RETCON_H_INCLUDED

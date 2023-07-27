@@ -26,7 +26,7 @@ typedef struct{
 //***********LLKL_FLAG_MAP is in LLKL_conf.h in DANGER ZONE
 extern uint8_t LLKL_FAST_MEM[LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER];
 extern uint8_t LLKL_COMM_BUFF[LLKL_COMM_BUFF_SIZE];
-extern uint32_t LLKL_LABEL[LLKL_LABEL_NUMBER];
+extern uint64_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 
 ///global varialibes
 
@@ -56,13 +56,14 @@ extern uint8_t llkl_end_main_program(void);
 extern uint8_t llkl_get(void);
 extern void llkl_send_info(char*, uint32_t);
 extern void llkl_throw_error(uint8_t,char *,uint8_t);
+extern void llkl_set_label(uint32_t);
 
 ///llkl_instructions
 llkl_err LLKL_seri(void);
 
 ///some helpful macros
 #define LLKL_REG_MODE ((llkl_h8 == '&') ? 0 : ((llkl_h8 == '%') ? 1 : 2))
-
+#define LLKL_CHECK_LABEL(x) ((x == ':')? 1 : 0)
 #define LLKL_CHECK_INT(x)  if(llkl_get() != 0x27){ x.status=LLKL_EXPECTED_SYMBOL;x.additional=0x27;return x;}  //x should be an error handler
 
 #define LLKL_CHECK_REG(x) llkl_h8=llkl_get(); \
