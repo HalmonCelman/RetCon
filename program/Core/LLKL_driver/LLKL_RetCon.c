@@ -18,8 +18,8 @@ uint8_t llkl_init_program(char* source,uint8_t num,uint32_t position){
 #endif
 uint8_t llkl_pom=f_open(&file[num],source,FA_READ); //open file in selected file
 if(llkl_pom) return llkl_pom;
-//llkl_pom=f_lseek(&file[num],position);
-//if(llkl_pom) return llkl_pom;
+llkl_pom=f_lseek(&file[num],position);
+if(llkl_pom) return llkl_pom;
 for(int i=0;i<NUMOFFILES;i++){
     file_pt[i].buffCounter=0; //clear buffor page pointer
     file_pt[i].command=0; //clear command pointer
@@ -168,24 +168,29 @@ void llkl_close_external_memory(void){
 void llkl_external_mem_write(uint32_t adress, uint8_t value){
     adress-=LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER;
     f_lseek(&file[FIL_SLOWMEM],adress);
-    llkl_throw_error(f_write(&file[FIL_SLOWMEM],&value,1,&s1),"SLOW MEMORY SAVE FAILED!",0);
+    llkl_throw_error(f_write(&file[FIL_SLOWMEM],&value,1,&s1),"SLOW MEM SAVE FAILED!",0);
 }
 
 uint8_t llkl_external_mem_read(uint32_t adress){ //todo reading more than 1 byte
     uint8_t value;
     adress-=LLKL_FAST_MEM_SIZE+LLKL_FLAG_NUMBER;
     f_lseek(&file[FIL_SLOWMEM],adress);
-    llkl_throw_error(f_read(&file[FIL_SLOWMEM],&value,1,&s1),"SLOW MEMORY LOAD FAILED!",0);
+    llkl_throw_error(f_read(&file[FIL_SLOWMEM],&value,1,&s1),"SLOW MEM LOAD FAILED!",0);
     return value;
 }
 
 
 void llkl_init_cache(void){
-    llkl_throw_error(f_mkdir(CACHEDIR),"FAILED TO INIT CACHE",1);
-    llkl_send_info("Cache initialized ",0);
+    FRESULT res=f_mkdir(CACHEDIR);
+    if(res != FR_EXIST){
+        llkl_throw_error(res,"FAILED TO INIT CACHE",1);
+        llkl_send_info("Cache initialized ",0);
+    }else{
+        llkl_send_info("Cache loaded ",0);
+    }
 }
 
 void llkl_remove_cache(void){
-    llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
+    //llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
     llkl_send_info("Cache deleted ",0);
 }

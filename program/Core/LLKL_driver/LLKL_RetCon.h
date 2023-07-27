@@ -6,9 +6,9 @@
 #include <LLKL.h>
 #include <ff.h>
 
-#define NUMOFFILES 4
-#define SLOWMEMFILE "RC.mem" //file for slow memory on SD card
-#define CACHEDIR "RC" 
+#define NUMOFFILES 5
+#define CACHEDIR "RC"
+#define SLOWMEMFILE CACHEDIR"/rc.mem" //file for slow memory on SD card
 /*
  file 0 - main program
  file 1 - logs
