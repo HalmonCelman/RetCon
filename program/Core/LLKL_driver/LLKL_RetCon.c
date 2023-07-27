@@ -191,6 +191,7 @@ void llkl_init_cache(void){
 }
 
 void llkl_remove_cache(void){
-    //llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
+    llkl_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",1);
+    llkl_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",1);
     llkl_send_info("Cache deleted ",0);
 }
