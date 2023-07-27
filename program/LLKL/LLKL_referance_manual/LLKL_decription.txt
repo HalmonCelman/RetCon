@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////
 LLKL description - by KK - All rights reserved
 ////////////////////////////////////////////////////////
--> LLKL have memory adressed by 32 bits - up to 32GB
--> Number of command is adressed by 32bit unsigned integer from 0 to 4 294 967 295
+-> LLKL have memory adressed by 32 bits - up to 4GB
+-> Number of command is adressed by 8bit unsigned integer from 0 to 255 - !command 58 is reserved as label! (':' in ascii)
 -> Number of label is adressed by 32bit unsigned integer from 0 to 4 294 967 295
 
 -> Labels from 0 to Flabel_number-1 are fast labels(stored in MCU), others are slow labels(on external memory)
@@ -12,10 +12,9 @@ LLKL description - by KK - All rights reserved
 -> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_FAST_MEM_SIZE)-1
 FastMeM_SIZE can be set in LLKL_config.h
 
--> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE+Flag_Number+Label_number adress to 0xFFFF
-Flag_Number should be changed !only! when number of flags are changing
+-> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE adress to 0xFFFFFFFF
 
--> flags are 1 byte universal registers( you can use it as regular registers, but at your own risk ):
+-> flags are 1 byte universal registers:
 0. 	O Flag - Overflow flag, sets when overflow occure 
 1. 	M Flag - minus and additional flag, This flag i saying if your number is greater than 0 (0) or lower (1), and can be used for some additional informations 
 2. 	R Flag - rest and result flag,8 older bits of multiplying, rest of dividing and result of comparing
@@ -23,13 +22,6 @@ Flag_Number should be changed !only! when number of flags are changing
 How to write:
 Flag:
  %(Flag) f.e. %O, %M, %R
-or
-&Bound+(Relative Flag adress), f.e.
-%O == &(Bound)
-%M == &(Bound+1)
-%R == &(Bound+2)
-where
-Bound :=(uint32)FASTMeM_SIZE;
 
 Register:
 
@@ -54,7 +46,7 @@ where it's allowed to use -INT (i) you should write - instead of '
 
 Additional:
 You can write *REG insted of &REG before register adress,
- it means for parser that adress of register is stored in 8 bytes beginning from *REG
+ it means for parser that adress of register is stored in 4 bytes beginning from *REG
 (LLKL memory is stored in 32 bits format)
 
 Avialibe commands:

@@ -68,31 +68,30 @@ if(counter>=10){ //for 16MHz -> 100Hz
 }
 
 
-uint8_t err(uint8_t r,char * com){
+uint8_t err(uint8_t result,char * com){
 #if DEBUG_MODE==1
-if(r){
-GLCD_B_ClearScreen();
-GLCD_B_WriteString(com,0,0);
-GLCD_B_WriteChar((char)(r+48),0,1);
-GLCD_r;
-delay(1000);
+if(result){
+write_message(com,result);
 }
 #endif // DEBUG_MODE
-return r;
+return result;
 }
 
-uint8_t errc(uint8_t r,char * com){
-if(r){
-GLCD_B_ClearScreen();
-GLCD_B_WriteString(com,0,0);
-GLCD_B_WriteChar((char)(r+48),0,1);
-GLCD_r;
+uint8_t errc(uint8_t result,char * com){
+if(result){
+write_message(com,result);
 while(1);
 }
-return r;
+return result;
 }
 
-
+void write_message(char * message,uint8_t number){
+	GLCD_B_ClearScreen();
+	GLCD_B_WriteString(message,0,0);
+	GLCD_B_WriteChar((char)(number+48),0,1);
+	GLCD_r;
+	delay(100);
+}
 void play(void){
 //TBD
 }

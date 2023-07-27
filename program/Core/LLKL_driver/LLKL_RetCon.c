@@ -95,14 +95,14 @@ return 0;
 
 /*
 llkl_send_info: sends info to the user
-info - information which you want to send
+info - information which you want to send up to 255 lenght of info
 value - additional number which will show after info
 */
 void llkl_send_info(char* info,uint32_t value){
 
 GLCD_B_ClearScreen();
 GLCD_B_WriteString(info,0,0);
-int len=0;
+uint8_t len=0;
 while(*info++){
 len++;
 }
@@ -148,7 +148,7 @@ condition - if true, error will be thrown
 message - message which will be displayed
 critical - if true, program will stop if condition also true
 */
-void llkl_throw_error(uint8_t condition,char * message,uint8_t critical){
+void llkl_throw_error(uint8_t condition,char * message, uint8_t critical){
     if(critical){
         errc(condition,message);
     }else{

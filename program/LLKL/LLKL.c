@@ -75,12 +75,13 @@ uint32_t llkl_reg=0;
         for(int i=0;i<4;i++){ //read adress
             llkl_reg = (llkl_reg<<8) + llkl_get();
         }
+        llkl_reg+=LLKL_FLAG_NUMBER;
     }
     if(mode==1){ //if flag mode
         llkl_h8=llkl_get();
         for(int i=0;i<LLKL_FLAG_NUMBER;i++){ //find flag adress
             if(LLKL_FLAG_MAP[i]==llkl_h8){
-                llkl_reg=LLKL_FAST_MEM_SIZE+i;
+                llkl_reg=i;
             }
         }
     }
@@ -89,9 +90,11 @@ uint32_t llkl_reg=0;
         for(int i=0;i<4;i++){ //get indirect adress
             llkl_pom = (llkl_pom<<8) + llkl_get();
         }
+        llkl_pom+=LLKL_FLAG_NUMBER;
         for(int i=0;i<4;i++){ //get direct adress
             llkl_reg = (llkl_reg<<8) + LLKL_load_mem(llkl_pom+i);
         }
+        llkl_reg+=LLKL_FLAG_NUMBER;
     }
     return llkl_reg;
 }
