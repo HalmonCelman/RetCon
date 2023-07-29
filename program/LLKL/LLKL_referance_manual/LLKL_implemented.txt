@@ -24,11 +24,11 @@ DEC 	( )
 SER	    ( )
 SERI	(x)
 
-RJMP	( )
+LJMP	( )
 JMP	    ( )
 
-CP  	( )
-CPI	    ( )
+CMP  	( )
+CMPI	    ( )
 
 SEQ	    ( )
 DEQ	    ( )

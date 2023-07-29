@@ -16,8 +16,37 @@ typedef enum{
 }  llkl_err_status ;
 
 typedef enum{
-    LLKL_SERI = 16
+    LLKL_ADD = 0,
+    LLKL_ADDI,
+    LLKL_SUB,
+    LLKL_SUBI,
+    LLKL_MUL,
+    LLKL_MULI,
+    LLKL_DIV,
+    LLKL_DIVI,
+    LLKL_AND,
+    LLKL_ANDI,
+    LLKL_OR,
+    LLKL_ORI,
+    LLKL_NOT,
+    LLKL_INC,
+    LLKL_DEC,
+    LLKL_SER,
+    LLKL_SERI,
+    LLKL_LJMP,
+    LLKL_JMP,
+    LLKL_CMP,
+    LLKL_CMPI,
+    LLKL_SEQ,
+    LLKL_DEQ,
+    LLKL_SLO,
+    LLKL_DLO,
+    LLKL_SGR,
+    LLKL_DGR,
+    LLKL_IN,
+    LLKL_OUT
 } llkl_command_list;
+
 ///error stream
 typedef struct{
     llkl_err_status status; //actual status returned
@@ -62,6 +91,7 @@ extern void llkl_throw_error(uint8_t,char *,uint8_t);
 extern void llkl_set_label(uint32_t);
 
 ///llkl_instructions
+llkl_err LLKL_add(void);
 llkl_err LLKL_seri(void);
 
 ///some helpful macros

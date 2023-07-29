@@ -172,7 +172,7 @@ Sets value in register to integer
 	INT,REG,INT
 Same as SER but INTs instead of REG2...
 *****************************************************************************************************************************
-RJMP	17
+LJMP	17
 Jump to some label;
 	(labelnumber)
 There is no output
@@ -182,12 +182,12 @@ It's an absolute jump to the offset of file
 	adress(32 bits value)
 There is no output
 *****************************************************************************************************************************
-CP		19
+CMP		19
 Compare two registers
 	REG,REG
 Output: %R= if equal:1 ; if lower: 0; if greater: 2
 *****************************************************************************************************************************
-CPI		20
+CMPI		20
 Compare register and integer
 	REG,INT
 Output: %R= if equal:1 ; if lower: 0; if greater: 2
