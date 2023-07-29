@@ -159,14 +159,18 @@ Decrement value in register
 Output on REG, when result is -1 then REG=0 and M=1
 *****************************************************************************************************************************
 SER		15
-Sets value in register to value of another register
-	REG,REG
-Output: First REG=Second REG
+Sets value in registers to value of another registers
+	INT,REG1,REG2
+REG1 is adress to int series, REG2 also
+REG1=REG2			--\
+REG1+1=REG2+1		  | INT times
+...					  | 
+REG1+INT-1=REG2+INT-1-/
 *****************************************************************************************************************************
 SERI	16
 Sets value in register to integer
-	REG,INT
-Output: REG=INT
+	INT,REG,INT
+Same as SER but INTs instead of REG2...
 *****************************************************************************************************************************
 RJMP	17
 Jump to some label;

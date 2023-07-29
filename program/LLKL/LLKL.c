@@ -8,6 +8,7 @@ const uint8_t LLKL_FLAG_MAP[LLKL_FLAG_NUMBER]={'O','A','R'};
 
 volatile uint8_t llkl_c;
 volatile uint8_t llkl_h8;
+volatile uint8_t llkl_number;
 
 static uint32_t LLKL_get32bit(void){
     uint32_t val32=0;
@@ -144,19 +145,24 @@ inst_err.status=LLKL_OK;
 //main instruction code
 
 #if LLKL_DEBUG_MODE==1
+    llkl_number=llkl_get(); //load number
+    llkl_send_info("seri number: ",llkl_number); //send debug info
     LLKL_CHECK_REG(inst_err); //check if properly written
     llkl_send_info("seri reg mode: ",LLKL_REG_MODE); //send debug info
     llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE); //load register adress
     llkl_send_info("seri adress: ",llkl_reg); //send debug info
-    llkl_h8=llkl_get(); //read value
-    llkl_send_info("seri value: ",llkl_h8); //send debug info
 #else
+    llkl_number=llkl_get(); //load number
     llkl_h8=llkl_get(); //load mode of register
     llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE); //load adress
-    llkl_h8=llkl_get(); //read value
 #endif // LLKL_DEBUG_MODE
-
-LLKL_save_mem(llkl_reg,llkl_h8);
+for(int i=0;i<llkl_number;i++){
+    llkl_h8=llkl_get();
+    #if LLKL_DEBUG_MODE
+        llkl_send_info("seri value: ",llkl_h8);
+    #endif
+    LLKL_save_mem(llkl_reg+i,llkl_h8);
+}
 /////////////////////////////////////////////
 return inst_err;
 }

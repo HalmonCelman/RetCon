@@ -56,7 +56,7 @@ uint8_t llkl_get(void){
 
     if(llkl_physical_read | llkl_reload_buffer){ //reload command buffer and set pointers - should be read from last command to avoid chain broke but will be implemented later 
 
-        #if LLKL_DEBUG_MODE==1
+        #if DEBUG_MODE==1
             llkl_send_info("INFO: reloading buffer ",(llkl_physical_read<<1)|llkl_reload_buffer);
         #endif
         
@@ -77,7 +77,7 @@ uint8_t llkl_get(void){
     }
     uint8_t llkl_pom = LLKL_COMM_BUFF[file_pt[llkl_actual_file].dCounter++];
 
-    #if LLKL_DEBUG_MODE==1
+    #if DEBUG_MODE==1
         llkl_send_info("INFO: llkl_get() ",llkl_pom);
     #endif
 

@@ -33,6 +33,7 @@ extern uint64_t LLKL_LABEL[LLKL_LABEL_NUMBER];
 ///global varialibes
 
 extern volatile uint8_t llkl_h8; //helpful 8bit varialibe
+extern volatile uint8_t llkl_number; //how many registers to copy itp
 extern volatile uint8_t llkl_c; //command
 ///functions
 
@@ -66,7 +67,6 @@ llkl_err LLKL_seri(void);
 ///some helpful macros
 #define LLKL_REG_MODE ((llkl_h8 == '&') ? 0 : ((llkl_h8 == '%') ? 1 : 2))
 #define LLKL_CHECK_LABEL(x) ((x == ':')? 1 : 0)
-#define LLKL_CHECK_INT(x)  if(llkl_get() != 0x27){ x.status=LLKL_EXPECTED_SYMBOL;x.additional=0x27;return x;}  //x should be an error handler
 
 #define LLKL_CHECK_REG(x) llkl_h8=llkl_get(); \
  if(!(llkl_h8=='&' || llkl_h8=='%' || llkl_h8=='*')){ x.status=LLKL_EXPECTED_SYMBOL;x.additional='&';return x;}  //x should be an error handler, which symbol has been checked is in llkl_h8 varialibe
