@@ -1,4 +1,4 @@
-add_library(LLKL_driver LLKL_RetCon.c LLKL_RetCon.h)
+add_library(LLKL_driver LLKL_RetCon.c RC_streams.c LLKL_RetCon.h RC_streams.h)
 
 target_include_directories(LLKL_driver PRIVATE ${PATH_TO_LLKL})
 target_include_directories(LLKL_driver PRIVATE ${PATH_TO_FATFS})

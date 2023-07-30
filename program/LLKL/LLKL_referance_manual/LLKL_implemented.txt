@@ -1,5 +1,5 @@
-ADD 	( )
-ADDI	( )
+ADD 	(x)
+ADDI	(x)
 
 SUB	    ( )
 SUBI	( )
@@ -28,7 +28,7 @@ LJMP	( )
 JMP	    ( )
 
 CMP  	( )
-CMPI	    ( )
+CMPI    ( )
 
 SEQ	    ( )
 DEQ	    ( )

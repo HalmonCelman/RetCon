@@ -12,6 +12,7 @@ typedef enum{
     LLKL_NO_COMMAND,
     LLKL_UNKNOWN_TYPE,
     LLKL_EXPECTED_SYMBOL,
+    LLKL_WRONG_STREAM,
     LLKL_EOP //end of program
 }  llkl_err_status ;
 
@@ -89,10 +90,14 @@ extern uint8_t llkl_get(void);
 extern void llkl_send_info(char*, uint32_t);
 extern void llkl_throw_error(uint8_t,char *,uint8_t);
 extern void llkl_set_label(uint32_t);
+//streams for device
+extern llkl_err llkl_stream_out(uint32_t,uint8_t);
 
 ///llkl_instructions
 llkl_err LLKL_add(void);
+llkl_err LLKL_addi(void);
 llkl_err LLKL_seri(void);
+llkl_err LLKL_out(void);
 
 ///some helpful macros
 #define LLKL_REG_MODE ((llkl_h8 == '&') ? 0 : ((llkl_h8 == '%') ? 1 : 2))

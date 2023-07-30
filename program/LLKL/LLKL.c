@@ -10,6 +10,7 @@ volatile uint8_t llkl_c;
 volatile uint8_t llkl_h8;
 volatile uint8_t llkl_number;
 
+//returns flag number(which is also it's adress)
 static uint8_t LLKL_getFlagNumber(char flag){
     for(int i=0;i<LLKL_FLAG_NUMBER;i++){ //find flag adress
         if(LLKL_FLAG_MAP[i]==flag){
@@ -22,6 +23,10 @@ static uint8_t LLKL_getFlagNumber(char flag){
     return 0;
 }
 
+/*
+LLKL_get32bit: gets 32bit value from program
+returns this value
+*/
 static uint32_t LLKL_get32bit(void){
     uint32_t val32=0;
     for(int i=0;i<4;i++){ //read adress
@@ -85,10 +90,17 @@ llkl_err LLKL_exec(void){
         case LLKL_ADD:    
             exec_err=LLKL_add();
         break;
+        case LLKL_ADDI:
+            exec_err=LLKL_addi();
+        break;
+
         case LLKL_SERI:    
             exec_err=LLKL_seri();
         break;
 
+        case LLKL_OUT:
+            exec_err=LLKL_out();
+        break;
         default:
             ///if no command executed
             exec_err.status = LLKL_NO_COMMAND; //command not found
@@ -165,18 +177,53 @@ llkl_err LLKL_add(void){
         llkl_reg1=LLKL_load_reg_addr(LLKL_REG_MODE);
     #endif
 
-    for(int i=0;i<llkl_number,i++){
+    for(int i=0;i<llkl_number;i++){
         llkl_sum += LLKL_load_mem(llkl_reg+i);
         if(llkl_sum > 255){
             llkl_sum -= 256;
             llkl_ovf=1;
         }    
     }
+
+    #if LLKL_DEBUG_MODE
+        llkl_send_info("add sum: ",llkl_sum);
+    #endif
+
     LLKL_save_mem(llkl_reg, (uint8_t)llkl_sum);
-    LLKL_save_mem(LLKL_getFlagNumber('O'), 255);
+    LLKL_save_mem(LLKL_getFlagNumber('O'), (llkl_ovf ? 255 : 0));
+
+    return inst_err;
 }
 
+llkl_err LLKL_addi(void){
+    llkl_err inst_err;
+    inst_err.status=LLKL_OK;
 
+    uint32_t llkl_reg;
+    uint16_t llkl_sum=0;
+
+    #if LLKL_DEBUG_MODE
+        LLKL_CHECK_REG(inst_err);
+        llkl_send_info("addi reg mode: ",LLKL_REG_MODE);
+        llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE);
+        llkl_sum=LLKL_load_mem(llkl_reg)+llkl_get();
+        llkl_send_info("addi sum: ",llkl_sum);
+    #else
+        llkl_h8=llkl_get();
+        llkl_reg=LLKL_load_reg_addr(LLKL_REG_MODE);
+        llkl_sum=LLKL_load_mem(llkl_reg)+llkl_get();
+    #endif
+
+    if(llkl_sum>255){
+        llkl_sum-=256;
+        LLKL_save_mem(LLKL_getFlagNumber('O'), 255);
+    }else{
+        LLKL_save_mem(LLKL_getFlagNumber('O'), 0);
+    }
+    LLKL_save_mem(llkl_reg, (uint8_t)llkl_sum);
+
+    return inst_err;
+}
 
 llkl_err LLKL_seri(void){
 llkl_err inst_err;
@@ -210,3 +257,11 @@ for(int i=0;i<llkl_number;i++){
 return inst_err;
 }
 
+llkl_err LLKL_out(void){
+    llkl_err inst_err;
+    inst_err.status=LLKL_OK;
+    
+    inst_err = llkl_stream_out(LLKL_get32bit(),LLKL_load_mem(LLKL_getFlagNumber('A')));
+
+    return inst_err;
+}

@@ -224,14 +224,13 @@ no output
 *****************************************************************************************************************************
 IN		27
 Get standard input( how many bytes and first REG), information from which stream you can give by M flag
-	INT(32bits), REG
-Output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
-(i) be aware because if you give this function too large INT it can replace all your memory. 
+	REG
+Output is in &REG, &(REG+1), &(REG+2), ...- number of bytes readed depends on wchich stream you select
 *****************************************************************************************************************************
 OUT		28
-Give informations to standard output (how many bytes and first REG), information to which stream you can give by M flag
-	INT(32bits), REG
-Information given to standard output is in &REG, &(REG+1), &(REG+2), ...- bypassing flags - INT is number of REGs used
+Give informations to standard output (how many bytes and first REG), information to which stream you can give by A flag
+	REG
+Information given to standard output is in &REG, &(REG+1), &(REG+2), ...- number of bytes written depends on wchich stream you select
 *****************************************************************************************************************************
 If command returned = 255 it means that end of program has been reached
 

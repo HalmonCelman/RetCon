@@ -41,7 +41,6 @@ typedef struct{
     volatile uint32_t dCounter; //dynamic counter - which char is actually analyzed
 } llkl_pt;
 
-
  ///tables
 extern FIL file[NUMOFFILES];
 extern llkl_pt file_pt[NUMOFFILES]; 
@@ -73,5 +72,7 @@ void llkl_send_info(char*, uint32_t);
 void llkl_throw_error(uint8_t,char *,uint8_t);
 void llkl_set_label(uint32_t);
 uint64_t llkl_get_label(uint32_t);
+//streams
+llkl_err llkl_stream_out(uint32_t,uint8_t);
 
 #endif // LLKL_RETCON_H_INCLUDED

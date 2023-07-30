@@ -1,4 +1,5 @@
 #include "LLKL_RetCon.h"
+#include "RC_streams.h"
 #include <config.h>
 #include <multi_buff.h>
 
@@ -234,4 +235,38 @@ uint64_t llkl_get_label(uint32_t labelNumber){
         llkl_send_info("Label get ",labelValue);
     #endif
     return labelValue;
+}
+
+// streams
+llkl_err llkl_stream_out(uint32_t param_num,uint8_t stream_set){
+    llkl_err inst_err;
+    inst_err.status=LLKL_OK;
+
+    switch(stream_set){
+        case RC_REFRESH:
+            rc_stream_refresh();
+        break;
+        
+        case RC_CLEAR:
+            rc_stream_clear();
+        break;
+
+        case RC_SET_PX:
+            rc_stream_set_px();
+        break;
+
+        case RC_CLR_PX:
+            rc_stream_clr_px();
+        break;
+
+        case RC_WRITE_CHAR:
+            rc_stream_write_char();
+        break;
+
+        default:
+            inst_err.status=LLKL_WRONG_STREAM;
+            inst_err.additional=stream_set;
+    }
+
+    return inst_err;
 }
