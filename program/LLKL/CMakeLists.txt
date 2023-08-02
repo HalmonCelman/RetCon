@@ -1,9 +1,0 @@
-set(LLKL_SOURCES 
-LLKL.c
-)
-
-set(LLKL_HEADERS
-LLKL_conf.h
-LLKL.h
-)
-add_library(LLKL ${LLKL_SOURCES} ${LLKL_HEADERS})

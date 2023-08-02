@@ -150,7 +150,11 @@ void findAllAndChange(void){
         if(str != " "){
         if(str[0] == '&' || str[0] == '*' || str[0] == ':'){ //register or label
             out_file<<(char)str[0];
-            out_file<<(char)std::stoi(&str[1]);
+            unsigned int strVal=std::stoi(&str[1]);
+            out_file<<(char)(strVal>>24);
+            out_file<<(char)(strVal>>16);
+            out_file<<(char)(strVal>>8);
+            out_file<<(char)(strVal);
         }else if((str[0] >= '0') && (str[0] <= '9')) { //INT
             out_file<<(char)std::stoi(str);
         }else{ //command

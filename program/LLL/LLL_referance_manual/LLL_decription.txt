@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
-LLKL description - by KK - All rights reserved
+LLL description - by KK - All rights reserved
 ////////////////////////////////////////////////////////
--> LLKL have memory adressed by 32 bits - up to 4GB
+-> LLL have memory adressed by 32 bits - up to 4GB
 -> Number of command is adressed by 8bit unsigned integer from 0 to 255 - !command 58 is reserved as label! (':' in ascii)
 -> Number of label is adressed by 32bit unsigned integer from 0 to 4 294 967 295
 
@@ -9,8 +9,8 @@ LLKL description - by KK - All rights reserved
 
 -> All registers are 8-bit
 
--> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLKL_FAST_MEM_SIZE)-1
-FastMeM_SIZE can be set in LLKL_config.h
+-> FastMeM( Fast Memory Matrix - located in MCU) is from 0 adress (&0) to FastMeM_Size(LLL_FAST_MEM_SIZE)-1
+FastMeM_SIZE can be set in LLL_config.h
 
 -> SlowMeM( Slow Memory Matrix - on external memory driver ) is from FastMeM_SIZE adress to 0xFFFFFFFF
 
@@ -42,7 +42,7 @@ f.e.
 Additional:
 You can write *REG insted of &REG before register adress,
  it means for parser that adress of register is stored in 4 bytes beginning from *REG
-(LLKL memory is stored in 32 bits format)
+(LLL memory is stored in 32 bits format)
 
 Avialibe commands:
 Form:

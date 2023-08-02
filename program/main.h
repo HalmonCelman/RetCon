@@ -30,11 +30,11 @@ contains all needed includes and macros
 #include <mmc_avr.h>
 #include <rtc.h>
 
-/// LLKL
-#include <LLKL.h>
+/// LLL
+#include <LLL.h>
 
 // Driver
-#include <LLKL_RetCon.h>
+#include <LLL_RetCon.h>
 
 // additional graphics
 #include <additional_graphics.h>

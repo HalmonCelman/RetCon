@@ -21,10 +21,10 @@ init_buffering();
 
 #if DEBUG_MODE
 GLCD_B_ClearScreen();
-#if LLKL_DEBUG_MODE
-GLCD_B_WriteString("DEBUG MODE WITH LLKL",0,0);
+#if LLL_DEBUG_MODE
+GLCD_B_WriteString("DEBUG MODE WITH LLL",0,0);
 #else
-GLCD_B_WriteString("DEBUG MODE WITHOUT LLKL",0,0);
+GLCD_B_WriteString("DEBUG MODE WITHOUT LLL",0,0);
 #endif
 GLCD_r;
 delay(100);
@@ -37,11 +37,12 @@ init_fs();
 
 animate("a.am");
 
-LLKL_init();
+LLL_init();
 
-LLKL_run("uno.l");
+LLL_run("add.l");
+LLL_run("addi.l");
 
-LLKL_end();
+LLL_end();
 
 close_fs();
 

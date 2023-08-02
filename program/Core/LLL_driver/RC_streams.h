@@ -1,7 +1,7 @@
 #ifndef RC_STREAMS_H
 #define RC_STREAMS_H
 
-#include <LLKL.h>
+#include <LLL.h>
 
 typedef enum{
     RC_REFRESH,   // refreshes screen - without it changes will not be visible
