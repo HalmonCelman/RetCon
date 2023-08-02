@@ -39,8 +39,8 @@ animate("a.am");
 
 LLL_init();
 
-LLL_run("add.l");
-LLL_run("addi.l");
+LLL_run("sub.l");
+LLL_run("subi.l");
 
 LLL_end();
 
