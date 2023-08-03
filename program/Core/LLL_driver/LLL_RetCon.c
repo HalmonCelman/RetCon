@@ -184,6 +184,7 @@ uint8_t lll_external_mem_read(uint32_t adress){ //todo reading more than 1 byte
 
 
 void lll_init_cache(void){
+    lll_throw_error(f_open(&file[FIL_LOG], LOGFILE ,FA_WRITE | FA_CREATE_ALWAYS),"Failed to create log file",1);
     FRESULT res=f_mkdir(CACHEDIR);
     if(res != FR_EXIST){
         lll_throw_error(res,"FAILED TO INIT CACHE",1);
@@ -197,6 +198,7 @@ void lll_remove_cache(void){
     lll_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",0);
     lll_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",0);
     lll_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",0);
+    lll_throw_error(f_close(&file[FIL_LOG]),"Failed to close log file",0);
     lll_send_info("Cache deleted ",0);
 }
 

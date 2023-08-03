@@ -12,6 +12,7 @@
 #define CACHEDIR "RC"
 #define SLOWMEMFILE CACHEDIR"/rc.mem" //file for slow memory on SD card
 #define LABELFILE CACHEDIR"/rc.lab" //file for labels
+#define LOGFILE "log.txt"
 
 #else
 #define NUMOFFILES 4

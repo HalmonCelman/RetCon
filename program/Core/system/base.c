@@ -37,13 +37,9 @@ void init_fs(void){
 	///end 1
 	///2.mount
 	errc(f_mount(&fs1, "", 0),"MountERR");
-
-	errc(f_open(&file[FIL_LOG], "log.txt",FA_WRITE | FA_CREATE_ALWAYS),"F2E");
 }
 
 void close_fs(void){
-	f_close(&file[FIL_MAIN]);
-	f_close(&file[FIL_LOG]);
 	f_unmount("");
 	///end 2
 }

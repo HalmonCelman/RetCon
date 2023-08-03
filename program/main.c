@@ -38,9 +38,12 @@ init_fs();
 animate("a.am");
 
 LLL_init();
-
+LLL_run("add.l");
+LLL_run("addi.l");
 LLL_run("sub.l");
 LLL_run("subi.l");
+LLL_run("mul.l");
+LLL_run("muli.l");
 
 LLL_end();
 
