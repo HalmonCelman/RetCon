@@ -44,7 +44,15 @@ LLL_run("sub.l");
 LLL_run("subi.l");
 LLL_run("mul.l");
 LLL_run("muli.l");
-
+LLL_run("div.l");
+LLL_run("divi.l");
+LLL_run("and.l");
+LLL_run("andi.l");
+LLL_run("or.l");
+LLL_run("ori.l");
+LLL_run("not.l");
+LLL_run("inc.l");
+LLL_run("dec.l");
 LLL_end();
 
 close_fs();
