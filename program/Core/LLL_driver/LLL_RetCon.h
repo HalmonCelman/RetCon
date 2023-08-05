@@ -73,6 +73,8 @@ void lll_send_info(char*, uint32_t);
 void lll_throw_error(uint8_t,char *,uint8_t);
 void lll_set_label(uint32_t);
 uint64_t lll_get_label(uint32_t);
+void lll_goTo(uint64_t);
+uint64_t lll_getPosition(void);
 //streams
 lll_err lll_stream_out(uint32_t,uint8_t);
 

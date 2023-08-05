@@ -38,6 +38,7 @@ init_fs();
 animate("a.am");
 
 LLL_init();
+/*
 LLL_run("add.l");
 LLL_run("addi.l");
 LLL_run("sub.l");
@@ -53,6 +54,9 @@ LLL_run("ori.l");
 LLL_run("not.l");
 LLL_run("inc.l");
 LLL_run("dec.l");
+*/
+LLL_run("ser.l");
+LLL_run("seri.l");
 LLL_end();
 
 close_fs();

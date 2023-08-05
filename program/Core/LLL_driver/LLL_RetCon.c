@@ -239,6 +239,20 @@ uint64_t lll_get_label(uint32_t labelNumber){
     return labelValue;
 }
 
+void lll_goTo(uint64_t position){
+    #if DEBUG_MODE
+    lll_throw_error(f_lseek(&file[FIL_MAIN],position),"Failed to jump",0);
+    #else
+    f_lseek(&file[FIL_MAIN],position);
+    #endif
+    file_pt[FIL_MAIN].buffCounter=position>>32;
+    file_pt[FIL_MAIN].dCounter=position & 0xFFFF;
+}
+
+uint64_t lll_getPosition(void){
+    return (((uint64_t)file_pt[FIL_MAIN].buffCounter)<<32)+file_pt[FIL_MAIN].dCounter;
+}
+
 // streams
 lll_err lll_stream_out(uint32_t param_num,uint8_t stream_set){
     lll_err inst_err;
