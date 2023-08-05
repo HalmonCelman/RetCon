@@ -54,9 +54,13 @@ LLL_run("ori.l");
 LLL_run("not.l");
 LLL_run("inc.l");
 LLL_run("dec.l");
-*/
 LLL_run("ser.l");
 LLL_run("seri.l");
+LLL_run("jmp.l");
+LLL_run("ret.l");
+*/
+LLL_run("ljmp.l");
+
 LLL_end();
 
 close_fs();
