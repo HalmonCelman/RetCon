@@ -56,10 +56,19 @@ LLL_run("inc.l");
 LLL_run("dec.l");
 LLL_run("ser.l");
 LLL_run("seri.l");
+LLL_run("ljmp.l");
 LLL_run("jmp.l");
 LLL_run("ret.l");
+LLL_run("cmp.l");
+LLL_run("cmpi.l");
 */
-LLL_run("ljmp.l");
+LLL_run("seq.l");
+LLL_run("deq.l");
+LLL_run("slo.l");
+LLL_run("dlo.l");
+LLL_run("sgr.l");
+LLL_run("dgr.l");
+
 
 LLL_end();
 

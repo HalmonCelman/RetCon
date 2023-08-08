@@ -18,6 +18,7 @@ uint8_t lll_init_program(char* source,uint8_t num,uint32_t position){
 #endif
 uint8_t lll_pom=f_open(&file[num],source,FA_READ); //open file in selected file
 lll_last_jump=0;
+lll_skip=0;
 
 if(lll_pom) return lll_pom;
 lll_pom=f_lseek(&file[num],position);
