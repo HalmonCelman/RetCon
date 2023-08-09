@@ -10,6 +10,39 @@ volatile uint8_t lll_physical_read; //says if it's needed to reload buffer - cau
 volatile uint8_t lll_reload_buffer; //says if it's needed to reload buffer - caused change of file
 volatile uint8_t lll_actual_file; //says which file is already used
 
+// streams
+lll_err lll_stream_out(uint32_t first_reg,uint8_t stream_set){
+    lll_err inst_err;
+    inst_err.status=LLL_OK;
+
+    switch(stream_set){
+        case RC_REFRESH:    rc_stream_refresh();                break;
+        case RC_CLEAR:      rc_stream_clear();                  break;
+        case RC_SET_PX:     rc_stream_set_px(first_reg);        break;
+        case RC_CLR_PX:     rc_stream_clr_px(first_reg);        break;
+        case RC_WRITE_CHAR: rc_stream_write_char(first_reg);    break;
+        case RC_SET_TIMER:  rc_stream_set_timer(first_reg);     break;
+        default:
+            inst_err.status=LLL_WRONG_STREAM;
+            inst_err.additional=stream_set;
+    }
+
+    return inst_err;
+}
+
+lll_err lll_stream_in(uint32_t first_reg,uint8_t stream_set){
+    lll_err inst_err;
+    inst_err.status=LLL_OK;
+
+    switch(stream_set){
+        case RC_GET_TIMER:   rc_stream_get_timer(first_reg);    break;
+        default:
+            inst_err.status=LLL_WRONG_STREAM;
+            inst_err.additional=stream_set;
+    }
+
+    return inst_err;
+}
 
 
 uint8_t lll_init_program(char* source,uint8_t num,uint32_t position){
@@ -275,36 +308,3 @@ uint64_t lll_getPosition(void){
     return (((uint64_t)file_pt[FIL_MAIN].buffCounter)<<32)+file_pt[FIL_MAIN].dCounter;
 }
 
-// streams
-lll_err lll_stream_out(uint32_t first_reg,uint8_t stream_set){
-    lll_err inst_err;
-    inst_err.status=LLL_OK;
-
-    switch(stream_set){
-        case RC_REFRESH:
-            rc_stream_refresh();
-        break;
-        
-        case RC_CLEAR:
-            rc_stream_clear();
-        break;
-
-        case RC_SET_PX:
-            rc_stream_set_px(first_reg);
-        break;
-
-        case RC_CLR_PX:
-            rc_stream_clr_px(first_reg);
-        break;
-
-        case RC_WRITE_CHAR:
-            rc_stream_write_char(first_reg);
-        break;
-
-        default:
-            inst_err.status=LLL_WRONG_STREAM;
-            inst_err.additional=stream_set;
-    }
-
-    return inst_err;
-}

@@ -77,5 +77,6 @@ void lll_goTo(uint64_t);
 uint64_t lll_getPosition(void);
 //streams
 lll_err lll_stream_out(uint32_t,uint8_t);
+lll_err lll_stream_in(uint32_t,uint8_t);
 
 #endif // LLL_RETCON_H_INCLUDED

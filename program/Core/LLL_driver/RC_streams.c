@@ -1,6 +1,9 @@
 #include "RC_streams.h"
 #include "LLL_RetCon.h"
+#include <base.h>
 #include <multi_buff.h>
+
+// output stream
 
 
 void rc_stream_refresh(void){
@@ -47,4 +50,27 @@ void rc_stream_write_char(uint32_t first_reg){
         lll_send_info("Write char:",charToWrite);
     #endif
     GLCD_B_WriteChar(charToWrite,p_x,p_y);
+}
+
+void rc_stream_set_timer(uint32_t first_reg){
+    uint16_t timVal=(LLL_load_mem(first_reg)<<8)+LLL_load_mem(first_reg+1);
+    #if DEBUG_MODE
+        lll_send_info("Set timer val: ",timVal);
+    #endif
+    timerDelay=timVal;
+}
+
+
+// input stream
+
+void rc_stream_get_timer(uint32_t first_reg){
+    uint8_t timVal1=(uint8_t)(timerDelay>>8);
+    uint8_t timVal2=(uint8_t)(timerDelay & 0xFF);
+    #if DEBUG_MODE
+        lll_send_info("Get timer val1: ",timVal1);
+        lll_send_info("Get timer val2: ",timVal2);
+    #endif
+    
+    LLL_save_mem(first_reg++,timVal1);
+    LLL_save_mem(first_reg,timVal2);
 }

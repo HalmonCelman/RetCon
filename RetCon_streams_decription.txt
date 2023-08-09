@@ -43,4 +43,9 @@ Write Char on screen(fast but not accurate on y axis - only 8 states)
 -> X axis [0:121]
 -> Y axis [0:7]
 ****************************************************************************
+10. setTimer
+sets timer which decerase every milisecond
+
+-> 16 bits value - two registers
+****************************************************************************
 
