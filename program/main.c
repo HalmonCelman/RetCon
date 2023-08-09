@@ -61,14 +61,14 @@ LLL_run("jmp.l");
 LLL_run("ret.l");
 LLL_run("cmp.l");
 LLL_run("cmpi.l");
-*/
 LLL_run("seq.l");
 LLL_run("deq.l");
 LLL_run("slo.l");
 LLL_run("dlo.l");
 LLL_run("sgr.l");
 LLL_run("dgr.l");
-
+*/
+LLL_run("out.l");
 
 LLL_end();
 

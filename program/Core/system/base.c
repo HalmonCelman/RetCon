@@ -65,17 +65,19 @@ if(counter>=10){ //for 16MHz -> 100Hz
 
 
 uint8_t err(uint8_t result,char * com){
-#if DEBUG_MODE==1
-if(result){
-write_message(com,result);
-}
-#endif // DEBUG_MODE
+	#if SHOW_ON_SCREEN
+		if(result){
+		write_message(com,result);
+		}
+	#endif
 return result;
 }
 
 uint8_t errc(uint8_t result,char * com){
 if(result){
-write_message(com,result);
+	#if SHOW_ON_SCREEN
+		write_message(com,result);
+	#endif
 while(1);
 }
 return result;

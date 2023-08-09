@@ -2,8 +2,10 @@
 #define RC_STREAMS_H
 
 #include <LLL.h>
+#include <config.h>
 
 typedef enum{
+    RC_ERROR,     // throws error
     RC_REFRESH,   // refreshes screen - without it changes will not be visible
     RC_CLEAR,     // clears screen
     RC_SET_PX,    // sets pixel
@@ -13,8 +15,8 @@ typedef enum{
 
 void rc_stream_refresh(void);
 void rc_stream_clear(void);
-void rc_stream_set_px(void);
-void rc_stream_clr_px(void);
-void rc_stream_write_char(void);
+void rc_stream_set_px(uint32_t);
+void rc_stream_clr_px(uint32_t);
+void rc_stream_write_char(uint32_t);
 
 #endif

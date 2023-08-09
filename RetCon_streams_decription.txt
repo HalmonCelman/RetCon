@@ -6,8 +6,8 @@
 
 This file decribes IN and OUT recieved from LLL, and it's functions
 
-Which stream of IN or OUT is used depends on the M flag setting, while sending IN/OUT signal
-for M=
+Which stream of IN or OUT is used depends on the A flag setting, while sending IN/OUT signal
+for A=
 0 - error stream either for IN and OUT
 for OUT:
 ****************************************************************************

@@ -13,7 +13,7 @@ volatile uint8_t lll_actual_file; //says which file is already used
 
 
 uint8_t lll_init_program(char* source,uint8_t num,uint32_t position){
-#if LLL_DEBUG_MODE==1
+#if DEBUG_MODE
     lll_send_info("INFO: opening file ",num);
 #endif
 uint8_t lll_pom=f_open(&file[num],source,FA_READ); //open file in selected file
@@ -28,7 +28,7 @@ for(int i=0;i<NUMOFFILES;i++){
     file_pt[i].command=0; //clear command pointer
     file_pt[i].dCounter=0; // clear dynamic pointer
     }
-#if LLL_DEBUG_MODE==1
+#if DEBUG_MODE
     lll_send_info("INFO: opened succesfully ",0);
 #endif
 lll_actual_file=num; //actual file change
@@ -42,7 +42,7 @@ uint8_t lll_init_main_program(char* source,uint32_t position){
 
 
 uint8_t lll_end_program(uint8_t num){
-#if LLL_DEBUG_MODE==1
+#if DEBUG_MODE==1
     lll_send_info("closing program in: ",num);
 #endif
 return f_close(&file[num]); //close selected file
@@ -89,7 +89,7 @@ uint8_t lll_get(void){
 }
 
 uint8_t lll_disp_char(uint8_t n){
-#if LLL_DEBUG_MODE==1
+#if DEBUG_MODE==1
     lll_send_info("INFO: not yet done ",0);
 #endif
 //todo
@@ -102,15 +102,18 @@ info - information which you want to send up to 255 lenght of info
 value - additional number which will show after info
 */
 void lll_send_info(char* info,uint32_t value){
-
-GLCD_B_ClearScreen();
-GLCD_B_WriteString(info,0,0);
+#if SHOW_ON_SCREEN
+    GLCD_B_ClearScreen();
+    GLCD_B_WriteString(info,0,0);
+#endif
 uint8_t len=0;
 while(*info++){
 len++;
 }
 info-=len+1;
+#if DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],info,len,&s1),"INFOERR",0);
+#endif
 uint8_t val2, val21, val22,hex;
 
 for(int i=0;i<4;i++){ //conversion to hex
@@ -124,8 +127,10 @@ if(val21>=10){
 } else{
     hex=val21+48;
 }
-GLCD_B_WriteChar(hex,i*14,1);
-#if LLL_DEBUG_MODE
+#if SHOW_ON_SCREEN
+    GLCD_B_WriteChar(hex,i*14,1);
+#endif
+#if DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE",0); //CE - conversion error
 #endif
 if(val22>=10){
@@ -133,13 +138,15 @@ hex=val22+'a'-10;
 } else{
 hex=val22+48;
 }
-GLCD_B_WriteChar(hex,6+i*14,1);
-#if LLL_DEBUG_MODE
+#if SHOW_ON_SCREEN
+    GLCD_B_WriteChar(hex,6+i*14,1);
+#endif
+#if DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val22CE",0);
 #endif
 }
 GLCD_r;
-#if LLL_DEBUG_MODE
+#if DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE",0);
 #endif
 }
@@ -187,22 +194,34 @@ uint8_t lll_external_mem_read(uint32_t adress){ //todo reading more than 1 byte
 
 
 void lll_init_cache(void){
-    lll_throw_error(f_open(&file[FIL_LOG], LOGFILE ,FA_WRITE | FA_CREATE_ALWAYS),"Failed to create log file",1);
-    FRESULT res=f_mkdir(CACHEDIR);
-    if(res != FR_EXIST){
-        lll_throw_error(res,"FAILED TO INIT CACHE",1);
-        lll_send_info("Cache initialized ",0);
-    }else{
-        lll_send_info("Cache loaded ",0);
-    }
+    #if DEBUG_MODE
+        lll_throw_error(f_open(&file[FIL_LOG], LOGFILE ,FA_WRITE | FA_CREATE_ALWAYS),"Failed to create log file",1);
+        FRESULT res=f_mkdir(CACHEDIR);
+        if(res != FR_EXIST){
+            lll_throw_error(res,"FAILED TO INIT CACHE",1);
+            lll_send_info("Cache initialized ",0);
+        }else{
+            lll_send_info("Cache loaded ",0);
+        }
+    #else
+        f_open(&file[FIL_LOG], LOGFILE ,FA_WRITE | FA_CREATE_ALWAYS);
+        f_mkdir(CACHEDIR);
+    #endif
 }
 
 void lll_remove_cache(void){
-    lll_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",0);
-    lll_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",0);
-    lll_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",0);
-    lll_throw_error(f_close(&file[FIL_LOG]),"Failed to close log file",0);
-    lll_send_info("Cache deleted ",0);
+    #if DEBUG_MODE
+        lll_throw_error(f_unlink(LABELFILE),"FAILED TO DEL LABELS",0);
+        lll_throw_error(f_unlink(SLOWMEMFILE),"FAILED TO DEL SLOWMEM",0);
+        lll_throw_error(f_unlink(CACHEDIR),"FAILED TO DEL CACHE",0);
+        lll_send_info("Cache deleted ",0);
+        lll_throw_error(f_close(&file[FIL_LOG]),"Failed to close log file",0);
+    #else
+        f_unlink(LABELFILE);
+        f_unlink(SLOWMEMFILE);
+        f_unlink(CACHEDIR);
+        f_close(&file[FIL_LOG]);
+    #endif
 }
 
 #endif
@@ -219,7 +238,7 @@ void lll_set_label(uint32_t labelNumber){
             lll_throw_error(1,"WRONG LABEL NUMBER",0);
         #endif
     }
-    #if LLL_DEBUG_MODE
+    #if DEBUG_MODE
         lll_send_info("Label set ",labelValue);
     #endif
 }
@@ -236,7 +255,7 @@ uint64_t lll_get_label(uint32_t labelNumber){
             lll_throw_error(1,"WRONG LABEL NUMBER",0);
         #endif
     }
-    #if LLL_DEBUG_MODE
+    #if DEBUG_MODE
         lll_send_info("Label get ",labelValue);
     #endif
     return labelValue;
@@ -257,7 +276,7 @@ uint64_t lll_getPosition(void){
 }
 
 // streams
-lll_err lll_stream_out(uint32_t param_num,uint8_t stream_set){
+lll_err lll_stream_out(uint32_t first_reg,uint8_t stream_set){
     lll_err inst_err;
     inst_err.status=LLL_OK;
 
@@ -271,15 +290,15 @@ lll_err lll_stream_out(uint32_t param_num,uint8_t stream_set){
         break;
 
         case RC_SET_PX:
-            rc_stream_set_px();
+            rc_stream_set_px(first_reg);
         break;
 
         case RC_CLR_PX:
-            rc_stream_clr_px();
+            rc_stream_clr_px(first_reg);
         break;
 
         case RC_WRITE_CHAR:
-            rc_stream_write_char();
+            rc_stream_write_char(first_reg);
         break;
 
         default:

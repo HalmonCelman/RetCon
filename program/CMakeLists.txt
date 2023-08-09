@@ -36,6 +36,8 @@ ELSE()
 set(DEBUG_MODE 0)
 ENDIF()
 
+option(SHOW_ON_SCREEN "" 1)
+
 configure_file( config.h.in ${CMAKE_BINARY_DIR}/generated/config.h )
 
 option(USE_FATFS "" ON)
