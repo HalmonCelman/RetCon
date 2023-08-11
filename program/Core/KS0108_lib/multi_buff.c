@@ -94,6 +94,14 @@ void GLCD_B_Rect(uint8_t x,uint8_t y,uint8_t b,uint8_t a){
 	}
 }
 
+void GLCD_B_FillRect(uint8_t x,uint8_t y,uint8_t b,uint8_t a){
+ unsigned char i,j; // zmienna pomocnicza
+  for(i = 0;i < b;i++){
+    for (j = 0; j < a; j++) {
+      GLCD_B_SetPixel(x + i, y + j);
+    }
+  }
+}
 
 void GLCD_B_CinRect(uint8_t x,uint8_t y,uint8_t b,uint8_t a){
  unsigned char i,j;

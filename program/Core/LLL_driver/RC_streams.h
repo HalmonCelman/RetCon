@@ -11,6 +11,8 @@ typedef enum{
     RC_SET_PX,      // sets pixel
     RC_CLR_PX,      // clears pixel
     RC_WRITE_CHAR,  // writes char
+    RC_STROKE_RECT,
+    RC_FILL_RECT,
     RC_SET_TIMER=10 
 } RETCON_STREAMS_OUT;
 
@@ -26,7 +28,8 @@ void rc_stream_set_px(uint32_t);
 void rc_stream_clr_px(uint32_t);
 void rc_stream_write_char(uint32_t);
 void rc_stream_set_timer(uint32_t);
-
+void rc_stream_stroke_rect(uint32_t);
+void rc_stream_fill_rect(uint32_t);
 
 //in
 void rc_stream_get_timer(uint32_t);

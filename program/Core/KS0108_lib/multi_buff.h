@@ -14,6 +14,7 @@ void GLCD_B_WriteString(char*,unsigned char,unsigned char);
 void GLCD_B_WriteStringAcc(char*,unsigned char,unsigned char);
 void GLCD_B_Circle(unsigned char, unsigned char,unsigned char);
 void GLCD_B_Rect(uint8_t, uint8_t, uint8_t, uint8_t);
+void GLCD_B_FillRect(uint8_t,uint8_t,uint8_t,uint8_t);
 void GLCD_B_CinRect(uint8_t, uint8_t, uint8_t, uint8_t);
 
 #define GLCD_r bufferSwitch=1;while(bufferSwitch)

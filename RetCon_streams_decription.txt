@@ -43,6 +43,24 @@ Write Char on screen(fast but not accurate on y axis - only 8 states)
 -> X axis [0:121]
 -> Y axis [0:7]
 ****************************************************************************
+6.Stroke Rect
+Draws a rectangle which isn't filled inside
+
+	4 parameters
+-> X start axis [0:127]
+-> Y start axis [0:63]
+-> X length
+-> Y length
+****************************************************************************
+6.Fill Rect
+Draws a rectangle which is filled inside
+
+	4 parameters
+-> X start axis [0:127]
+-> Y start axis [0:63]
+-> X length
+-> Y length
+****************************************************************************
 10. setTimer
 sets timer which decerase every milisecond
 

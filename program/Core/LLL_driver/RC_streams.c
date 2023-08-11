@@ -61,6 +61,40 @@ void rc_stream_set_timer(uint32_t first_reg){
 }
 
 
+void rc_stream_stroke_rect(uint32_t first_reg){
+    uint8_t x,y,xw,yw;
+    x=LLL_load_mem(first_reg++);
+    y=LLL_load_mem(first_reg++);
+    xw=LLL_load_mem(first_reg++);
+    yw=LLL_load_mem(first_reg);
+
+    #if DEBUG_MODE
+        lll_send_info("Stroke Rect x:",x);
+        lll_send_info("Stroke Rect y:",y);
+        lll_send_info("Stroke Rect x width:",xw);
+        lll_send_info("Stroke Rect y width:",yw);
+    #endif
+
+    GLCD_B_Rect(x,y,xw,yw);
+}
+
+void rc_stream_fill_rect(uint32_t first_reg){
+    uint8_t x,y,xw,yw;
+    x=LLL_load_mem(first_reg++);
+    y=LLL_load_mem(first_reg++);
+    xw=LLL_load_mem(first_reg++);
+    yw=LLL_load_mem(first_reg);
+
+    #if DEBUG_MODE
+        lll_send_info("Fill Rect x:",x);
+        lll_send_info("Fill Rect y:",y);
+        lll_send_info("Fill Rect x width:",xw);
+        lll_send_info("Fill Rect y width:",yw);
+    #endif
+
+    GLCD_B_FillRect(x,y,xw,yw);
+}
+
 // input stream
 
 void rc_stream_get_timer(uint32_t first_reg){

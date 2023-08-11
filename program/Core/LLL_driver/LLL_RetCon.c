@@ -22,6 +22,8 @@ lll_err lll_stream_out(uint32_t first_reg,uint8_t stream_set){
         case RC_CLR_PX:     rc_stream_clr_px(first_reg);        break;
         case RC_WRITE_CHAR: rc_stream_write_char(first_reg);    break;
         case RC_SET_TIMER:  rc_stream_set_timer(first_reg);     break;
+        case RC_STROKE_RECT:rc_stream_stroke_rect(first_reg);   break;
+        case RC_FILL_RECT:  rc_stream_fill_rect(first_reg);     break;
         default:
             inst_err.status=LLL_WRONG_STREAM;
             inst_err.additional=stream_set;
