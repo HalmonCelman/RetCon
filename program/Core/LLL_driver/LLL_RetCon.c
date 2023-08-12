@@ -9,6 +9,8 @@ lll_pt file_pt[NUMOFFILES];
 volatile uint8_t lll_physical_read; //says if it's needed to reload buffer - caused end of buffer
 volatile uint8_t lll_reload_buffer; //says if it's needed to reload buffer - caused change of file
 volatile uint8_t lll_actual_file; //says which file is already used
+volatile uint8_t lll_eof; //says which file is already used
+static uint8_t lll_label_set;
 
 // streams
 lll_err lll_stream_out(uint32_t first_reg,uint8_t stream_set){
@@ -54,6 +56,12 @@ uint8_t lll_init_program(char* source,uint8_t num,uint32_t position){
 uint8_t lll_pom=f_open(&file[num],source,FA_READ); //open file in selected file
 lll_last_jump=0;
 lll_skip=0;
+lll_eof=0;
+
+for(uint8_t i=0;i<LLL_LABEL_NUMBER;i++){
+    LLL_LABEL[i]=0;
+}
+
 
 if(lll_pom) return lll_pom;
 lll_pom=f_lseek(&file[num],position);
@@ -102,6 +110,7 @@ uint8_t lll_get(void){
         f_read(&file[lll_actual_file],LLL_COMM_BUFF,LLL_COMM_BUFF_SIZE,&s1);
         if(s1<LLL_COMM_BUFF_SIZE){
             LLL_COMM_BUFF[s1]=0xFF; //reached EOF
+            lll_eof=1;
         }
         if(lll_physical_read){
             lll_physical_read = 0;
@@ -115,10 +124,6 @@ uint8_t lll_get(void){
 
     }
     uint8_t lll_pom = LLL_COMM_BUFF[file_pt[lll_actual_file].dCounter++];
-
-    #if DEBUG_MODE==1
-        lll_send_info("INFO: lll_get() ",lll_pom);
-    #endif
 
     return lll_pom;
 }
@@ -146,7 +151,7 @@ while(*info++){
 len++;
 }
 info-=len+1;
-#if DEBUG_MODE
+#if DEBUG_MODE || LLL_DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],info,len,&s1),"INFOERR",0);
 #endif
 uint8_t val2, val21, val22,hex;
@@ -165,7 +170,7 @@ if(val21>=10){
 #if SHOW_ON_SCREEN
     GLCD_B_WriteChar(hex,i*14,1);
 #endif
-#if DEBUG_MODE
+#if DEBUG_MODE || LLL_DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val21CE",0); //CE - conversion error
 #endif
 if(val22>=10){
@@ -175,13 +180,13 @@ hex=val22+48;
 }
 #if SHOW_ON_SCREEN
     GLCD_B_WriteChar(hex,6+i*14,1);
+    GLCD_r;
 #endif
-#if DEBUG_MODE
+#if DEBUG_MODE || LLL_DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],&hex,1,&s1),"val22CE",0);
 #endif
 }
-GLCD_r;
-#if DEBUG_MODE
+#if DEBUG_MODE || LLL_DEBUG_MODE
 lll_throw_error(f_write(&file[FIL_LOG],"\n",1,&s1),"nCE",0);
 #endif
 }
@@ -276,19 +281,32 @@ void lll_set_label(uint32_t labelNumber){
     #if DEBUG_MODE
         lll_send_info("Label set ",labelValue);
     #endif
+    lll_label_set=1;
 }
 
 uint64_t lll_get_label(uint32_t labelNumber){
+    lll_label_set=0;
     uint64_t labelValue=0;
+
     if(labelNumber<LLL_LABEL_NUMBER){
         labelValue=LLL_LABEL[labelNumber];
     }else{
         #if LLL_USE_EXTERNAL_MEMORY
-            lll_throw_error(f_lseek(&file[FIL_LABELS],(labelNumber-LLL_LABEL_NUMBER)*4),"Cannot lseek read label",0);
-            lll_throw_error(f_read(&file[FIL_LABELS],&labelValue,4,&s1),"Cannot read label",0);
+            f_lseek(&file[FIL_LABELS],(labelNumber-LLL_LABEL_NUMBER)*4);
+            f_read(&file[FIL_LABELS],&labelValue,4,&s1);
         #else
             lll_throw_error(1,"WRONG LABEL NUMBER",0);
         #endif
+    }
+
+    if(!labelValue){
+        lll_skip=1;
+        LLL_exec();
+        while(!lll_label_set){
+            lll_skip=1;
+            LLL_exec();
+        }
+        return lll_get_label(labelNumber);       
     }
     #if DEBUG_MODE
         lll_send_info("Label get ",labelValue);
