@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name Blue)(type KiCad)(uri ${KIPRJMOD}/Niebieski.pretty)(options "")(descr ""))
-)
