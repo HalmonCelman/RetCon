@@ -1,4 +1,0 @@
-(sym_lib_table
-  (lib (name Device)(type Legacy)(uri ${KIPRJMOD}/Device.lib)(options "")(descr ""))
-  (lib (name SD)(type Legacy)(uri ${KIPRJMOD}/SD.lib)(options "")(descr ""))
-)
