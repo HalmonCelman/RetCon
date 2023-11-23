@@ -1,3 +1,8 @@
 (fp_lib_table
-  (lib (name Blue)(type KiCad)(uri ${KIPRJMOD}/Niebieski.pretty)(options "")(descr ""))
+  (version 7)
+  (lib (name "Blue")(type "KiCad")(uri "${KIPRJMOD}/Niebieski.pretty")(options "")(descr ""))
+  (lib (name "joystick")(type "KiCad")(uri "${KIPRJMOD}/joystick/joystick.pretty")(options "")(descr ""))
+  (lib (name "buttons")(type "KiCad")(uri "${KIPRJMOD}/buttons.pretty")(options "")(descr ""))
+  (lib (name "Holes")(type "KiCad")(uri "${KIPRJMOD}/Holes.pretty")(options "")(descr ""))
+  (lib (name "USB")(type "KiCad")(uri "${KIPRJMOD}/USB.pretty")(options "")(descr ""))
 )
