@@ -30,6 +30,7 @@ fp-info-cache
 *.hex
 *.elf
 
+*.zip
 #cmake
 
 CMakeLists.txt.user
@@ -49,3 +50,4 @@ _deps
 .vscode/
 schemat-backups/
 adapter-backups/
+Gerber

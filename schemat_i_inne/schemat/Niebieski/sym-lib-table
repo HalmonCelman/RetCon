@@ -1,5 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "USBasp")(type "Legacy")(uri "${KIPRJMOD}/USBasp.lib")(options "")(descr ""))
-  (lib (name "sd")(type "KiCad")(uri "${KIPRJMOD}/sd.kicad_sym")(options "")(descr ""))
-)

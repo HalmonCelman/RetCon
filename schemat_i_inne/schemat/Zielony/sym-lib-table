@@ -1,4 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "schemat_dip40-rescue")(type "KiCad")(uri "${KIPRJMOD}/schemat_dip40-rescue.kicad_sym")(options "")(descr ""))
-)
