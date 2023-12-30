@@ -17,8 +17,8 @@
 #include "mmc_avr.h"
 
 /* Peripheral controls (Platform dependent) */
-#define CS_LOW()		PORTA&=~(1<<CS)	/* Set MMC_CS = low */
-#define	CS_HIGH()		PORTA|=(1<<CS)	/* Set MMC_CS = high */
+#define CS_LOW()		PORTB&=~(1<<CS)	/* Set MMC_CS = low */
+#define	CS_HIGH()		PORTB|=(1<<CS)	/* Set MMC_CS = high */
 #define MMC_CD			1	/* Test if card detected.   yes:true, no:false, default:true */
 #define MMC_WP			0	/* Test if write protected. yes:true, no:false, default:false */
 #define	FCLK_SLOW()			/* Set SPI clock for initialization (100-400kHz) */

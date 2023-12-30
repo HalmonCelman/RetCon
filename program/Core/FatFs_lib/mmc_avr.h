@@ -11,8 +11,7 @@
 #define SCK 7
 #define MISO 6
 #define MOSI 5
-#define CS 0 //PORTA
-
+#define CS 4 
 
 
 #ifdef __cplusplus

@@ -1,1 +1,1 @@
-cd build;cmake .. -DCMAKE_BUILD_TYPE=Release -DSHOW_ON_SCREEN=0
+cd build;cmake .. -DCMAKE_BUILD_TYPE=Debug -DSHOW_ON_SCREEN=1
