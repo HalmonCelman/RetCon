@@ -1,3 +1,5 @@
+#include "graphic.h"
+
 extern void GLCD_SetPixel(unsigned char x, unsigned char y, unsigned char color);
 
 const unsigned char color = 1;
@@ -55,51 +57,51 @@ int CurrentX, CurrentY, Xinc, Yinc,
     Dx, Dy, TwoDx, TwoDy, 
 	TwoDxAccumulatedError, TwoDyAccumulatedError;
 
-Dx = (X2-X1); // obliczenie sk³adowej poziomej
-Dy = (Y2-Y1); // obliczenie sk³adowej pionowej
+Dx = (X2-X1); // obliczenie skï¿½adowej poziomej
+Dy = (Y2-Y1); // obliczenie skï¿½adowej pionowej
 
-TwoDx = Dx + Dx; // podwojona sk³adowa pozioma
-TwoDy = Dy + Dy; // podwojona sk³adowa pionowa
+TwoDx = Dx + Dx; // podwojona skï¿½adowa pozioma
+TwoDy = Dy + Dy; // podwojona skï¿½adowa pionowa
 
 CurrentX = X1; // zaczynamy od X1
 CurrentY = Y1; // oraz Y1
 
-Xinc = 1; // ustalamy krok zwiêkszania pozycji w poziomie 
-Yinc = 1; // ustalamy krok zwiêkszania pozycji w pionie
+Xinc = 1; // ustalamy krok zwiï¿½kszania pozycji w poziomie 
+Yinc = 1; // ustalamy krok zwiï¿½kszania pozycji w pionie
 
-if(Dx < 0) // jesli sk³adowa pozioma jest ujemna 
+if(Dx < 0) // jesli skï¿½adowa pozioma jest ujemna 
   {
-  Xinc = -1; // to bêdziemy siê "cofaæ" (krok ujemny)
-  Dx = -Dx;  // zmieniamy znak sk³adowej na dodatni
-  TwoDx = -TwoDx; // jak równie¿ podwojonej sk³adowej
+  Xinc = -1; // to bï¿½dziemy siï¿½ "cofaï¿½" (krok ujemny)
+  Dx = -Dx;  // zmieniamy znak skï¿½adowej na dodatni
+  TwoDx = -TwoDx; // jak rï¿½wnieï¿½ podwojonej skï¿½adowej
   }
 
-if (Dy < 0) // jeœli sk³adowa pionowa jest ujemna
+if (Dy < 0) // jeï¿½li skï¿½adowa pionowa jest ujemna
   {
-  Yinc = -1; // to bêdziemy siê "cofaæ" (krok ujemny)
-  Dy = -Dy; // zmieniamy znak sk³adowej na dodatki
-  TwoDy = -TwoDy; // jak równiez podwojonej sk³adowej
+  Yinc = -1; // to bï¿½dziemy siï¿½ "cofaï¿½" (krok ujemny)
+  Dy = -Dy; // zmieniamy znak skï¿½adowej na dodatki
+  TwoDy = -TwoDy; // jak rï¿½wniez podwojonej skï¿½adowej
   }
 
 GLCD_SetPixel(X1,Y1, color); // stawiamy pierwszy krok (zapalamy pierwszy piksel)
 
-if ((Dx != 0) || (Dy != 0)) // sprawdzamy czy linia sk³ada siê z wiêcej ni¿ jednego punktu ;)
+if ((Dx != 0) || (Dy != 0)) // sprawdzamy czy linia skï¿½ada siï¿½ z wiï¿½cej niï¿½ jednego punktu ;)
   {
-  // sprawdzamy czy sk³adowa pionowa jest mniejsza lub równa sk³adowej poziomej
-  if (Dy <= Dx) // jeœli tak, to idziemy "po iksach"
+  // sprawdzamy czy skï¿½adowa pionowa jest mniejsza lub rï¿½wna skï¿½adowej poziomej
+  if (Dy <= Dx) // jeï¿½li tak, to idziemy "po iksach"
     { 
-    TwoDxAccumulatedError = 0; // zerujemy zmienn¹ 
-    do // ruszamy w drogê
+    TwoDxAccumulatedError = 0; // zerujemy zmiennï¿½ 
+    do // ruszamy w drogï¿½
 	  {
       CurrentX += Xinc; // do aktualnej pozycji dodajemy krok 
-      TwoDxAccumulatedError += TwoDy; // a tu dodajemy podwojon¹ sk³adow¹ pionow¹
-      if(TwoDxAccumulatedError > Dx)  // jeœli TwoDxAccumulatedError jest wiêkszy od Dx
+      TwoDxAccumulatedError += TwoDy; // a tu dodajemy podwojonï¿½ skï¿½adowï¿½ pionowï¿½
+      if(TwoDxAccumulatedError > Dx)  // jeï¿½li TwoDxAccumulatedError jest wiï¿½kszy od Dx
         {
-        CurrentY += Yinc; // zwiêkszamy aktualn¹ pozycjê w pionie
+        CurrentY += Yinc; // zwiï¿½kszamy aktualnï¿½ pozycjï¿½ w pionie
         TwoDxAccumulatedError -= TwoDx; // i odejmujemy TwoDx
         }
-       GLCD_SetPixel(CurrentX,CurrentY, color);// stawiamy nastêpny krok (zapalamy piksel)
-       }while (CurrentX != X2); // idziemy tak d³ugo, a¿ osi¹gniemy punkt docelowy
+       GLCD_SetPixel(CurrentX,CurrentY, color);// stawiamy nastï¿½pny krok (zapalamy piksel)
+       }while (CurrentX != X2); // idziemy tak dï¿½ugo, aï¿½ osiï¿½gniemy punkt docelowy
      }
    else // w przeciwnym razie idziemy "po igrekach" 
       {

@@ -51,3 +51,5 @@ _deps
 schemat-backups/
 adapter-backups/
 Gerber
+
+*.l

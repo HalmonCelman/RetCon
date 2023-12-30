@@ -37,11 +37,11 @@ init_fs();
 
 animate("a.am");
 
-//LLL_init();
+LLL_init();
 
-//LLL_run("snake/main.l");
+LLL_run("program.l");
 
-//LLL_end();
+LLL_end();
 
 close_fs();
 
