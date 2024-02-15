@@ -36,7 +36,7 @@ ELSE()
 set(DEBUG_MODE 0)
 ENDIF()
 
-option(SHOW_ON_SCREEN "" 1)
+option(SHOW_ON_SCREEN "" 0)
 
 configure_file( config.h.in ${CMAKE_BINARY_DIR}/generated/config.h )
 

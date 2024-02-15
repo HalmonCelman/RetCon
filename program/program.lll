@@ -1,5 +1,21 @@
 # some simple program to test if LLL is working on RetCon
-mov r0, @1
-mov r1, @2
+mov r0, @0
+mov r1, @0
+mov r2, @4
+mov r3, @4
 
-add r2,r0,r1
+mov r5, @0
+
+:infloop
+    # manage
+    inc r0
+    cmp r0 @124    # 124 = 128 (screen width) - 4 (rect width)
+    movrc r0 @0     # clear r0 if equal
+
+    # draw
+    out @0 2    # clr screen
+    out r3-r0 7 # fill rect
+    out @0 1    # refresh
+frjmp :infloop 0
+
+# note: exitrc to correction

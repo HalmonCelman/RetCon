@@ -8,7 +8,7 @@
 
 // config section
 #define LLL_COMM_BUFF_SIZE 128
-
+#define LLL_STREAM_PARAMS 4         // maximum value of stream values
 #define LOGFILE "logs.txt"
 // * end of config section *
 
@@ -48,7 +48,7 @@ typedef struct{
  ///tables
 extern FIL file[NUMOFFILES];
 extern lll_pt file_pt[NUMOFFILES]; 
-
+extern uint8_t stream_params[LLL_STREAM_PARAMS];
 #if LLL_USE_EXTERNAL_MEMORY
     void lll_init_external_memory(void);
     void lll_external_mem_write(uint32_t,uint8_t);

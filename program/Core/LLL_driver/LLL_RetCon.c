@@ -12,6 +12,40 @@ extern BYTE res;
 extern uint8_t errc(uint8_t,char*);
 extern uint8_t err(uint8_t,char*);
 
+uint8_t stream_params[LLL_STREAM_PARAMS];
+uint8_t param_counter = 0;
+uint8_t last_stream = 255;
+
+const uint8_t lll_stream_out_value_num[]={
+    1,  // Error
+    1,  // Refresh screen
+    1,  // Clear buffer
+    2,  // SetPixel
+    2,  // ClearPixel
+    3,  // writeChar
+    4,  // StrokeRect
+    4,  // Fill Rect
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    2   // setTimer
+};
+
+const uint8_t lll_stream_in_value_num[]={
+    1,  // Error
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    2   // getTimer
+};
+
 
 FIL file[NUMOFFILES];
 lll_pt file_pt[NUMOFFILES];
@@ -258,10 +292,47 @@ lll_err lll_stream_out(uint8_t data,uint8_t stream){
     lll_err inst_err;
     inst_err.status=LLL_OK;
 
-    switch(stream){
-        default:
-            inst_err.status=LLL_WRONG_STREAM;
-            inst_err.additional=stream;
+    if(stream == last_stream){
+        stream_params[param_counter++] = data;
+    }else{
+        last_stream = stream;
+        stream_params[0] = data;
+        param_counter = 1;
+    }
+
+    if(param_counter == lll_stream_out_value_num[stream]){
+        param_counter = 0;
+        switch(stream){
+            case 1:
+                rc_stream_refresh();
+                break;
+            case 2:
+                rc_stream_clear();
+                break;
+            case 3:
+                rc_stream_set_px();
+                break;
+            case 4:
+                rc_stream_clr_px();
+                break;
+            case 5:
+                rc_stream_write_char();
+                break;
+            case 6:
+                rc_stream_stroke_rect();
+                break;
+            case 7:
+                rc_stream_fill_rect();
+                break;
+
+            case 10:
+                rc_stream_set_timer();
+                break;
+            
+            default:
+                inst_err.status=LLL_WRONG_STREAM;
+                inst_err.additional=stream;
+        }
     }
 
     return inst_err;
