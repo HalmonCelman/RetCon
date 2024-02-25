@@ -8,8 +8,9 @@
 #include <config.h>
 
 uint8_t pointMenu;
-unsigned char counter;
-volatile int timerDelay;
+uint8_t counter;
+volatile uint16_t timerDelay;
+volatile uint16_t timerValue;
 uint8_t res;
 UINT s1;
 FATFS fs1;
@@ -46,6 +47,7 @@ void close_fs(void){
 
 ISR(TIMER0_COMPA_vect){
 counter++;
+if(timerValue) timerValue--; //timer for set and getTimer streams
 if(timerDelay) timerDelay--; //accurate delay
 if(counter>=10){ //for 16MHz -> 100Hz
     mmc_disk_timerproc(); //for FatFS
@@ -89,61 +91,4 @@ void write_message(char * message,uint8_t number){
 	GLCD_B_WriteChar((char)(number+48),0,1);
 	GLCD_r;
 	delay(100);
-}
-void play(void){
-//TBD
-}
-
-
-void minilook(void){
-//TBD
-}
-
-void load_games_menu(void){
-GLCD_B_CinRect(0,22,63,42);
-GLCD_B_WriteStringAcc("snake",10,27-((pointMenu==1 || pointMenu==2)?3:0));
-GLCD_B_WriteStringAcc("slimon",10,43-((pointMenu==1)?3:0)-((pointMenu==2)?7:0));
-GLCD_B_WriteStringAcc("saper",10,55-((pointMenu==2)?3:0));
-
-for (int j = 0; j < 52; j++)	{
-		GLCD_B_SetPixel(6 + j, 23+R);
-		GLCD_B_SetPixel(6 + j, 37+R);
-	}
-
-	GLCD_B_SetPixel(6, 24+R); //kropki
-	GLCD_B_SetPixel(57, 24+R);
-	GLCD_B_SetPixel(6, 36+R);
-	GLCD_B_SetPixel(57, 36+R);
-
-	GLCD_B_Rect(2,25+R,60,11); //obwod
-
-	//strzalki
-	GLCD_B_SetPixel(0, 30+R); //lewa
-	GLCD_B_SetPixel(1, 30+R);
-	GLCD_B_SetPixel(3, 30+R);
-	GLCD_B_SetPixel(4, 30+R);
-	GLCD_B_SetPixel(5, 30+R);
-	GLCD_B_SetPixel(6, 30+R);
-	GLCD_B_SetPixel(5, 29+R);
-	GLCD_B_SetPixel(5, 31+R);
-	GLCD_B_SetPixel(4, 29+R);
-	GLCD_B_SetPixel(4, 28+R);
-	GLCD_B_SetPixel(4, 31+R);
-	GLCD_B_SetPixel(4, 32+R);
-
-    GLCD_B_SetPixel(63, 30+R); //prawa
-	GLCD_B_SetPixel(62, 30+R);
-	GLCD_B_SetPixel(60, 30+R);
-	GLCD_B_SetPixel(59, 30+R);
-	GLCD_B_SetPixel(58, 30+R);
-	GLCD_B_SetPixel(57, 30+R);
-	GLCD_B_SetPixel(58, 29+R);
-	GLCD_B_SetPixel(58, 31+R);
-	GLCD_B_SetPixel(59, 29+R);
-	GLCD_B_SetPixel(59, 28+R);
-	GLCD_B_SetPixel(59, 31+R);
-	GLCD_B_SetPixel(59, 32+R);
-
-minilook();
-
 }

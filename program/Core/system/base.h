@@ -10,7 +10,8 @@
 
 extern uint8_t pointMenu;
 extern unsigned char counter;
-extern volatile int timerDelay;
+extern volatile uint16_t timerDelay;
+extern volatile uint16_t timerValue;
 extern uint8_t res;
 extern UINT s1;
 extern FATFS fs1;

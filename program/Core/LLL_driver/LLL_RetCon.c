@@ -16,6 +16,39 @@ uint8_t stream_params[LLL_STREAM_PARAMS];
 uint8_t param_counter = 0;
 uint8_t last_stream = 255;
 
+typedef void (* streamout_p)(void);
+typedef uint8_t (* streamin_p)(void);
+
+// stream config section
+
+const streamout_p lll_stream_out_func[]={
+    rc_stream_error,  // Error
+    rc_stream_refresh,  // Refresh screen
+    rc_stream_clear,  // Clear buffer
+    rc_stream_set_px,  // SetPixel
+    rc_stream_clr_px,  // ClearPixel
+    rc_stream_write_char,  // writeChar
+    rc_stream_stroke_rect,  // StrokeRect
+    rc_stream_fill_rect,  // Fill Rect
+    0,  // Not Used
+    0,  // Not Used
+    rc_stream_set_timer   // setTimer
+};
+
+const streamin_p lll_stream_in_func[]={
+    rc_stream_error_in,  // Error
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    0,  // Not Used
+    rc_stream_get_timer   // getTimer
+};
+
 const uint8_t lll_stream_out_value_num[]={
     1,  // Error
     1,  // Refresh screen
@@ -25,7 +58,6 @@ const uint8_t lll_stream_out_value_num[]={
     3,  // writeChar
     4,  // StrokeRect
     4,  // Fill Rect
-    0,  // Not Used
     0,  // Not Used
     0,  // Not Used
     2   // setTimer
@@ -42,10 +74,10 @@ const uint8_t lll_stream_in_value_num[]={
     0,  // Not Used
     0,  // Not Used
     0,  // Not Used
-    0,  // Not Used
     2   // getTimer
 };
 
+// end of section
 
 FIL file[NUMOFFILES];
 lll_pt file_pt[NUMOFFILES];
@@ -302,37 +334,7 @@ lll_err lll_stream_out(uint8_t data,uint8_t stream){
 
     if(param_counter == lll_stream_out_value_num[stream]){
         param_counter = 0;
-        switch(stream){
-            case 1:
-                rc_stream_refresh();
-                break;
-            case 2:
-                rc_stream_clear();
-                break;
-            case 3:
-                rc_stream_set_px();
-                break;
-            case 4:
-                rc_stream_clr_px();
-                break;
-            case 5:
-                rc_stream_write_char();
-                break;
-            case 6:
-                rc_stream_stroke_rect();
-                break;
-            case 7:
-                rc_stream_fill_rect();
-                break;
-
-            case 10:
-                rc_stream_set_timer();
-                break;
-            
-            default:
-                inst_err.status=LLL_WRONG_STREAM;
-                inst_err.additional=stream;
-        }
+        lll_stream_out_func[stream]();
     }
 
     return inst_err;
@@ -342,11 +344,7 @@ lll_err lll_stream_in(uint8_t * data,uint8_t stream){
     lll_err inst_err;
     inst_err.status=LLL_OK;
 
-    switch(stream){
-        default:
-            inst_err.status=LLL_WRONG_STREAM;
-            inst_err.additional=stream;
-    }
+    *data = lll_stream_in_func[stream]();
 
     return inst_err;
 }

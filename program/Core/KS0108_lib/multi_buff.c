@@ -29,7 +29,7 @@ GLCD_Buffer[(y/8)*128+x]=tmp;
 }
 
 void GLCD_B_WriteChar(char charToWrite,unsigned char x, unsigned char y)
-{
+{ // sth not working here
 uint8_t i;
 int wsp;
 charToWrite -= 32;

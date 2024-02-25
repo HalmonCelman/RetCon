@@ -38,7 +38,7 @@
 > > - Y axis [0:63]
 >
 > ### 5. WriteChar
-> > Write Char on screen
+> > Write Char on screen, x and y indicates position of top left pixel of letter, letters size are 5x7 
 > > 
 > >  3 values
 > > - X axis [0:121]
@@ -63,8 +63,51 @@
 > >  - X length
 > >  - Y length
 > 
+> ### 8. Beep
+> > Beep with buzzer for up to 655536 ms (this don't stop program from execuitng)
+> >
+> > 2 values
+> > - 16 bits value
+> ### 9. Delay - in miliseconds
+> > Stop executing anything for up to 65535 ms
+> >
+> > 2 values
+> > - 16 bits value
+> >
 > ### 10. setTimer
-> > sets timer which decerase every milisecond
+> > sets timer which decerase every milisecond and stops at 0
+> >
+> >  2 values
+> >  - 16 bits value
+
+## for IN:
+
+> ### 0. Error Stream
+> > Check if any error exist, if yes get his number
+> > 
+> > 1 value
+> > - error number
+> >
+> ### 1. get 1-0 buttons value
+> > if button is pressed, at its position 1 is set, for positions see buttons.pdf
+> >
+> > 1 value
+> > - bits for all buttons
+> >
+> ### 2. get analog 1 value
+> > 
+> > gets value from left analog
+> > 
+> > - 1 value
+> >
+> ### 3. get analog 1 value
+> > 
+> > gets value from right analog
+> > 
+> > - 1 value
+>
+> ### 10. getTimer
+> > gets timer value
 > >
 > >  2 values
 > >  - 16 bits value
