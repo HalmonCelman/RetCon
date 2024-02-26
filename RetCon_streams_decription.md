@@ -65,10 +65,13 @@
 > >  - Y length
 > 
 > ### 8. Beep
-> > Beep with buzzer for up to 655536 ms (this don't stop program from execuitng)
+> > Beep with buzzer for up to 255 ms (this don't stop program from execuitng)
 > >
-> > 2 values
-> > - 16 bits value
+> > *believe me you don't want to turn this buzzer for longer time,
+> >  but chill, in the RetCon v1.1 you should be able to play some music with it*
+> >
+> > 1 value
+> > - time of beeping
 > ### 9. Delay - in miliseconds
 > > Stop executing anything for up to 65535 ms
 > >

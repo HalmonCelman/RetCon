@@ -21,4 +21,6 @@ void key_init(void){
 
     // buzzer as output
     DDR(BUZZ_PORT) |= (1<<BUZZ_PIN);
+    // default off
+    PORT(BUZZ_PORT) &=~ (1<<BUZZ_PIN);
 }

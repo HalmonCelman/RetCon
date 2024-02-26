@@ -6,21 +6,30 @@
 #include <mmc_avr.h>
 #include <LLL_RetCon.h>
 #include <config.h>
+#include <RetCon_config.h>
 
 uint8_t pointMenu;
 uint8_t counter;
+volatile uint8_t beepCounter;
 volatile uint16_t timerDelay;
 volatile uint16_t timerValue;
 uint8_t res;
 UINT s1;
 FATFS fs1;
 
+/*
+turns on buzzer with generator,
+set until beep counter reaches 0, or if it is already zero until beepOff()
+*/
 void beepOn(void){
-	
+	PORT(BUZZ_PORT) |= (1<<BUZZ_PIN);
 }
 
-void beepOff(void){
-
+/*
+turns off buzzer
+*/
+static void beepOff(void){
+	PORT(BUZZ_PORT) &=~ (1<<BUZZ_PIN);
 }
 
 void init_buffering(void){
@@ -52,6 +61,12 @@ void close_fs(void){
 
 ISR(TIMER0_COMPA_vect){
 counter++;
+if(beepCounter){
+	beepCounter--;
+	if(!beepCounter){
+		beepOff();
+	}
+} 
 if(timerValue) timerValue--; //timer for set and getTimer streams
 if(timerDelay) timerDelay--; //accurate delay
 if(counter>=10){ //for 16MHz -> 100Hz

@@ -37,11 +37,12 @@ void rc_stream_fill_rect(void){
 }
 
 void rc_stream_beep(void){
-    
+    beepOn();
+    beepCounter=stream_params[0];
 }
 
 void rc_stream_delay(void){
-
+    delay((uint16_t)stream_params[0] + (uint16_t)(stream_params[1]<<8));
 }
 
 void rc_stream_set_timer(void){
@@ -50,6 +51,18 @@ void rc_stream_set_timer(void){
 
 
 //in
+uint8_t rc_stream_10_val(void){
+    return 0;
+}
+
+uint8_t rc_analog1_val(void){
+    return 0;
+}
+
+uint8_t rc_analog2_val(void){
+    return 0;
+}
+
 uint8_t rc_stream_get_timer(void){
     static uint8_t cnt=0;   // internal counter
     if(cnt){

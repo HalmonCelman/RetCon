@@ -22,31 +22,31 @@ typedef uint8_t (* streamin_p)(void);
 // stream config section
 
 const streamout_p lll_stream_out_func[]={
-    rc_stream_error,  // Error
-    rc_stream_refresh,  // Refresh screen
-    rc_stream_clear,  // Clear buffer
-    rc_stream_set_px,  // SetPixel
-    rc_stream_clr_px,  // ClearPixel
-    rc_stream_write_char,  // writeChar
+    rc_stream_error,        // Error
+    rc_stream_refresh,      // Refresh screen
+    rc_stream_clear,        // Clear buffer
+    rc_stream_set_px,       // SetPixel
+    rc_stream_clr_px,       // ClearPixel
+    rc_stream_write_char,   // writeChar
     rc_stream_stroke_rect,  // StrokeRect
-    rc_stream_fill_rect,  // Fill Rect
-    0,  // Not Used
-    0,  // Not Used
-    rc_stream_set_timer   // setTimer
+    rc_stream_fill_rect,    // Fill Rect
+    rc_stream_beep,         // Beep
+    rc_stream_delay,        // Delay
+    rc_stream_set_timer     // setTimer
 };
 
 const streamin_p lll_stream_in_func[]={
-    rc_stream_error_in,  // Error
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
-    rc_stream_get_timer   // getTimer
+    rc_stream_error_in,     // Error
+    rc_stream_10_val,       // get 1-0 buttons value
+    rc_analog1_val,         // get analog 1 value
+    rc_analog2_val,         // get analog 2 value
+    0,                      // Not Used
+    0,                      // Not Used
+    0,                      // Not Used
+    0,                      // Not Used
+    0,                      // Not Used
+    0,                      // Not Used
+    rc_stream_get_timer     // getTimer
 };
 
 const uint8_t lll_stream_out_value_num[]={
@@ -58,16 +58,16 @@ const uint8_t lll_stream_out_value_num[]={
     3,  // writeChar
     4,  // StrokeRect
     4,  // Fill Rect
-    0,  // Not Used
-    0,  // Not Used
+    1,  // Beep
+    2,  // Delay
     2   // setTimer
 };
 
 const uint8_t lll_stream_in_value_num[]={
     1,  // Error
-    0,  // Not Used
-    0,  // Not Used
-    0,  // Not Used
+    1,  // get 1-0 buttons value
+    1,  // get analog 1 value
+    1,  // get analog 2 value
     0,  // Not Used
     0,  // Not Used
     0,  // Not Used

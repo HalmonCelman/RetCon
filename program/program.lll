@@ -7,6 +7,8 @@ mov r3, @4
 mov r6, @3  # r6-r5 = 1000
 mov r5, @232
 
+out @10 8
+
 :infloop
     # manage
     add r0 r0 @4
@@ -23,17 +25,8 @@ mov r5, @232
     out @65 5
     out @0 1    # refresh
 
-    frjmp :delay_1s 1 # wait
+    # wait 1s
+    out @252 9
+    out @3 9
 frjmp :infloop 0
 
-:delay_1s
-    mov r6, @3  # r6-r5 = 1000
-    mov r5, @232
-
-    out r6-r5 10 # set timer
-
-    :delay_1s_wait
-    in r8-r7 10
-    cmp r8-r7 @0
-    frjmprs :delay_1s_wait 0
-ret
