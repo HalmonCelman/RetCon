@@ -3,7 +3,22 @@
 *         by KK        RetCon core              *
 *************************************************
  */
-#include "main.h"
+#define F_CPU 16000000UL
+#ifndef __AVR_ATmega1284P__
+    #define __AVR_ATmega1284P__
+#endif
+
+/// __ekran WinCom WG12864D ze sterownikiem KS0108
+#include <KS0108.h>
+#include <multi_buff.h>
+#include <additional_graphics.h>
+
+/// LLL
+#include <LLL.h>
+
+//system
+#include <base.h>
+#include <input.h>
 #include <config.h>
 
 
@@ -19,23 +34,12 @@ GLCD_B_ClearScreen(); //clear buffer
 
 init_buffering();
 
-#if DEBUG_MODE
-GLCD_B_ClearScreen();
-#if LLL_DEBUG_MODE
-GLCD_B_WriteString("DEBUG MODE WITH LLL",0,0);
-#else
-GLCD_B_WriteString("DEBUG MODE WITHOUT LLL",0,0);
-#endif
-GLCD_r;
-delay(100);
-#endif
 ///->main program
 GLCD_B_ClearScreen();
 GLCD_B_WriteString("starting KoKOS...",0,0);
 GLCD_r;
-init_fs();
 
-animate("a.am");
+init_fs();
 
 LLL_init();
 

@@ -14,6 +14,7 @@ target_include_directories(system PRIVATE ${PATH_TO_KS0108})
 target_include_directories(system PRIVATE ${PATH_TO_FATFS})
 target_include_directories(system PRIVATE ${PATH_TO_LLL_DRIVER})
 target_include_directories(system PRIVATE ${PATH_TO_LLL})
+target_include_directories(system PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(system PRIVATE ${CMAKE_BINARY_DIR}/generated/)
 
 target_link_libraries(system KS0108)

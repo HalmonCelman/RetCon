@@ -1,6 +1,8 @@
 #ifndef MULTI_BUFF_H_INCLUDED
 #define MULTI_BUFF_H_INCLUDED
 
+#include <stdint.h>
+
 #define GLCD_Buffer_size 1024
 extern unsigned char GLCD_Buffer[GLCD_Buffer_size];
 extern volatile unsigned char bufferSwitch;

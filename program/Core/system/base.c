@@ -15,8 +15,13 @@ uint8_t res;
 UINT s1;
 FATFS fs1;
 
+void beepOn(void){
+	
+}
 
+void beepOff(void){
 
+}
 
 void init_buffering(void){
 	timerDelay=0;

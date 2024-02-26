@@ -3,8 +3,6 @@
 #include "font5x8.h"
 #include "multi_buff.h"
 
-
-//gcc 12
 unsigned char GLCD_Buffer[GLCD_Buffer_size];
 volatile unsigned char bufferSwitch;
 

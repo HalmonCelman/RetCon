@@ -12,6 +12,7 @@ extern uint8_t pointMenu;
 extern unsigned char counter;
 extern volatile uint16_t timerDelay;
 extern volatile uint16_t timerValue;
+extern volatile uint16_t beepCounter;
 extern uint8_t res;
 extern UINT s1;
 extern FATFS fs1;
@@ -24,5 +25,7 @@ void init_buffering(void);
 void init_fs(void);
 void close_fs(void);
 
+// output
+void beepOn(void);
 
 #endif

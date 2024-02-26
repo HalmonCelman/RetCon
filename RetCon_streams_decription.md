@@ -3,6 +3,7 @@
 > This file decribes IN and OUT recieved from LLL, and it's functions
 
 **! *0 values mean that parameter isn't processed but still 1 parameter is necessary in program, I recommend to write in his place @0* !**
+
 **! *more than 1 value should be given by range, or by separating out command into multiple out commands with same stream* !**
 
 ## for OUT:
@@ -100,7 +101,7 @@
 > > 
 > > - 1 value
 > >
-> ### 3. get analog 1 value
+> ### 3. get analog 2 value
 > > 
 > > gets value from right analog
 > > 

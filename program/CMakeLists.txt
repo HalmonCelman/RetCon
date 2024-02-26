@@ -99,7 +99,7 @@ list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_SYSTEM} )
 list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES system)
 
 # main file
-add_executable(${PROJECT_NAME} main.c main.h)
+add_executable(${PROJECT_NAME} main.c)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${${PROJECT_NAME}_INCLUDE_DIRECTORIES} ${CMAKE_BINARY_DIR}/generated/)
 
