@@ -30,3 +30,13 @@
 
 #define BUZZ_PIN 3  //buzzer - active high
 #define BUZZ_PORT B
+
+// analog joysticks
+#define ANALOG_PORT A
+
+#define AN1_X_PIN 0
+#define AN1_Y_PIN 1
+
+#define AN2_X_PIN 2
+#define AN2_Y_PIN 3
+

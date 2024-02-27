@@ -31,8 +31,8 @@ fp-info-cache
 *.elf
 
 *.zip
-#cmake
 
+#cmake
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -53,3 +53,7 @@ adapter-backups/
 Gerber
 
 *.l
+
+#animations
+*.wbmp
+*.txt
