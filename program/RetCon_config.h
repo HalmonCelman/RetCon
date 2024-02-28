@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RETCON_CONFIG_H
+#define RETCON_CONFIG_H
 
 #define PREP_TRICK_DDR(x,y) x##y
 #define DDR(x) PREP_TRICK_DDR(DDR,x)
@@ -40,3 +41,4 @@
 #define AN2_X_PIN 2
 #define AN2_Y_PIN 3
 
+#endif

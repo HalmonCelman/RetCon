@@ -38,11 +38,11 @@ void key_init(void){
 */
 uint8_t getButtonsData(void){
     uint8_t tmpVal=0;
-    tmpVal |= (PIN(T_L_PORT) & (1<<T_L_PIN));
-    tmpVal |= (PIN(T_R_PORT) & (1<<T_R_PIN))<<1;
-    tmpVal |= (PIN(B_L_PORT) & (1<<B_L_PIN))<<2;
-    tmpVal |= (PIN(B_R_PORT) & (1<<B_R_PIN))<<3;
-    tmpVal |= (PIN(HOME_PORT) & (1<<HOME_PIN))<<4;
-    tmpVal |= (PIN(SELECT_PORT) & (1<<SELECT_PIN))<<5;
+    if((PIN(T_L_PORT) & (1<<T_L_PIN))) tmpVal |= (1<<0);
+    if((PIN(T_R_PORT) & (1<<T_R_PIN))) tmpVal |= (1<<1);
+    if((PIN(B_L_PORT) & (1<<B_L_PIN))) tmpVal |= (1<<2);
+    if((PIN(B_R_PORT) & (1<<B_R_PIN))) tmpVal |= (1<<3);
+    if((PIN(HOME_PORT) & (1<<HOME_PIN))) tmpVal |= (1<<4);
+    if((PIN(SELECT_PORT) & (1<<SELECT_PIN))) tmpVal |= (1<<5);
     return tmpVal;
 }

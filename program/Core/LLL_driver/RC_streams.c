@@ -1,6 +1,7 @@
 #include "RC_streams.h"
 #include "LLL_RetCon.h"
 #include <base.h>
+#include <input.h>
 #include <multi_buff.h>
 
 //out
@@ -52,7 +53,7 @@ void rc_stream_set_timer(void){
 
 //in
 uint8_t rc_stream_10_val(void){
-    return 0;
+    return getButtonsData();
 }
 
 uint8_t rc_analog1_val(void){

@@ -4,29 +4,19 @@ mov r1, @0
 mov r2, @4
 mov r3, @4
 
-mov r6, @3  # r6-r5 = 1000
-mov r5, @232
-
-out @10 8
-
 :infloop
-    # manage
-    add r0 r0 @4
-    cmp r0 @124    # 124 = 128 (screen width) - 4 (rect width)
-    movrc r0 @0     # clear r0 if equal
-
-    # draw
     out @0 2    # clr screen
-    out r3-r0 7 # fill rect
+    
+    # manage
+    in r4 1
+
+    ands r5 r4 @1   # TL pressed
 
     # draw char A
-    out @0 5
-    out @11 5
-    out @65 5
-    out @0 1    # refresh
+    outzc @0 5
+    outzc @11 5
+    outzc @65 5
+    outzc @0 1    # refresh
 
-    # wait 1s
-    out @252 9
-    out @3 9
 frjmp :infloop 0
 

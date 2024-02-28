@@ -22,6 +22,7 @@
 #include <config.h>
 
 
+#include <avr/io.h>
 int main(void)
 {
 
@@ -43,8 +44,11 @@ init_fs();
 
 LLL_init();
 
-LLL_run("program.l");
-
+//LLL_run("program.l");
+while(1){
+lll_send_info("btnValue",getButtonsData());
+delay(200);
+}
 LLL_end();
 
 close_fs();
