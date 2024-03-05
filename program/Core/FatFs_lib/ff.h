@@ -32,6 +32,7 @@ extern "C" {
 #error Wrong configuration file (ffconf.h).
 #endif
 
+#include <stdint.h>
 
 /* Integer types used for FatFs API */
 
@@ -300,7 +301,6 @@ typedef enum {
 /*--------------------------------------------------------------*/
 /* FatFs Module Application Interface                           */
 /*--------------------------------------------------------------*/
-
 FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);				/* Open or create a file */
 FRESULT f_close (FIL* fp);											/* Close an open file object */
 FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
@@ -347,8 +347,13 @@ TCHAR* f_gets (TCHAR* buff, int len, FIL* fp);						/* Get a string from the fil
 #define f_rmdir(path) f_unlink(path)
 #define f_unmount(path) f_mount(0, path, 0)
 
-
-
+/* Device dependent functions - for driver */
+void FatFs_clock(void); //should be called with frequency 100Hz
+extern void FatFs_CS_HIGH(void);
+extern void FatFs_CS_LOW(void);
+extern void FatFs_power_on(void);
+extern void FatFs_power_off(void);
+extern uint8_t FatFs_SPI_SendRcv(uint8_t data);
 
 /*--------------------------------------------------------------*/
 /* Additional Functions                                         */

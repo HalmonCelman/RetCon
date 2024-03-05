@@ -27,7 +27,6 @@ contains all needed includes and macros
 #include <diskio.h>
 #include <ff.h>
 #include <ffconf.h>
-#include <mmc_avr.h>
 #include <rtc.h>
 
 /// LLL

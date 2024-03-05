@@ -15,7 +15,7 @@
 #include "cfc_avr.h"	/* Header file of existing CF control module */
 #endif
 #ifdef DRV_MMC
-#include "mmc_avr.h"	/* Header file of existing SD control module */
+#include "mmc_spi.h"	/* Header file of existing SD control module */
 #endif
 
 // gcc 12

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26.4)
+cmake_minimum_required(VERSION 3.26.0)
 
 # Compiler setup
 set(CMAKE_C_COMPILER avr-gcc)
