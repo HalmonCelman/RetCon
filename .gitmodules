@@ -1,3 +1,6 @@
-[submodule "program/LLL"]
-	path = program/LLL
-	url = https://github.com/HalmonCelman/LLL
+[submodule "program/External/LLL"]
+	path = program/External/LLL
+	url = https://github.com/HalmonCelman/LLL.git
+[submodule "program/External/FatFsSD"]
+	path = program/External/FatFsSD
+	url = https://github.com/HalmonCelman/FatFsSD.git

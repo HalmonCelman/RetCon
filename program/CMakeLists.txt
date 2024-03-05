@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26.4)
+cmake_minimum_required(VERSION 3.26.0)
 
 # Compiler setup
 set(CMAKE_C_COMPILER avr-gcc)
@@ -6,12 +6,12 @@ add_compile_options(-Wall -std=c99 -mmcu=atmega1284p -Wno-array-bounds -Os)
 add_link_options(-mmcu=atmega1284p)
 
 # paths to libraries
-set(ROOT_TO_FATFS Core/FatFs_lib )
+set(ROOT_TO_FATFS External/FatFsSD )
 set(ROOT_TO_KS0108 Core/KS0108_lib)
 set(ROOT_TO_LLL_DRIVER Core/LLL_driver)
 set(ROOT_TO_SYSTEM Core/system)
 set(ROOT_TO_ADDITIONAL Core/additional_graphics)
-set(ROOT_TO_LLL LLL/)
+set(ROOT_TO_LLL External/LLL)
 
 
 set(PATH_TO_FATFS ${CMAKE_CURRENT_SOURCE_DIR}/${ROOT_TO_FATFS} )
@@ -64,6 +64,10 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+#system
+add_subdirectory(${PATH_TO_SYSTEM})  # sd card
+list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_SYSTEM} )
+list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES system)
 
 IF(USE_FATFS)
 add_subdirectory(${PATH_TO_FATFS})  # sd card
@@ -92,11 +96,6 @@ add_subdirectory(${PATH_TO_ADDITIONAL})  # sd card
 list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_ADDITIONAL})
 list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES additional_graphics)
 ENDIF()
-
-#system
-add_subdirectory(${PATH_TO_SYSTEM})  # sd card
-list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_SYSTEM} )
-list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES system)
 
 # main file
 add_executable(${PROJECT_NAME} main.c)

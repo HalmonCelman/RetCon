@@ -3,7 +3,7 @@
 #include "base.h"
 #include <multi_buff.h>
 #include <KS0108.h>
-#include <mmc_avr.h>
+#include <mmc_spi.h>
 #include <LLL_RetCon.h>
 #include <config.h>
 #include <RetCon_config.h>
@@ -70,7 +70,7 @@ if(beepCounter){
 if(timerValue) timerValue--; //timer for set and getTimer streams
 if(timerDelay) timerDelay--; //accurate delay
 if(counter>=10){ //for 16MHz -> 100Hz
-    mmc_disk_timerproc(); //for FatFS
+    FatFs_clock(); //for FatFS
     counter=0;
     if(bufferSwitch){
         bufferSwitch=0;
