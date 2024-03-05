@@ -6,12 +6,12 @@ add_compile_options(-Wall -std=c99 -mmcu=atmega1284p -Wno-array-bounds -Os)
 add_link_options(-mmcu=atmega1284p)
 
 # paths to libraries
-set(ROOT_TO_FATFS Core/FatFs_lib )
+set(ROOT_TO_FATFS External/FatFsSD )
 set(ROOT_TO_KS0108 Core/KS0108_lib)
 set(ROOT_TO_LLL_DRIVER Core/LLL_driver)
 set(ROOT_TO_SYSTEM Core/system)
 set(ROOT_TO_ADDITIONAL Core/additional_graphics)
-set(ROOT_TO_LLL LLL)
+set(ROOT_TO_LLL External/LLL)
 
 
 set(PATH_TO_FATFS ${CMAKE_SOURCE_DIR}/${ROOT_TO_FATFS} )
