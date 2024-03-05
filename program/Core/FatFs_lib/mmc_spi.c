@@ -12,6 +12,7 @@
 /-------------------------------------------------------------------------*/
 
 #include "diskio.h"
+#include "ff.h"
 
 #define MMC_CD			1	/* Test if card detected.   yes:true, no:false, default:true */
 #define MMC_WP			0	/* Test if write protected. yes:true, no:false, default:false */
@@ -104,12 +105,11 @@ int wait_ready (	/* 1:Ready, 0:Timeout */
 {
 	BYTE d;
 
-
 	wt /= 10;
-	cli(); Timer2 = wt; sei();
+	Timer2 = wt;
 	do {
 		d = xchg_spi(0xFF);
-		cli(); wt = Timer2; sei();
+		wt = Timer2;
 	} while (d != 0xFF && wt);
 
 	return (d == 0xFF) ? 1 : 0;
@@ -124,7 +124,7 @@ int wait_ready (	/* 1:Ready, 0:Timeout */
 static
 void deselect (void)
 {
-	CS_HIGH();		/* Set CS# high */
+	FatFs_CS_HIGH();		/* Set CS# high */
 	xchg_spi(0xFF);	/* Dummy clock (force DO hi-z for multiple slave SPI) */
 }
 
@@ -137,7 +137,7 @@ void deselect (void)
 static
 int select (void)	/* 1:Successful, 0:Timeout */
 {
-	CS_LOW();		/* Set CS# low */
+	FatFs_CS_LOW();		/* Set CS# low */
 	xchg_spi(0xFF);	/* Dummy clock (force DO enabled) */
 
 	if (wait_ready(500)) return 1;	/* Leading busy check: Wait for card ready */
@@ -270,10 +270,10 @@ BYTE send_cmd (		/* Returns R1 resp (bit7==1:Send failed) */
 DSTATUS mmc_disk_initialize (void)
 {
 	BYTE n, cmd, ty, ocr[4];
-	power_off();						/* Turn off the socket power to reset the card */
+	FatFs_power_off();						/* Turn off the socket power to reset the card */
 	for (Timer1 = 10; Timer1; ) ;		/* Wait for 100ms */
 	if (Stat & STA_NODISK) return Stat;	/* No card in the socket? */
-	power_on();							/* Turn on the socket power */
+	FatFs_power_on();							/* Turn on the socket power */
 	FCLK_SLOW();
 	for (n = 10; n; n--) xchg_spi(0xFF);	/* 80 dummy clocks */
 
@@ -307,7 +307,7 @@ DSTATUS mmc_disk_initialize (void)
 		Stat &= ~STA_NOINIT;		/* Clear STA_NOINIT */
 		FCLK_FAST();
 	} else {			/* Initialization failed */
-		power_off();
+		FatFs_power_off();
 	}
 
 	return Stat;
@@ -525,7 +525,7 @@ DRESULT mmc_disk_ioctl (
 		break;
 
 	case CTRL_POWER_OFF :	/* Power off */
-		power_off();
+		FatFs_power_off();
 		Stat |= STA_NOINIT;
 		res = RES_OK;
 		break;
@@ -582,13 +582,10 @@ DRESULT mmc_disk_ioctl (
 void FatFs_clock (void)
 {
 	BYTE b;
-	UINT n;
-
 
 	b = Timer1;				/* 100Hz decrement timer */
 	if (b) Timer1 = --b;
-	n = Timer2;
-	if (n) Timer2 = --n;
+	if (Timer2) Timer2--;
 
 	b = Stat;
 	if (MMC_WP) {				/* Write protected */

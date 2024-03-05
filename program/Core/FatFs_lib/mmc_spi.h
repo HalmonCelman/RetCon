@@ -20,7 +20,6 @@ DSTATUS mmc_disk_status (void);
 DRESULT mmc_disk_read (BYTE* buff, LBA_t sector, UINT count);
 DRESULT mmc_disk_write (const BYTE* buff, LBA_t sector, UINT count);
 DRESULT mmc_disk_ioctl (BYTE cmd, void* buff);
-void mmc_disk_timerproc (void);
 
 #ifdef __cplusplus
 }

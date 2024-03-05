@@ -1,6 +1,7 @@
 set(SYSTEM_SOURCES 
 base.c
 input.c
+FatFs_driver.c
 )
 
 set(SYSTEM_INCLUDE 

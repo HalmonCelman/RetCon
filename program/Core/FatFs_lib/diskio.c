@@ -158,7 +158,7 @@ void disk_timerproc (void)
 	cf_disk_timerproc();
 #endif
 #ifdef DRV_MMC
-	mmc_disk_timerproc();
+	FatFs_clock();
 #endif
 }
 

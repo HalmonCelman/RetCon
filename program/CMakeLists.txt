@@ -65,6 +65,10 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+#system
+add_subdirectory(${PATH_TO_SYSTEM})  # sd card
+list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_SYSTEM} )
+list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES system)
 
 IF(USE_FATFS)
 add_subdirectory(${PATH_TO_FATFS})  # sd card
@@ -93,11 +97,6 @@ add_subdirectory(${PATH_TO_ADDITIONAL})  # sd card
 list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_ADDITIONAL})
 list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES additional_graphics)
 ENDIF()
-
-#system
-add_subdirectory(${PATH_TO_SYSTEM})  # sd card
-list(APPEND ${PROJECT_NAME}_INCLUDE_DIRECTORIES ${PATH_TO_SYSTEM} )
-list(APPEND ${PROJECT_NAME}_LINK_LIBRARIES system)
 
 # main file
 add_executable(${PROJECT_NAME} main.c main.h)

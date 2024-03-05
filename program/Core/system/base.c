@@ -3,7 +3,7 @@
 #include "base.h"
 #include <multi_buff.h>
 #include <KS0108.h>
-#include <mmc_avr.h>
+#include <mmc_spi.h>
 #include <LLL_RetCon.h>
 #include <config.h>
 
@@ -48,7 +48,7 @@ ISR(TIMER0_COMPA_vect){
 counter++;
 if(timerDelay) timerDelay--; //accurate delay
 if(counter>=10){ //for 16MHz -> 100Hz
-    mmc_disk_timerproc(); //for FatFS
+    FatFs_clock(); //for FatFS
     counter=0;
     if(bufferSwitch){
         bufferSwitch=0;

@@ -1,8 +1,3 @@
-/*
-    !!! this file is only template(it is not used) - copy this file into parent folder and delete this adnotation
-*/
-
-
 /*---------------------------------------------------------------------------/
 /  Configurations of FatFs Module
 /---------------------------------------------------------------------------*/

@@ -23,7 +23,7 @@ void FatFs_CS_LOW(void){
 /*
 Initialize all pins and SPI here
 */
-void FatFs_power_on()(void)
+void FatFs_power_on(void)
 {
     DDRB |= (1<<MOSI)|(1<<SCK)|(1<<PB4); //SS output to working SPI
     DDRA |= (1<<CS);
@@ -37,7 +37,7 @@ void FatFs_power_on()(void)
 /*
 Turn off spi and pins here
 */
-void FatFs_power_off (void)
+void FatFs_power_off(void)
 {
 	/* Disable SPI function */
 	SPCR &=~ (1<<SPE) | (1<<MSTR)|(1<<SPI2X);
