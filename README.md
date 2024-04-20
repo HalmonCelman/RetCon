@@ -28,7 +28,7 @@ in program/
 
 you can find schematic in `schematic_and_others/schematic` and modify it in KiCAD, or just look below:
 
-![Schematic](schematic.png "schematic of RetCon")
+![Schematic](schematic.jpg "schematic of RetCon")
 
 ## Board and Reality
 

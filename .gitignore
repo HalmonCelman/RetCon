@@ -48,8 +48,7 @@ _deps
 
 # Others
 .vscode/
-schemat-backups/
-adapter-backups/
+*-backups
 Gerber
 
 *.l
