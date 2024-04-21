@@ -3390,7 +3390,7 @@
     )
   )
 
-  (symbol (lib_id "Switch:SW_Push") (at 30.48 158.75 0) (unit 1)
+  (symbol (lib_id "Switch:SW_Push") (at 30.48 158.75 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00bf7401-cedf-46e0-a34c-6b03b8fdae86)
     (property "Reference" "SW3" (at 34.29 156.21 0)
@@ -5002,7 +5002,7 @@
     )
   )
 
-  (symbol (lib_id "Switch:SW_Push") (at 30.48 148.59 0) (unit 1)
+  (symbol (lib_id "Switch:SW_Push") (at 30.48 148.59 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d564914e-5518-4cae-b3fe-ba03b01bbc38)
     (property "Reference" "SW6" (at 34.29 146.05 0)

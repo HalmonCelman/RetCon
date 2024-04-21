@@ -34,6 +34,6 @@ you can find schematic in `schematic_and_others/schematic` and modify it in KiCA
 
 here are some pictures how the board has been designed and how it looks in reality
 
-![Board](board.png "board design")
+![Board](board.jpg "board design")
 
 ![Reality](reality.jpg "reality")
