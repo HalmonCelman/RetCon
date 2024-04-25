@@ -4591,7 +4591,7 @@
   (symbol (lib_id "Device:R_Potentiometer") (at 251.46 115.57 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9c498099-1f5a-4490-a3ba-f16972b057aa)
-    (property "Reference" "RV2" (at 254 114.935 0)
+    (property "Reference" "RV1" (at 254 114.935 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "R_Potentiometer" (at 254 117.475 0)
@@ -4609,7 +4609,7 @@
     (instances
       (project "RetCon"
         (path "/275aa44a-b61f-489f-9e2a-819a0fe0d1eb"
-          (reference "RV2") (unit 1)
+          (reference "RV1") (unit 1)
         )
       )
     )
