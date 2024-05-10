@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "base.h"
+#include "input.h"
 #include <multi_buff.h>
 #include <KS0108.h>
 #include <mmc_spi.h>
@@ -59,30 +60,31 @@ void close_fs(void){
 	///end 2
 }
 
-ISR(TIMER0_COMPA_vect){
-counter++;
-if(beepCounter){
-	beepCounter--;
-	if(!beepCounter){
-		beepOff();
-	}
-} 
-if(timerValue) timerValue--; //timer for set and getTimer streams
-if(timerDelay) timerDelay--; //accurate delay
-if(counter>=10){ //for 16MHz -> 100Hz
-    FatFs_clock(); //for FatFS
-    counter=0;
-    if(bufferSwitch){
-        bufferSwitch=0;
+ISR(TIMER0_COMPA_vect){ //1kHz timer
+	counter++;
+	if(beepCounter){
+		beepCounter--;
+		if(!beepCounter){
+			beepOff();
+		}
+	} 
+	if(timerValue) timerValue--; //timer for set and getTimer streams
+	if(timerDelay) timerDelay--; //accurate delay
+	if(counter>=10){ //for 16MHz -> 100Hz
+	    triggerADC(); //100Hz for joysticks
+		FatFs_clock(); //for FatFS
+	    counter=0;
+	    if(bufferSwitch){
+	        bufferSwitch=0;
 
-        int i,j;
-        for(j = 0; j < 8; j++){
-            GLCD_GoTo(0,j);
-            for(i = 0; i < 128; i++)
-                GLCD_WriteData(GLCD_Buffer[j*128+i]);
-        }
-    }
-}
+	        int i,j;
+	        for(j = 0; j < 8; j++){
+	            GLCD_GoTo(0,j);
+	            for(i = 0; i < 128; i++)
+	                GLCD_WriteData(GLCD_Buffer[j*128+i]);
+	        }
+	    }
+	}
 }
 
 

@@ -1,7 +1,19 @@
 #include "input.h"
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <RetCon_config.h>
 
+#define ADMUX_SETTINGS ((1<<REFS0) | (1<<ADLAR)) // AREF connected to AVCC, left adjust(8 bit)
+
+const uint8_t adcSrc[4] = {  // look up table for adc sources
+    AN1_X_PIN,
+    AN1_Y_PIN,
+    AN2_X_PIN,
+    AN2_Y_PIN
+};
+
+uint8_t adcSrcCnt=0;
+uint8_t joysticks[4]; // keeps 8bit value of joysticks 
 /*
     initializes all interactives in RetCon
 */
@@ -30,7 +42,13 @@ void key_init(void){
     // analog joysticks as input
     DDR(ANALOG_PORT) &=~ ((1<<AN1_X_PIN) | (1<<AN1_Y_PIN) | (1<<AN2_X_PIN) | (1<<AN2_Y_PIN));
     //without pullup
-    PORT(ANALOG_PORT) &=~ ((1<<AN1_X_PIN) | (1<<AN1_Y_PIN) | (1<<AN2_X_PIN) | (1<<AN2_Y_PIN));
+    PIN(ANALOG_PORT) &=~ ((1<<AN1_X_PIN) | (1<<AN1_Y_PIN) | (1<<AN2_X_PIN) | (1<<AN2_Y_PIN));
+
+    adcSrcCnt = 0;
+    ADMUX = ADMUX_SETTINGS; 
+    ADCSRA = (1<<ADEN) | (1<<ADIE) | (ADPS2)| (ADPS1) | (ADPS0); // ADC ON, Interrupt ON, prescaler 128
+
+    DIDR0 = (1<<NC1) | (1<<NC2);
 }
 
 /*
@@ -45,4 +63,15 @@ uint8_t getButtonsData(void){
     if((PIN(HOME_PORT) & (1<<HOME_PIN))) tmpVal |= (1<<4);
     if((PIN(SELECT_PORT) & (1<<SELECT_PIN))) tmpVal |= (1<<5);
     return tmpVal;
+}
+
+
+void triggerADC(void){
+    ADMUX = (1<<REFS0) | (1<<ADLAR) | adcSrc[adcSrcCnt];
+    ADCSRA |= (1<<ADSC);
+}
+
+ISR(ADC_vect){
+    joysticks[adcSrcCnt] = ADCH;
+    adcSrcCnt = (adcSrcCnt == 3)? 0 : adcSrcCnt+1;
 }

@@ -41,4 +41,8 @@
 #define AN2_X_PIN 2
 #define AN2_Y_PIN 3
 
+// not connected analog inputs, disabled to minimize power consumption
+#define NC1 6
+#define NC2 7
+
 #endif
